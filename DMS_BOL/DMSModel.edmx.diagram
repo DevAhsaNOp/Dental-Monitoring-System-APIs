@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bd0bdbec71b440781853506044a66e5" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="dentalDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="9.75" PointY="13.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="15" PointY="13.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="17.25" PointY="14.25" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="0.75" PointY="14.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="14.25" PointY="9.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="12" PointY="18.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblMessage" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="dentalDBModel.tblMessageDetail" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="dentalDBModel.tblPatient" Width="1.5" PointX="12" PointY="7.25" />
+        <EntityTypeShape EntityType="dentalDBModel.tblRole" Width="1.5" PointX="9.75" PointY="8.125" />
+        <EntityTypeShape EntityType="dentalDBModel.tblState" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="dentalDBModel.tblSuperAdmin" Width="1.5" PointX="12" PointY="13.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblZone" Width="1.5" PointX="7.5" PointY="14.625" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCity" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCountry" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblState" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblZone" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAdmin_tblAddress" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctor_tblAddress" />
+        <AssociationConnector Association="dentalDBModel.FK_tblPatient_tblAddress" />
+        <AssociationConnector Association="dentalDBModel.FK_tblSuperAdmin_tblAddress" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAdmin_tblRoles" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAppointment_tblDoctor" />
+        <AssociationConnector Association="dentalDBModel.FK_tblAppointment_tblPatient" />
+        <AssociationConnector Association="dentalDBModel.FK_tblCity_tblState" />
+        <AssociationConnector Association="dentalDBModel.FK_tblZone_tblCity" />
+        <AssociationConnector Association="dentalDBModel.FK_tblState_tblCountry" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDiagnostics_tblDoctor" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDiagnostics_tblPatient" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctor_tblRoles" />
+        <AssociationConnector Association="dentalDBModel.FK_tblMessageDetails_tblMessage" />
+        <AssociationConnector Association="dentalDBModel.FK_tblPatient_tblRoles" />
+        <AssociationConnector Association="dentalDBModel.FK_tblSuperAdmin_tblRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
