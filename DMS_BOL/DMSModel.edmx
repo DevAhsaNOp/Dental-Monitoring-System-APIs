@@ -106,10 +106,12 @@
           <Property Name="D_ProfileImage" Type="varchar(max)" Nullable="false" />
           <Property Name="D_Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="D_Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="D_YearsOfExperience" Type="varchar(max)" Nullable="false" />
           <Property Name="D_Specialization" Type="varchar(max)" Nullable="false" />
-          <Property Name="D_Location" Type="varchar(max)" />
-          <Property Name="D_Hospitals" Type="varchar(max)" />
-          <Property Name="D_Timing" Type="varchar(max)" />
+          <Property Name="D_OfferedServices" Type="varchar(max)" />
+          <Property Name="D_WorkPhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="D_AwardsAndAchievements" Type="varchar(max)" />
+          <Property Name="D_AboutMe" Type="varchar(max)" />
           <Property Name="D_CreatedBy" Type="int" />
           <Property Name="D_CreatedOn" Type="datetime" />
           <Property Name="D_UpdatedBy" Type="int" />
@@ -118,6 +120,24 @@
           <Property Name="D_IsArchive" Type="bit" />
           <Property Name="D_OTP" Type="varchar" MaxLength="50" />
           <Property Name="D_Verified" Type="bit" />
+          <Property Name="D_SatisfactionRate" Type="int" />
+          <Property Name="D_ResponseTime" Type="int" />
+        </EntityType>
+        <EntityType Name="tblDoctorWorkExperience">
+          <Key>
+            <PropertyRef Name="WEX_ID" />
+          </Key>
+          <Property Name="WEX_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WEX_DoctorID" Type="int" />
+          <Property Name="WEX_HospitalName" Type="varchar" MaxLength="500" />
+          <Property Name="WEX_Designation" Type="varchar" MaxLength="250" />
+          <Property Name="WEX_IsWorking" Type="bit" />
+          <Property Name="WEX_IsActive" Type="bit" />
+          <Property Name="WEX_IsArchive" Type="bit" />
+          <Property Name="WEX_CreatedBy" Type="int" />
+          <Property Name="WEX_CreatedOn" Type="datetime" />
+          <Property Name="WEX_UpdatedBy" Type="int" />
+          <Property Name="WEX_UpdatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="tblMessage">
           <Key>
@@ -139,6 +159,65 @@
           <Property Name="MD_Datetime" Type="datetime" />
           <Property Name="MD_IsRead" Type="bit" />
           <Property Name="MD_IsDelivered" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblOfflineConsultaionDetails">
+          <Key>
+            <PropertyRef Name="OFCD_ID" />
+          </Key>
+          <Property Name="OFCD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OFCD_DoctorID" Type="int" Nullable="false" />
+          <Property Name="OFCD_HospitalName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="OFCD_HospitalPhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="OFCD_HospitalAddressID" Type="int" Nullable="false" />
+          <Property Name="OFCD_MondayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_MondayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_TuesdayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_TuesdayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_WednesdayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_WednesdayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_ThursdayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_ThursdayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_FridayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_FridayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_SaturdayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_SaturdayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_SundayStartTime" Type="time" Precision="7" />
+          <Property Name="OFCD_SundayEndTime" Type="time" Precision="7" />
+          <Property Name="OFCD_Charges" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="OFCD_IsActive" Type="bit" />
+          <Property Name="OFCD_IsArchive" Type="bit" />
+          <Property Name="OFCD_CreatedBy" Type="int" />
+          <Property Name="OFCD_CreatedOn" Type="datetime" />
+          <Property Name="OFCD_UpdatedBy" Type="int" />
+          <Property Name="OFCD_UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblOnlineConsultaionDetails">
+          <Key>
+            <PropertyRef Name="OCD_ID" />
+          </Key>
+          <Property Name="OCD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OCD_DoctorID" Type="int" />
+          <Property Name="OCD_MondayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_MondayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_TuesdayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_TuesdayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_WednesdayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_WednesdayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_ThursdayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_ThursdayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_FridayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_FridayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_SaturdayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_SaturdayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_SundayStartTime" Type="time" Precision="7" />
+          <Property Name="OCD_SundayEndTime" Type="time" Precision="7" />
+          <Property Name="OCD_Charges" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="OCD_IsActive" Type="bit" />
+          <Property Name="OCD_IsArchive" Type="bit" />
+          <Property Name="OCD_CreatedBy" Type="int" />
+          <Property Name="OCD_CreatedOn" Type="datetime" />
+          <Property Name="OCD_UpdatedBy" Type="int" />
+          <Property Name="OCD_UpdatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="tblPatient">
           <Key>
@@ -371,6 +450,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorWorkExperience_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorWorkExperience" Type="Self.tblDoctorWorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorWorkExperience">
+              <PropertyRef Name="WEX_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblMessageDetails_tblMessage">
           <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="1" />
           <End Role="tblMessageDetails" Type="Self.tblMessageDetails" Multiplicity="*" />
@@ -380,6 +471,42 @@
             </Principal>
             <Dependent Role="tblMessageDetails">
               <PropertyRef Name="MD_MessageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOfflineConsultaionDetails_tblAddress">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblOfflineConsultaionDetails" Type="Self.tblOfflineConsultaionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="tblOfflineConsultaionDetails">
+              <PropertyRef Name="OFCD_HospitalAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOfflineConsultaionDetails_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="1" />
+          <End Role="tblOfflineConsultaionDetails" Type="Self.tblOfflineConsultaionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblOfflineConsultaionDetails">
+              <PropertyRef Name="OFCD_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOnlineConsultaionDetails_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblOnlineConsultaionDetails" Type="Self.tblOnlineConsultaionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblOnlineConsultaionDetails">
+              <PropertyRef Name="OCD_DoctorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -464,8 +591,11 @@
           <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctor" EntityType="Self.tblDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDoctorWorkExperience" EntityType="Self.tblDoctorWorkExperience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessage" EntityType="Self.tblMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessageDetails" EntityType="Self.tblMessageDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOfflineConsultaionDetails" EntityType="Self.tblOfflineConsultaionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOnlineConsultaionDetails" EntityType="Self.tblOnlineConsultaionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPatient" EntityType="Self.tblPatient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
@@ -523,9 +653,25 @@
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctor" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="Self.FK_tblDoctorWorkExperience_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperience" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="Self.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessage" />
             <End Role="tblMessageDetails" EntitySet="tblMessageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOfflineConsultaionDetails_tblAddress" Association="Self.FK_tblOfflineConsultaionDetails_tblAddress">
+            <End Role="tblAddress" EntitySet="tblAddress" />
+            <End Role="tblOfflineConsultaionDetails" EntitySet="tblOfflineConsultaionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOfflineConsultaionDetails_tblDoctor" Association="Self.FK_tblOfflineConsultaionDetails_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblOfflineConsultaionDetails" EntitySet="tblOfflineConsultaionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOnlineConsultaionDetails_tblDoctor" Association="Self.FK_tblOnlineConsultaionDetails_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblOnlineConsultaionDetails" EntitySet="tblOnlineConsultaionDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tblPatient_tblAddress" Association="Self.FK_tblPatient_tblAddress">
             <End Role="tblAddress" EntitySet="tblAddress" />
@@ -565,8 +711,11 @@
           <EntitySet Name="tblCountries" EntityType="dentalDBModel.tblCountry" />
           <EntitySet Name="tblDiagnostics" EntityType="dentalDBModel.tblDiagnostic" />
           <EntitySet Name="tblDoctors" EntityType="dentalDBModel.tblDoctor" />
+          <EntitySet Name="tblDoctorWorkExperiences" EntityType="dentalDBModel.tblDoctorWorkExperience" />
           <EntitySet Name="tblMessages" EntityType="dentalDBModel.tblMessage" />
           <EntitySet Name="tblMessageDetails" EntityType="dentalDBModel.tblMessageDetail" />
+          <EntitySet Name="tblOfflineConsultaionDetails" EntityType="dentalDBModel.tblOfflineConsultaionDetail" />
+          <EntitySet Name="tblOnlineConsultaionDetails" EntityType="dentalDBModel.tblOnlineConsultaionDetail" />
           <EntitySet Name="tblPatients" EntityType="dentalDBModel.tblPatient" />
           <EntitySet Name="tblRoles" EntityType="dentalDBModel.tblRole" />
           <EntitySet Name="tblStates" EntityType="dentalDBModel.tblState" />
@@ -595,6 +744,10 @@
           <AssociationSet Name="FK_tblDoctor_tblAddress" Association="dentalDBModel.FK_tblDoctor_tblAddress">
             <End Role="tblAddress" EntitySet="tblAddresses" />
             <End Role="tblDoctor" EntitySet="tblDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOfflineConsultaionDetails_tblAddress" Association="dentalDBModel.FK_tblOfflineConsultaionDetails_tblAddress">
+            <End Role="tblAddress" EntitySet="tblAddresses" />
+            <End Role="tblOfflineConsultaionDetail" EntitySet="tblOfflineConsultaionDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tblPatient_tblAddress" Association="dentalDBModel.FK_tblPatient_tblAddress">
             <End Role="tblAddress" EntitySet="tblAddresses" />
@@ -640,6 +793,18 @@
             <End Role="tblRole" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctors" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOfflineConsultaionDetails_tblDoctor" Association="dentalDBModel.FK_tblOfflineConsultaionDetails_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblOfflineConsultaionDetail" EntitySet="tblOfflineConsultaionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOnlineConsultaionDetails_tblDoctor" Association="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblOnlineConsultaionDetail" EntitySet="tblOnlineConsultaionDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="dentalDBModel.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessages" />
             <End Role="tblMessageDetail" EntitySet="tblMessageDetails" />
@@ -679,6 +844,7 @@
           <NavigationProperty Name="tblZone" Relationship="dentalDBModel.FK_tblAddress_tblZone" FromRole="tblAddress" ToRole="tblZone" />
           <NavigationProperty Name="tblAdmins" Relationship="dentalDBModel.FK_tblAdmin_tblAddress" FromRole="tblAddress" ToRole="tblAdmin" />
           <NavigationProperty Name="tblDoctors" Relationship="dentalDBModel.FK_tblDoctor_tblAddress" FromRole="tblAddress" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="dentalDBModel.FK_tblOfflineConsultaionDetails_tblAddress" FromRole="tblAddress" ToRole="tblOfflineConsultaionDetail" />
           <NavigationProperty Name="tblPatients" Relationship="dentalDBModel.FK_tblPatient_tblAddress" FromRole="tblAddress" ToRole="tblPatient" />
           <NavigationProperty Name="tblSuperAdmins" Relationship="dentalDBModel.FK_tblSuperAdmin_tblAddress" FromRole="tblAddress" ToRole="tblSuperAdmin" />
         </EntityType>
@@ -773,10 +939,12 @@
           <Property Name="D_ProfileImage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="D_Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="D_YearsOfExperience" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_Specialization" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="D_Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="D_Hospitals" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="D_Timing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="D_OfferedServices" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="D_WorkPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D_AwardsAndAchievements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="D_AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_CreatedBy" Type="Int32" />
           <Property Name="D_CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="D_UpdatedBy" Type="Int32" />
@@ -785,10 +953,32 @@
           <Property Name="D_IsArchive" Type="Boolean" />
           <Property Name="D_OTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="D_Verified" Type="Boolean" />
+          <Property Name="D_SatisfactionRate" Type="Int32" />
+          <Property Name="D_ResponseTime" Type="Int32" />
           <NavigationProperty Name="tblAddress" Relationship="dentalDBModel.FK_tblDoctor_tblAddress" FromRole="tblDoctor" ToRole="tblAddress" />
           <NavigationProperty Name="tblAppointments" Relationship="dentalDBModel.FK_tblAppointment_tblDoctor" FromRole="tblDoctor" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="dentalDBModel.FK_tblDiagnostics_tblDoctor" FromRole="tblDoctor" ToRole="tblDiagnostic" />
           <NavigationProperty Name="tblRole" Relationship="dentalDBModel.FK_tblDoctor_tblRoles" FromRole="tblDoctor" ToRole="tblRole" />
+          <NavigationProperty Name="tblDoctorWorkExperiences" Relationship="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorWorkExperience" />
+          <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="dentalDBModel.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOfflineConsultaionDetail" />
+          <NavigationProperty Name="tblOnlineConsultaionDetails" Relationship="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOnlineConsultaionDetail" />
+        </EntityType>
+        <EntityType Name="tblDoctorWorkExperience">
+          <Key>
+            <PropertyRef Name="WEX_ID" />
+          </Key>
+          <Property Name="WEX_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WEX_DoctorID" Type="Int32" />
+          <Property Name="WEX_HospitalName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WEX_Designation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="WEX_IsWorking" Type="Boolean" />
+          <Property Name="WEX_IsActive" Type="Boolean" />
+          <Property Name="WEX_IsArchive" Type="Boolean" />
+          <Property Name="WEX_CreatedBy" Type="Int32" />
+          <Property Name="WEX_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="WEX_UpdatedBy" Type="Int32" />
+          <Property Name="WEX_UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctorWorkExperience" ToRole="tblDoctor" />
         </EntityType>
         <EntityType Name="tblMessage">
           <Key>
@@ -812,6 +1002,68 @@
           <Property Name="MD_IsRead" Type="Boolean" />
           <Property Name="MD_IsDelivered" Type="Boolean" />
           <NavigationProperty Name="tblMessage" Relationship="dentalDBModel.FK_tblMessageDetails_tblMessage" FromRole="tblMessageDetail" ToRole="tblMessage" />
+        </EntityType>
+        <EntityType Name="tblOfflineConsultaionDetail">
+          <Key>
+            <PropertyRef Name="OFCD_ID" />
+          </Key>
+          <Property Name="OFCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OFCD_DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="OFCD_HospitalName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OFCD_HospitalPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OFCD_HospitalAddressID" Type="Int32" Nullable="false" />
+          <Property Name="OFCD_MondayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_MondayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_TuesdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_TuesdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_WednesdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_WednesdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_ThursdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_ThursdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_FridayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_FridayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_SaturdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_SaturdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_SundayStartTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_SundayEndTime" Type="Time" Precision="7" />
+          <Property Name="OFCD_Charges" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="OFCD_IsActive" Type="Boolean" />
+          <Property Name="OFCD_IsArchive" Type="Boolean" />
+          <Property Name="OFCD_CreatedBy" Type="Int32" />
+          <Property Name="OFCD_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OFCD_UpdatedBy" Type="Int32" />
+          <Property Name="OFCD_UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblAddress" Relationship="dentalDBModel.FK_tblOfflineConsultaionDetails_tblAddress" FromRole="tblOfflineConsultaionDetail" ToRole="tblAddress" />
+          <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblOfflineConsultaionDetail" ToRole="tblDoctor" />
+        </EntityType>
+        <EntityType Name="tblOnlineConsultaionDetail">
+          <Key>
+            <PropertyRef Name="OCD_ID" />
+          </Key>
+          <Property Name="OCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OCD_DoctorID" Type="Int32" />
+          <Property Name="OCD_MondayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_MondayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_TuesdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_TuesdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_WednesdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_WednesdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_ThursdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_ThursdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_FridayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_FridayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_SaturdayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_SaturdayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_SundayStartTime" Type="Time" Precision="7" />
+          <Property Name="OCD_SundayEndTime" Type="Time" Precision="7" />
+          <Property Name="OCD_Charges" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="OCD_IsActive" Type="Boolean" />
+          <Property Name="OCD_IsArchive" Type="Boolean" />
+          <Property Name="OCD_CreatedBy" Type="Int32" />
+          <Property Name="OCD_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OCD_UpdatedBy" Type="Int32" />
+          <Property Name="OCD_UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblOnlineConsultaionDetail" ToRole="tblDoctor" />
         </EntityType>
         <EntityType Name="tblPatient">
           <Key>
@@ -975,6 +1227,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblOfflineConsultaionDetails_tblAddress">
+          <End Type="dentalDBModel.tblAddress" Role="tblAddress" Multiplicity="1" />
+          <End Type="dentalDBModel.tblOfflineConsultaionDetail" Role="tblOfflineConsultaionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="tblOfflineConsultaionDetail">
+              <PropertyRef Name="OFCD_HospitalAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblPatient_tblAddress">
           <End Type="dentalDBModel.tblAddress" Role="tblAddress" Multiplicity="0..1" />
           <End Type="dentalDBModel.tblPatient" Role="tblPatient" Multiplicity="*" />
@@ -1107,6 +1371,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorWorkExperience_tblDoctor">
+          <End Type="dentalDBModel.tblDoctor" Role="tblDoctor" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblDoctorWorkExperience" Role="tblDoctorWorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorWorkExperience">
+              <PropertyRef Name="WEX_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOfflineConsultaionDetails_tblDoctor">
+          <End Type="dentalDBModel.tblDoctor" Role="tblDoctor" Multiplicity="1" />
+          <End Type="dentalDBModel.tblOfflineConsultaionDetail" Role="tblOfflineConsultaionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblOfflineConsultaionDetail">
+              <PropertyRef Name="OFCD_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOnlineConsultaionDetails_tblDoctor">
+          <End Type="dentalDBModel.tblDoctor" Role="tblDoctor" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblOnlineConsultaionDetail" Role="tblOnlineConsultaionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblOnlineConsultaionDetail">
+              <PropertyRef Name="OCD_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblMessageDetails_tblMessage">
           <End Type="dentalDBModel.tblMessage" Role="tblMessage" Multiplicity="1" />
           <End Type="dentalDBModel.tblMessageDetail" Role="tblMessageDetail" Multiplicity="*" />
@@ -1143,7 +1443,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1247,6 +1547,8 @@
           <EntitySetMapping Name="tblDoctors">
             <EntityTypeMapping TypeName="dentalDBModel.tblDoctor">
               <MappingFragment StoreEntitySet="tblDoctor">
+                <ScalarProperty Name="D_ResponseTime" ColumnName="D_ResponseTime" />
+                <ScalarProperty Name="D_SatisfactionRate" ColumnName="D_SatisfactionRate" />
                 <ScalarProperty Name="D_Verified" ColumnName="D_Verified" />
                 <ScalarProperty Name="D_OTP" ColumnName="D_OTP" />
                 <ScalarProperty Name="D_IsArchive" ColumnName="D_IsArchive" />
@@ -1255,10 +1557,12 @@
                 <ScalarProperty Name="D_UpdatedBy" ColumnName="D_UpdatedBy" />
                 <ScalarProperty Name="D_CreatedOn" ColumnName="D_CreatedOn" />
                 <ScalarProperty Name="D_CreatedBy" ColumnName="D_CreatedBy" />
-                <ScalarProperty Name="D_Timing" ColumnName="D_Timing" />
-                <ScalarProperty Name="D_Hospitals" ColumnName="D_Hospitals" />
-                <ScalarProperty Name="D_Location" ColumnName="D_Location" />
+                <ScalarProperty Name="D_AboutMe" ColumnName="D_AboutMe" />
+                <ScalarProperty Name="D_AwardsAndAchievements" ColumnName="D_AwardsAndAchievements" />
+                <ScalarProperty Name="D_WorkPhoneNumber" ColumnName="D_WorkPhoneNumber" />
+                <ScalarProperty Name="D_OfferedServices" ColumnName="D_OfferedServices" />
                 <ScalarProperty Name="D_Specialization" ColumnName="D_Specialization" />
+                <ScalarProperty Name="D_YearsOfExperience" ColumnName="D_YearsOfExperience" />
                 <ScalarProperty Name="D_Password" ColumnName="D_Password" />
                 <ScalarProperty Name="D_Email" ColumnName="D_Email" />
                 <ScalarProperty Name="D_ProfileImage" ColumnName="D_ProfileImage" />
@@ -1268,6 +1572,23 @@
                 <ScalarProperty Name="D_LastName" ColumnName="D_LastName" />
                 <ScalarProperty Name="D_FirstName" ColumnName="D_FirstName" />
                 <ScalarProperty Name="D_ID" ColumnName="D_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDoctorWorkExperiences">
+            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorWorkExperience">
+              <MappingFragment StoreEntitySet="tblDoctorWorkExperience">
+                <ScalarProperty Name="WEX_UpdatedOn" ColumnName="WEX_UpdatedOn" />
+                <ScalarProperty Name="WEX_UpdatedBy" ColumnName="WEX_UpdatedBy" />
+                <ScalarProperty Name="WEX_CreatedOn" ColumnName="WEX_CreatedOn" />
+                <ScalarProperty Name="WEX_CreatedBy" ColumnName="WEX_CreatedBy" />
+                <ScalarProperty Name="WEX_IsArchive" ColumnName="WEX_IsArchive" />
+                <ScalarProperty Name="WEX_IsActive" ColumnName="WEX_IsActive" />
+                <ScalarProperty Name="WEX_IsWorking" ColumnName="WEX_IsWorking" />
+                <ScalarProperty Name="WEX_Designation" ColumnName="WEX_Designation" />
+                <ScalarProperty Name="WEX_HospitalName" ColumnName="WEX_HospitalName" />
+                <ScalarProperty Name="WEX_DoctorID" ColumnName="WEX_DoctorID" />
+                <ScalarProperty Name="WEX_ID" ColumnName="WEX_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1291,6 +1612,67 @@
                 <ScalarProperty Name="MD_Message" ColumnName="MD_Message" />
                 <ScalarProperty Name="MD_MessageID" ColumnName="MD_MessageID" />
                 <ScalarProperty Name="MD_ID" ColumnName="MD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOfflineConsultaionDetails">
+            <EntityTypeMapping TypeName="dentalDBModel.tblOfflineConsultaionDetail">
+              <MappingFragment StoreEntitySet="tblOfflineConsultaionDetails">
+                <ScalarProperty Name="OFCD_UpdatedOn" ColumnName="OFCD_UpdatedOn" />
+                <ScalarProperty Name="OFCD_UpdatedBy" ColumnName="OFCD_UpdatedBy" />
+                <ScalarProperty Name="OFCD_CreatedOn" ColumnName="OFCD_CreatedOn" />
+                <ScalarProperty Name="OFCD_CreatedBy" ColumnName="OFCD_CreatedBy" />
+                <ScalarProperty Name="OFCD_IsArchive" ColumnName="OFCD_IsArchive" />
+                <ScalarProperty Name="OFCD_IsActive" ColumnName="OFCD_IsActive" />
+                <ScalarProperty Name="OFCD_Charges" ColumnName="OFCD_Charges" />
+                <ScalarProperty Name="OFCD_SundayEndTime" ColumnName="OFCD_SundayEndTime" />
+                <ScalarProperty Name="OFCD_SundayStartTime" ColumnName="OFCD_SundayStartTime" />
+                <ScalarProperty Name="OFCD_SaturdayEndTime" ColumnName="OFCD_SaturdayEndTime" />
+                <ScalarProperty Name="OFCD_SaturdayStartTime" ColumnName="OFCD_SaturdayStartTime" />
+                <ScalarProperty Name="OFCD_FridayEndTime" ColumnName="OFCD_FridayEndTime" />
+                <ScalarProperty Name="OFCD_FridayStartTime" ColumnName="OFCD_FridayStartTime" />
+                <ScalarProperty Name="OFCD_ThursdayEndTime" ColumnName="OFCD_ThursdayEndTime" />
+                <ScalarProperty Name="OFCD_ThursdayStartTime" ColumnName="OFCD_ThursdayStartTime" />
+                <ScalarProperty Name="OFCD_WednesdayEndTime" ColumnName="OFCD_WednesdayEndTime" />
+                <ScalarProperty Name="OFCD_WednesdayStartTime" ColumnName="OFCD_WednesdayStartTime" />
+                <ScalarProperty Name="OFCD_TuesdayEndTime" ColumnName="OFCD_TuesdayEndTime" />
+                <ScalarProperty Name="OFCD_TuesdayStartTime" ColumnName="OFCD_TuesdayStartTime" />
+                <ScalarProperty Name="OFCD_MondayEndTime" ColumnName="OFCD_MondayEndTime" />
+                <ScalarProperty Name="OFCD_MondayStartTime" ColumnName="OFCD_MondayStartTime" />
+                <ScalarProperty Name="OFCD_HospitalAddressID" ColumnName="OFCD_HospitalAddressID" />
+                <ScalarProperty Name="OFCD_HospitalPhoneNumber" ColumnName="OFCD_HospitalPhoneNumber" />
+                <ScalarProperty Name="OFCD_HospitalName" ColumnName="OFCD_HospitalName" />
+                <ScalarProperty Name="OFCD_DoctorID" ColumnName="OFCD_DoctorID" />
+                <ScalarProperty Name="OFCD_ID" ColumnName="OFCD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOnlineConsultaionDetails">
+            <EntityTypeMapping TypeName="dentalDBModel.tblOnlineConsultaionDetail">
+              <MappingFragment StoreEntitySet="tblOnlineConsultaionDetails">
+                <ScalarProperty Name="OCD_UpdatedOn" ColumnName="OCD_UpdatedOn" />
+                <ScalarProperty Name="OCD_UpdatedBy" ColumnName="OCD_UpdatedBy" />
+                <ScalarProperty Name="OCD_CreatedOn" ColumnName="OCD_CreatedOn" />
+                <ScalarProperty Name="OCD_CreatedBy" ColumnName="OCD_CreatedBy" />
+                <ScalarProperty Name="OCD_IsArchive" ColumnName="OCD_IsArchive" />
+                <ScalarProperty Name="OCD_IsActive" ColumnName="OCD_IsActive" />
+                <ScalarProperty Name="OCD_Charges" ColumnName="OCD_Charges" />
+                <ScalarProperty Name="OCD_SundayEndTime" ColumnName="OCD_SundayEndTime" />
+                <ScalarProperty Name="OCD_SundayStartTime" ColumnName="OCD_SundayStartTime" />
+                <ScalarProperty Name="OCD_SaturdayEndTime" ColumnName="OCD_SaturdayEndTime" />
+                <ScalarProperty Name="OCD_SaturdayStartTime" ColumnName="OCD_SaturdayStartTime" />
+                <ScalarProperty Name="OCD_FridayEndTime" ColumnName="OCD_FridayEndTime" />
+                <ScalarProperty Name="OCD_FridayStartTime" ColumnName="OCD_FridayStartTime" />
+                <ScalarProperty Name="OCD_ThursdayEndTime" ColumnName="OCD_ThursdayEndTime" />
+                <ScalarProperty Name="OCD_ThursdayStartTime" ColumnName="OCD_ThursdayStartTime" />
+                <ScalarProperty Name="OCD_WednesdayEndTime" ColumnName="OCD_WednesdayEndTime" />
+                <ScalarProperty Name="OCD_WednesdayStartTime" ColumnName="OCD_WednesdayStartTime" />
+                <ScalarProperty Name="OCD_TuesdayEndTime" ColumnName="OCD_TuesdayEndTime" />
+                <ScalarProperty Name="OCD_TuesdayStartTime" ColumnName="OCD_TuesdayStartTime" />
+                <ScalarProperty Name="OCD_MondayEndTime" ColumnName="OCD_MondayEndTime" />
+                <ScalarProperty Name="OCD_MondayStartTime" ColumnName="OCD_MondayStartTime" />
+                <ScalarProperty Name="OCD_DoctorID" ColumnName="OCD_DoctorID" />
+                <ScalarProperty Name="OCD_ID" ColumnName="OCD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

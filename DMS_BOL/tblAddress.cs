@@ -19,6 +19,7 @@ namespace DMS_BOL
         {
             this.tblAdmins = new HashSet<tblAdmin>();
             this.tblDoctors = new HashSet<tblDoctor>();
+            this.tblOfflineConsultaionDetails = new HashSet<tblOfflineConsultaionDetail>();
             this.tblPatients = new HashSet<tblPatient>();
             this.tblSuperAdmins = new HashSet<tblSuperAdmin>();
         }
@@ -38,6 +39,8 @@ namespace DMS_BOL
         public virtual ICollection<tblAdmin> tblAdmins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDoctor> tblDoctors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOfflineConsultaionDetail> tblOfflineConsultaionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPatient> tblPatients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

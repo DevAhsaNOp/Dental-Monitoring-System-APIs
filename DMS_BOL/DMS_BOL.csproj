@@ -90,10 +90,19 @@
     <Compile Include="tblDoctor.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblDoctorWorkExperience.cs">
+      <DependentUpon>DMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblMessage.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMessageDetail.cs">
+      <DependentUpon>DMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOfflineConsultaionDetail.cs">
+      <DependentUpon>DMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOnlineConsultaionDetail.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblPatient.cs">
