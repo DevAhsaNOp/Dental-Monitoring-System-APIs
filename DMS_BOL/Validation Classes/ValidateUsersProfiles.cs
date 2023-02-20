@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DMS_BOL.Validation_Classes
 {
@@ -26,14 +25,10 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
         public string UserPhoneNumber { get; set; }
         
-        [Required(ErrorMessage = "Provide your address")]
         [Display(Name ="User Address")]
-        [RegularExpression("^[0-9]+$",ErrorMessage ="Invalid Address Type")]
         public int UserAddressID { get; set; }
 
-        [Required(ErrorMessage = "Provide your role")]
         [Display(Name = "User Role")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Role Type")]
         public int UserRoleID { get; set; }
 
         [Required(ErrorMessage = "Provide your profile image")]
@@ -50,16 +45,15 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Password should contain minimum 8 characters in length and At least one uppercase, lowercase English letter and one digit and special character")]
         public string UserPassword { get; set; }
 
-        [Required(ErrorMessage = "Provide your password")]
-        [Display(Name = "Password")]
-        public string UserLoginPassword { get; set; }
+        //[Required(ErrorMessage = "Provide your password")]
+        //[Display(Name = "Password")]
+        //public string UserLoginPassword { get; set; }
 
         [Required(ErrorMessage = "Provide created by user id")]
         [Display(Name = "Created By")]
         [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid CreatedBy Type")]
         public int? UserCreatedBy { get; set; }
 
-        [Required(ErrorMessage = "Provide created on date/time")]
         [Display(Name = "Created On")]
         public System.DateTime? UserCreatedOn { get; set; }
 
@@ -68,15 +62,12 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid UpdatedBy Type")]
         public int? UserUpdatedBy { get; set; }
 
-        [Required(ErrorMessage = "Provide updated on date/time")]
         [Display(Name = "Updated On")]
         public System.DateTime? UserUpdatedOn { get; set; }
 
-        [Required(ErrorMessage = "Provide user is active")]
         [Display(Name = "User Is Active")]
         public bool? UserIsActive { get; set; }
 
-        [Required(ErrorMessage = "Provide user is archive")]
         [Display(Name = "User Is Archive")]
         public bool? UserIsArchive { get; set; }
 
@@ -85,7 +76,6 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid OTP")]
         public string UserOTP { get; set; }
 
-        [Required(ErrorMessage = "Provide user verified")]
         [Display(Name = "User Verified")]
         public bool? UserVerified { get; set; }
 

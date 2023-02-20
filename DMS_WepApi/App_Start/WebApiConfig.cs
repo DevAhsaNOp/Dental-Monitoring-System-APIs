@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using DMS_WepApi.Models;
 
 namespace DMS_WepApi
 {
@@ -11,7 +12,7 @@ namespace DMS_WepApi
         {
             // Web API configuration and services
             config.EnableCors();
-
+            config.Filters.Add(new ValidationActionFilter());
             // Web API routes
             config.MapHttpAttributeRoutes();
 

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace JRCar.BLL
+namespace DMS_BLL
 {
     public static class EncDec
     {

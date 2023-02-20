@@ -25,6 +25,7 @@ namespace DMS_DAL.DBLayer
                 model.P_CreatedOn = DateTime.Now;
                 model.P_UpdatedOn = null;
                 model.P_UpdatedBy = null;
+                model.P_IsArchive= false;
                 model.P_RoleID = 4;
                 _context.tblPatients.Add(model);
                 Save();
