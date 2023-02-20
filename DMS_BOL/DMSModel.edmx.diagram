@@ -6,23 +6,24 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8bd0bdbec71b440781853506044a66e5" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="dentalDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="9.75" PointY="26" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="12" PointY="19.625" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="20.25" PointY="26.125" />
-        <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="5.25" PointY="29" />
-        <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="0.75" PointY="24.5" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="17.25" PointY="26.375" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="15" PointY="24.375" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctorWorkExperience" Width="1.5" PointX="17.25" PointY="44.75" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="9.75" PointY="26.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="12" PointY="26.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="17.25" PointY="33.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="5.25" PointY="29.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="0.75" PointY="25.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="20.25" PointY="29.625" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="15" PointY="25.125" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorReview" Width="1.5" PointX="22.5" PointY="28.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorWorkExperience" Width="1.5" PointX="17.25" PointY="46" />
         <EntityTypeShape EntityType="dentalDBModel.tblMessage" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="dentalDBModel.tblMessageDetail" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="dentalDBModel.tblOfflineConsultaionDetail" Width="1.5" PointX="17.25" PointY="18.75" />
-        <EntityTypeShape EntityType="dentalDBModel.tblOnlineConsultaionDetail" Width="1.5" PointX="17.25" PointY="31.25" />
-        <EntityTypeShape EntityType="dentalDBModel.tblPatient" Width="1.5" PointX="12" PointY="25.375" />
-        <EntityTypeShape EntityType="dentalDBModel.tblRole" Width="1.5" PointX="9.75" PointY="20.25" />
-        <EntityTypeShape EntityType="dentalDBModel.tblState" Width="1.5" PointX="3" PointY="29" />
-        <EntityTypeShape EntityType="dentalDBModel.tblSuperAdmin" Width="1.5" PointX="12" PointY="31.625" />
-        <EntityTypeShape EntityType="dentalDBModel.tblZone" Width="1.5" PointX="7.5" PointY="28.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblOfflineConsultaionDetail" Width="1.5" PointX="17.25" PointY="25.625" />
+        <EntityTypeShape EntityType="dentalDBModel.tblOnlineConsultaionDetail" Width="1.5" PointX="17.25" PointY="39.625" />
+        <EntityTypeShape EntityType="dentalDBModel.tblPatient" Width="1.5" PointX="12" PointY="32.125" />
+        <EntityTypeShape EntityType="dentalDBModel.tblRole" Width="1.5" PointX="9.75" PointY="21.125" />
+        <EntityTypeShape EntityType="dentalDBModel.tblState" Width="1.5" PointX="3" PointY="29.875" />
+        <EntityTypeShape EntityType="dentalDBModel.tblSuperAdmin" Width="1.5" PointX="12" PointY="20.375" />
+        <EntityTypeShape EntityType="dentalDBModel.tblZone" Width="1.5" PointX="7.5" PointY="29.75" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCity" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCountry" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblState" />
@@ -35,15 +36,19 @@
         <AssociationConnector Association="dentalDBModel.FK_tblAdmin_tblRoles" />
         <AssociationConnector Association="dentalDBModel.FK_tblAppointment_tblDoctor" />
         <AssociationConnector Association="dentalDBModel.FK_tblAppointment_tblPatient" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblAppointment" />
         <AssociationConnector Association="dentalDBModel.FK_tblCity_tblState" />
         <AssociationConnector Association="dentalDBModel.FK_tblZone_tblCity" />
         <AssociationConnector Association="dentalDBModel.FK_tblState_tblCountry" />
         <AssociationConnector Association="dentalDBModel.FK_tblDiagnostics_tblDoctor" />
         <AssociationConnector Association="dentalDBModel.FK_tblDiagnostics_tblPatient" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblDiagnostics" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctor_tblRoles" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblDoctor" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor" />
         <AssociationConnector Association="dentalDBModel.FK_tblOfflineConsultaionDetails_tblDoctor" />
         <AssociationConnector Association="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblPatient" />
         <AssociationConnector Association="dentalDBModel.FK_tblMessageDetails_tblMessage" />
         <AssociationConnector Association="dentalDBModel.FK_tblPatient_tblRoles" />
         <AssociationConnector Association="dentalDBModel.FK_tblSuperAdmin_tblRoles" />

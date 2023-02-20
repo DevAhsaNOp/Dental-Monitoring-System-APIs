@@ -90,6 +90,9 @@
     <Compile Include="tblDoctor.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblDoctorReview.cs">
+      <DependentUpon>DMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblDoctorWorkExperience.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
@@ -120,6 +123,7 @@
     <Compile Include="tblZone.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validation Classes\ValidateAddress.cs" />
     <Compile Include="Validation Classes\ValidateAdmin.cs" />
     <Compile Include="Validation Classes\ValidateDoctor.cs" />
     <Compile Include="Validation Classes\ValidatePatient.cs" />

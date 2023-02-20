@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncDec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressRepo.cs" />
+    <Compile Include="Repositories\UsersRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DMS_BOL\DMS_BOL.csproj">

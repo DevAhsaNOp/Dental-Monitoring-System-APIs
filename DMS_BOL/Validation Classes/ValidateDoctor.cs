@@ -12,31 +12,32 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage = "Provide your year of experience")]
         [Display(Name = "Year Of Experience")]
-        public string D_YearsOfExperience { get; set; }
+        public string DoctorYearsOfExperience { get; set; }
 
         [Required(ErrorMessage = "Provide your offered services")]
         [Display(Name = "Offered Services")]
-        public string D_OfferedServices { get; set; }
+        public string DoctorOfferedServices { get; set; }
 
         [Required(ErrorMessage = "Provide your work phone number")]
         [Display(Name = "Work Phone Number")]
-        public string D_WorkPhoneNumber { get; set; }
+        public string DoctorWorkPhoneNumber { get; set; }
 
         [Display(Name = "Awards and Achievements")]
-        public string D_AwardsAndAchievements { get; set; }
+        public string DoctorAwardsAndAchievements { get; set; }
 
         [Required(ErrorMessage = "Provide your about me")]
         [Display(Name = "About Me")]
-        public string D_AboutMe { get; set; }
+        public string DoctorAboutMe { get; set; }
         
-        public int? D_SatisfactionRate { get; set; }
+        public int? DoctorSatisfactionRate { get; set; }
 
         [Required(ErrorMessage = "Provide your response time")]
         [Display(Name = "Response Time")]
-        public int? D_ResponseTime { get; set; }
+        public int? DoctorResponseTime { get; set; }
 
         public virtual ICollection<tblAppointment> tblAppointments { get; set; }
         public virtual ICollection<tblDiagnostic> tblDiagnostics { get; set; }
+        public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
         public virtual ICollection<tblDoctorWorkExperience> tblDoctorWorkExperiences { get; set; }
         public virtual ICollection<tblOfflineConsultaionDetail> tblOfflineConsultaionDetails { get; set; }
         public virtual ICollection<tblOnlineConsultaionDetail> tblOnlineConsultaionDetails { get; set; }

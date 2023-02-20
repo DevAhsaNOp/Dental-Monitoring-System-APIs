@@ -89,34 +89,31 @@ namespace DMS_BOL.Validation_Classes
         [Display(Name = "User Verified")]
         public bool? UserVerified { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        //[Required(ErrorMessage = "*")]
+        //[Display(Name = "State")]
+        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a State")]
+        //public string State { get; set; }
+
+        //[Required(ErrorMessage = "*")]
+        //[Display(Name = "City")]
+        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a City")]
+        //public string City { get; set; }
+
+        //[Required(ErrorMessage = "*")]
+        //[Display(Name = "Area")]
+        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a Area")]
+        //public string Area { get; set; }
+
+        [Required(ErrorMessage = "Provide your state")]
         [Display(Name = "State")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a State")]
-        public string State { get; set; }
-
-        [Required(ErrorMessage = "*")]
-        [Display(Name = "City")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a City")]
-        public string City { get; set; }
-
-        [Required(ErrorMessage = "*")]
-        [Display(Name = "Area")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a Area")]
-        public string Area { get; set; }
-
-        [Required(ErrorMessage = "*")]
-        [Display(Name = "State")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a State")]
         public int StateID { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Provide your city")]
         [Display(Name = "City")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a City")]
         public int CityID { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Provide you area")]
         [Display(Name = "Area")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "Must select a Area")]
         public int AreaID { get; set; }
 
         [Display(Name = "Address")]

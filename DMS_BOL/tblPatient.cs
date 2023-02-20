@@ -19,6 +19,7 @@ namespace DMS_BOL
         {
             this.tblAppointments = new HashSet<tblAppointment>();
             this.tblDiagnostics = new HashSet<tblDiagnostic>();
+            this.tblDoctorReviews = new HashSet<tblDoctorReview>();
         }
     
         public int P_ID { get; set; }
@@ -44,6 +45,8 @@ namespace DMS_BOL
         public virtual ICollection<tblAppointment> tblAppointments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDiagnostic> tblDiagnostics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
         public virtual tblRole tblRole { get; set; }
     }
 }

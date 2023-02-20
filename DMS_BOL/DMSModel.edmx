@@ -123,6 +123,26 @@
           <Property Name="D_SatisfactionRate" Type="int" />
           <Property Name="D_ResponseTime" Type="int" />
         </EntityType>
+        <EntityType Name="tblDoctorReviews">
+          <Key>
+            <PropertyRef Name="DR_ID" />
+          </Key>
+          <Property Name="DR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DR_DoctorID" Type="int" />
+          <Property Name="DR_PatientID" Type="int" />
+          <Property Name="DR_AppointmentID" Type="int" />
+          <Property Name="DR_DiagnosticsID" Type="int" />
+          <Property Name="DR_StarRatingDiagnostics" Type="int" Nullable="false" />
+          <Property Name="DR_Message" Type="varchar(max)" />
+          <Property Name="DR_RateDoctorService" Type="int" />
+          <Property Name="DR_IsAllowAnonymous" Type="bit" />
+          <Property Name="DR_IsActive" Type="bit" />
+          <Property Name="DR_IsArchive" Type="bit" />
+          <Property Name="DR_CreatedBy" Type="int" />
+          <Property Name="DR_CreatedOn" Type="datetime" />
+          <Property Name="DR_UpdatedBy" Type="int" />
+          <Property Name="DR_UpdatedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblDoctorWorkExperience">
           <Key>
             <PropertyRef Name="WEX_ID" />
@@ -450,6 +470,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorReviews_tblAppointment">
+          <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="0..1" />
+          <End Role="tblDoctorReviews" Type="Self.tblDoctorReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointment">
+              <PropertyRef Name="AP_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReviews">
+              <PropertyRef Name="DR_AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorReviews_tblDiagnostics">
+          <End Role="tblDiagnostics" Type="Self.tblDiagnostics" Multiplicity="0..1" />
+          <End Role="tblDoctorReviews" Type="Self.tblDoctorReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDiagnostics">
+              <PropertyRef Name="DG_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReviews">
+              <PropertyRef Name="DR_DiagnosticsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorReviews_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorReviews" Type="Self.tblDoctorReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReviews">
+              <PropertyRef Name="DR_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorReviews_tblPatient">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblDoctorReviews" Type="Self.tblDoctorReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReviews">
+              <PropertyRef Name="DR_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorWorkExperience_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
           <End Role="tblDoctorWorkExperience" Type="Self.tblDoctorWorkExperience" Multiplicity="*" />
@@ -591,6 +659,7 @@
           <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctor" EntityType="Self.tblDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDoctorReviews" EntityType="Self.tblDoctorReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorWorkExperience" EntityType="Self.tblDoctorWorkExperience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessage" EntityType="Self.tblMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessageDetails" EntityType="Self.tblMessageDetails" Schema="dbo" store:Type="Tables" />
@@ -653,6 +722,22 @@
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctor" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblAppointment" Association="Self.FK_tblDoctorReviews_tblAppointment">
+            <End Role="tblAppointment" EntitySet="tblAppointment" />
+            <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblDiagnostics" Association="Self.FK_tblDoctorReviews_tblDiagnostics">
+            <End Role="tblDiagnostics" EntitySet="tblDiagnostics" />
+            <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblDoctor" Association="Self.FK_tblDoctorReviews_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblPatient" Association="Self.FK_tblDoctorReviews_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatient" />
+            <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="Self.FK_tblDoctorWorkExperience_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctor" />
             <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperience" />
@@ -711,6 +796,7 @@
           <EntitySet Name="tblCountries" EntityType="dentalDBModel.tblCountry" />
           <EntitySet Name="tblDiagnostics" EntityType="dentalDBModel.tblDiagnostic" />
           <EntitySet Name="tblDoctors" EntityType="dentalDBModel.tblDoctor" />
+          <EntitySet Name="tblDoctorReviews" EntityType="dentalDBModel.tblDoctorReview" />
           <EntitySet Name="tblDoctorWorkExperiences" EntityType="dentalDBModel.tblDoctorWorkExperience" />
           <EntitySet Name="tblMessages" EntityType="dentalDBModel.tblMessage" />
           <EntitySet Name="tblMessageDetails" EntityType="dentalDBModel.tblMessageDetail" />
@@ -769,6 +855,10 @@
             <End Role="tblPatient" EntitySet="tblPatients" />
             <End Role="tblAppointment" EntitySet="tblAppointments" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblAppointment" Association="dentalDBModel.FK_tblDoctorReviews_tblAppointment">
+            <End Role="tblAppointment" EntitySet="tblAppointments" />
+            <End Role="tblDoctorReview" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCity_tblState" Association="dentalDBModel.FK_tblCity_tblState">
             <End Role="tblState" EntitySet="tblStates" />
             <End Role="tblCity" EntitySet="tblCities" />
@@ -789,9 +879,17 @@
             <End Role="tblPatient" EntitySet="tblPatients" />
             <End Role="tblDiagnostic" EntitySet="tblDiagnostics" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblDiagnostics" Association="dentalDBModel.FK_tblDoctorReviews_tblDiagnostics">
+            <End Role="tblDiagnostic" EntitySet="tblDiagnostics" />
+            <End Role="tblDoctorReview" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDoctor_tblRoles" Association="dentalDBModel.FK_tblDoctor_tblRoles">
             <End Role="tblRole" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblDoctor" Association="dentalDBModel.FK_tblDoctorReviews_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblDoctorReview" EntitySet="tblDoctorReviews" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
@@ -804,6 +902,10 @@
           <AssociationSet Name="FK_tblOnlineConsultaionDetails_tblDoctor" Association="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblOnlineConsultaionDetail" EntitySet="tblOnlineConsultaionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorReviews_tblPatient" Association="dentalDBModel.FK_tblDoctorReviews_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatients" />
+            <End Role="tblDoctorReview" EntitySet="tblDoctorReviews" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="dentalDBModel.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessages" />
@@ -889,6 +991,7 @@
           <Property Name="AP_IsArchive" Type="Boolean" />
           <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblAppointment_tblDoctor" FromRole="tblAppointment" ToRole="tblDoctor" />
           <NavigationProperty Name="tblPatient" Relationship="dentalDBModel.FK_tblAppointment_tblPatient" FromRole="tblAppointment" ToRole="tblPatient" />
+          <NavigationProperty Name="tblDoctorReviews" Relationship="dentalDBModel.FK_tblDoctorReviews_tblAppointment" FromRole="tblAppointment" ToRole="tblDoctorReview" />
         </EntityType>
         <EntityType Name="tblCity">
           <Key>
@@ -925,6 +1028,7 @@
           <Property Name="DG_IsArchive" Type="Boolean" />
           <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblDiagnostics_tblDoctor" FromRole="tblDiagnostic" ToRole="tblDoctor" />
           <NavigationProperty Name="tblPatient" Relationship="dentalDBModel.FK_tblDiagnostics_tblPatient" FromRole="tblDiagnostic" ToRole="tblPatient" />
+          <NavigationProperty Name="tblDoctorReviews" Relationship="dentalDBModel.FK_tblDoctorReviews_tblDiagnostics" FromRole="tblDiagnostic" ToRole="tblDoctorReview" />
         </EntityType>
         <EntityType Name="tblDoctor">
           <Key>
@@ -959,9 +1063,34 @@
           <NavigationProperty Name="tblAppointments" Relationship="dentalDBModel.FK_tblAppointment_tblDoctor" FromRole="tblDoctor" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="dentalDBModel.FK_tblDiagnostics_tblDoctor" FromRole="tblDoctor" ToRole="tblDiagnostic" />
           <NavigationProperty Name="tblRole" Relationship="dentalDBModel.FK_tblDoctor_tblRoles" FromRole="tblDoctor" ToRole="tblRole" />
+          <NavigationProperty Name="tblDoctorReviews" Relationship="dentalDBModel.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorReview" />
           <NavigationProperty Name="tblDoctorWorkExperiences" Relationship="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorWorkExperience" />
           <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="dentalDBModel.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOfflineConsultaionDetail" />
           <NavigationProperty Name="tblOnlineConsultaionDetails" Relationship="dentalDBModel.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOnlineConsultaionDetail" />
+        </EntityType>
+        <EntityType Name="tblDoctorReview">
+          <Key>
+            <PropertyRef Name="DR_ID" />
+          </Key>
+          <Property Name="DR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DR_DoctorID" Type="Int32" />
+          <Property Name="DR_PatientID" Type="Int32" />
+          <Property Name="DR_AppointmentID" Type="Int32" />
+          <Property Name="DR_DiagnosticsID" Type="Int32" />
+          <Property Name="DR_StarRatingDiagnostics" Type="Int32" Nullable="false" />
+          <Property Name="DR_Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DR_RateDoctorService" Type="Int32" />
+          <Property Name="DR_IsAllowAnonymous" Type="Boolean" />
+          <Property Name="DR_IsActive" Type="Boolean" />
+          <Property Name="DR_IsArchive" Type="Boolean" />
+          <Property Name="DR_CreatedBy" Type="Int32" />
+          <Property Name="DR_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="DR_UpdatedBy" Type="Int32" />
+          <Property Name="DR_UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblAppointment" Relationship="dentalDBModel.FK_tblDoctorReviews_tblAppointment" FromRole="tblDoctorReview" ToRole="tblAppointment" />
+          <NavigationProperty Name="tblDiagnostic" Relationship="dentalDBModel.FK_tblDoctorReviews_tblDiagnostics" FromRole="tblDoctorReview" ToRole="tblDiagnostic" />
+          <NavigationProperty Name="tblDoctor" Relationship="dentalDBModel.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctorReview" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblPatient" Relationship="dentalDBModel.FK_tblDoctorReviews_tblPatient" FromRole="tblDoctorReview" ToRole="tblPatient" />
         </EntityType>
         <EntityType Name="tblDoctorWorkExperience">
           <Key>
@@ -1089,6 +1218,7 @@
           <NavigationProperty Name="tblAddress" Relationship="dentalDBModel.FK_tblPatient_tblAddress" FromRole="tblPatient" ToRole="tblAddress" />
           <NavigationProperty Name="tblAppointments" Relationship="dentalDBModel.FK_tblAppointment_tblPatient" FromRole="tblPatient" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="dentalDBModel.FK_tblDiagnostics_tblPatient" FromRole="tblPatient" ToRole="tblDiagnostic" />
+          <NavigationProperty Name="tblDoctorReviews" Relationship="dentalDBModel.FK_tblDoctorReviews_tblPatient" FromRole="tblPatient" ToRole="tblDoctorReview" />
           <NavigationProperty Name="tblRole" Relationship="dentalDBModel.FK_tblPatient_tblRoles" FromRole="tblPatient" ToRole="tblRole" />
         </EntityType>
         <EntityType Name="tblRole">
@@ -1299,6 +1429,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorReviews_tblAppointment">
+          <End Type="dentalDBModel.tblAppointment" Role="tblAppointment" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblDoctorReview" Role="tblDoctorReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointment">
+              <PropertyRef Name="AP_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReview">
+              <PropertyRef Name="DR_AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCity_tblState">
           <End Type="dentalDBModel.tblState" Role="tblState" Multiplicity="0..1" />
           <End Type="dentalDBModel.tblCity" Role="tblCity" Multiplicity="*" />
@@ -1359,6 +1501,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorReviews_tblDiagnostics">
+          <End Type="dentalDBModel.tblDiagnostic" Role="tblDiagnostic" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblDoctorReview" Role="tblDoctorReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDiagnostic">
+              <PropertyRef Name="DG_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReview">
+              <PropertyRef Name="DR_DiagnosticsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctor_tblRoles">
           <End Type="dentalDBModel.tblRole" Role="tblRole" Multiplicity="0..1" />
           <End Type="dentalDBModel.tblDoctor" Role="tblDoctor" Multiplicity="*" />
@@ -1368,6 +1522,18 @@
             </Principal>
             <Dependent Role="tblDoctor">
               <PropertyRef Name="D_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorReviews_tblDoctor">
+          <End Type="dentalDBModel.tblDoctor" Role="tblDoctor" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblDoctorReview" Role="tblDoctorReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReview">
+              <PropertyRef Name="DR_DoctorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1404,6 +1570,18 @@
             </Principal>
             <Dependent Role="tblOnlineConsultaionDetail">
               <PropertyRef Name="OCD_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorReviews_tblPatient">
+          <End Type="dentalDBModel.tblPatient" Role="tblPatient" Multiplicity="0..1" />
+          <End Type="dentalDBModel.tblDoctorReview" Role="tblDoctorReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorReview">
+              <PropertyRef Name="DR_PatientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1572,6 +1750,27 @@
                 <ScalarProperty Name="D_LastName" ColumnName="D_LastName" />
                 <ScalarProperty Name="D_FirstName" ColumnName="D_FirstName" />
                 <ScalarProperty Name="D_ID" ColumnName="D_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDoctorReviews">
+            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorReview">
+              <MappingFragment StoreEntitySet="tblDoctorReviews">
+                <ScalarProperty Name="DR_UpdatedOn" ColumnName="DR_UpdatedOn" />
+                <ScalarProperty Name="DR_UpdatedBy" ColumnName="DR_UpdatedBy" />
+                <ScalarProperty Name="DR_CreatedOn" ColumnName="DR_CreatedOn" />
+                <ScalarProperty Name="DR_CreatedBy" ColumnName="DR_CreatedBy" />
+                <ScalarProperty Name="DR_IsArchive" ColumnName="DR_IsArchive" />
+                <ScalarProperty Name="DR_IsActive" ColumnName="DR_IsActive" />
+                <ScalarProperty Name="DR_IsAllowAnonymous" ColumnName="DR_IsAllowAnonymous" />
+                <ScalarProperty Name="DR_RateDoctorService" ColumnName="DR_RateDoctorService" />
+                <ScalarProperty Name="DR_Message" ColumnName="DR_Message" />
+                <ScalarProperty Name="DR_StarRatingDiagnostics" ColumnName="DR_StarRatingDiagnostics" />
+                <ScalarProperty Name="DR_DiagnosticsID" ColumnName="DR_DiagnosticsID" />
+                <ScalarProperty Name="DR_AppointmentID" ColumnName="DR_AppointmentID" />
+                <ScalarProperty Name="DR_PatientID" ColumnName="DR_PatientID" />
+                <ScalarProperty Name="DR_DoctorID" ColumnName="DR_DoctorID" />
+                <ScalarProperty Name="DR_ID" ColumnName="DR_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

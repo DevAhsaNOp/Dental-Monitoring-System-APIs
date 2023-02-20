@@ -14,6 +14,12 @@ namespace DMS_BOL
     
     public partial class tblDiagnostic
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblDiagnostic()
+        {
+            this.tblDoctorReviews = new HashSet<tblDoctorReview>();
+        }
+    
         public int DG_ID { get; set; }
         public string DG_Name { get; set; }
         public Nullable<System.DateTime> DG_Datetime { get; set; }
@@ -26,5 +32,7 @@ namespace DMS_BOL
     
         public virtual tblDoctor tblDoctor { get; set; }
         public virtual tblPatient tblPatient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
     }
 }
