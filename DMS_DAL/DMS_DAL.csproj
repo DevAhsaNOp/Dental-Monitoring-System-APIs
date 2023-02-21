@@ -51,6 +51,8 @@
     <Compile Include="DBLayer\AddressDb.cs" />
     <Compile Include="DBLayer\UsersDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDefine\OTPGenerator.cs" />
+    <Compile Include="UserDefine\UserViewDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DMS_BOL\DMS_BOL.csproj">
