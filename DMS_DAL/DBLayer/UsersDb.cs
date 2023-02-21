@@ -24,22 +24,17 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
-                if (CheckOTP(model.P_Email, model.P_OTP))
-                {
-                    model.P_IsActive = true;
-                    model.P_CreatedOn = DateTime.Now;
-                    model.P_UpdatedOn = null;
-                    model.P_UpdatedBy = null;
-                    model.P_IsArchive = false;
-                    model.P_RoleID = 4;
-                    _context.tblPatients.Add(model);
-                    Save();
-                    if (model.P_ID > 0)
-                        return true;
-                    return false;
-                }
-                else
-                    return false;
+                model.P_IsActive = true;
+                model.P_CreatedOn = DateTime.Now;
+                model.P_UpdatedOn = null;
+                model.P_UpdatedBy = null;
+                model.P_IsArchive = false;
+                model.P_RoleID = 4;
+                _context.tblPatients.Add(model);
+                Save();
+                if (model.P_ID > 0)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -52,11 +47,12 @@ namespace DMS_DAL.DBLayer
             try
             {
                 model.P_IsActive = true;
-                model.P_CreatedOn = GetPatientByID(model.P_ID).P_CreatedOn;
                 model.P_CreatedBy = GetPatientByID(model.P_ID).P_CreatedBy;
+                model.P_CreatedOn = GetPatientByID(model.P_ID).P_CreatedOn;
                 model.P_UpdatedOn = DateTime.Now;
                 model.P_RoleID = 4;
                 model.P_IsArchive = false;
+                model.P_Verified = true;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
                 if (model.P_ID > 0)
@@ -78,9 +74,8 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetPatientByID(model.P_ID);
                 model.P_IsActive = false;
-                model.P_CreatedOn = GetPatientByID(model.P_ID).P_CreatedOn;
-                model.P_CreatedBy = GetPatientByID(model.P_ID).P_CreatedBy;
                 model.P_UpdatedOn = DateTime.Now;
                 model.P_RoleID = 4;
                 model.P_IsArchive = true;
@@ -100,9 +95,8 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetPatientByID(model.P_ID);
                 model.P_IsActive = true;
-                model.P_CreatedOn = GetPatientByID(model.P_ID).P_CreatedOn;
-                model.P_CreatedBy = GetPatientByID(model.P_ID).P_CreatedBy;
                 model.P_UpdatedOn = DateTime.Now;
                 model.P_RoleID = 4;
                 model.P_IsArchive = false;
@@ -126,22 +120,17 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
-                if (CheckOTP(model.A_Email, model.A_OTP))
-                {
-                    model.A_IsActive = true;
-                    model.A_CreatedOn = DateTime.Now;
-                    model.A_UpdatedOn = null;
-                    model.A_UpdatedBy = null;
-                    model.A_IsArchive = false;
-                    model.A_RoleID = 2;
-                    _context.tblAdmins.Add(model);
-                    Save();
-                    if (model.A_ID > 0)
-                        return true;
-                    return false;
-                }
-                else
-                { return false; }
+                model.A_IsActive = true;
+                model.A_CreatedOn = DateTime.Now;
+                model.A_UpdatedOn = null;
+                model.A_UpdatedBy = null;
+                model.A_IsArchive = false;
+                model.A_RoleID = 2;
+                _context.tblAdmins.Add(model);
+                Save();
+                if (model.A_ID > 0)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -228,22 +217,17 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
-                if (CheckOTP(model.SA_Email, model.SA_OTP))
-                {
-                    model.SA_IsActive = true;
-                    model.SA_CreatedOn = DateTime.Now;
-                    model.SA_UpdatedOn = null;
-                    model.SA_UpdatedBy = null;
-                    model.SA_IsArchive = false;
-                    model.SA_RoleID = 1;
-                    _context.tblSuperAdmins.Add(model);
-                    Save();
-                    if (model.SA_ID > 0)
-                        return true;
-                    return false;
-                }
-                else
-                { return false; }
+                model.SA_IsActive = true;
+                model.SA_CreatedOn = DateTime.Now;
+                model.SA_UpdatedOn = null;
+                model.SA_UpdatedBy = null;
+                model.SA_IsArchive = false;
+                model.SA_RoleID = 1;
+                _context.tblSuperAdmins.Add(model);
+                Save();
+                if (model.SA_ID > 0)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -330,22 +314,17 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
-                if (CheckOTP(model.D_Email, model.D_OTP))
-                {
-                    model.D_IsActive = true;
-                    model.D_CreatedOn = DateTime.Now;
-                    model.D_UpdatedOn = null;
-                    model.D_UpdatedBy = null;
-                    model.D_IsArchive = false;
-                    model.D_RoleID = 3;
-                    _context.tblDoctors.Add(model);
-                    Save();
-                    if (model.D_ID > 0)
-                        return true;
-                    return false;
-                }
-                else
-                { return false; }
+                model.D_IsActive = true;
+                model.D_CreatedOn = DateTime.Now;
+                model.D_UpdatedOn = null;
+                model.D_UpdatedBy = null;
+                model.D_IsArchive = false;
+                model.D_RoleID = 3;
+                _context.tblDoctors.Add(model);
+                Save();
+                if (model.D_ID > 0)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -648,6 +627,112 @@ namespace DMS_DAL.DBLayer
             }).FirstOrDefault();
 
             var doctor = _context.tblDoctors.Where(x => x.D_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
+            {
+                UserID = s.D_ID,
+                UserFirstName = s.D_FirstName,
+                UserLastName = s.D_LastName,
+                UserEmail = s.D_Email,
+                tblAddress = s.tblAddress,
+                UserPhoneNumber = s.D_PhoneNumber,
+                UserProfileImage = s.D_ProfileImage,
+                UserPassword = s.D_Password,
+                tblRole = s.tblRole,
+                UserIsActive = s.D_IsActive.Value,
+                UserVerified = s.D_Verified.Value,
+                UserOTP = s.D_OTP,
+                UserIsArchive = s.D_IsArchive.Value,
+                UserUpdatedBy = s.D_UpdatedBy.Value,
+                UserUpdatedOn = s.D_UpdatedOn.Value,
+                UserCreatedBy = s.D_CreatedBy.Value,
+                UserCreatedOn = s.D_CreatedOn.Value,
+            }).FirstOrDefault();
+
+            if (superAdmin != null)
+            {
+                return superAdmin;
+            }
+            else if (admin != null)
+            {
+                return admin;
+            }
+            else if (patients != null)
+            {
+                return patients;
+            }
+            else if (doctor != null)
+            {
+                return doctor;
+            }
+            else
+                return null;
+        }
+        
+        public ValidateUsersProfiles GetUserDetailById(int Id)
+        {
+            var patients = _context.tblPatients.Where(x => x.P_ID == Id).Select(s => new ValidateUsersProfiles()
+            {
+                UserID = s.P_ID,
+                UserFirstName = s.P_FirstName,
+                UserLastName = s.P_LastName,
+                UserEmail = s.P_Email,
+                tblAddress = s.tblAddress,
+                UserPhoneNumber = s.P_PhoneNumber,
+                UserProfileImage = s.P_ProfileImage,
+                UserPassword = s.P_Password,
+                tblRole = s.tblRole,
+                UserIsActive = s.P_IsActive.Value,
+                UserVerified = s.P_Verified.Value,
+                UserOTP = s.P_OTP,
+                UserIsArchive = s.P_IsArchive.Value,
+                UserUpdatedBy = s.P_UpdatedBy.Value,
+                UserUpdatedOn = s.P_UpdatedOn.Value,
+                UserCreatedBy = s.P_CreatedBy.Value,
+                UserCreatedOn = s.P_CreatedOn.Value,
+            }).FirstOrDefault();
+
+            var admin = _context.tblAdmins.Where(x => x.A_ID == Id).Select(s => new ValidateUsersProfiles()
+            {
+                UserID = s.A_ID,
+                UserFirstName = s.A_FirstName,
+                UserLastName = s.A_LastName,
+                UserEmail = s.A_Email,
+                tblAddress = s.tblAddress,
+                UserPhoneNumber = s.A_PhoneNumber,
+                UserProfileImage = s.A_ProfileImage,
+                UserPassword = s.A_Password,
+                tblRole = s.tblRole,
+                UserIsActive = s.A_IsActive.Value,
+                UserVerified = s.A_Verified.Value,
+                UserOTP = s.A_OTP,
+                UserIsArchive = s.A_IsArchive.Value,
+                UserUpdatedBy = s.A_UpdatedBy.Value,
+                UserUpdatedOn = s.A_UpdatedOn.Value,
+                UserCreatedBy = s.A_CreatedBy.Value,
+                UserCreatedOn = s.A_CreatedOn.Value,
+            }).FirstOrDefault();
+
+            var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_ID == Id).Select(s => new ValidateUsersProfiles()
+            {
+                UserID = s.SA_ID,
+                UserFirstName = s.SA_FirstName,
+                UserLastName = s.SA_LastName,
+                UserEmail = s.SA_Email,
+                tblAddress = s.tblAddress,
+                UserPhoneNumber = s.SA_PhoneNumber,
+                UserProfileImage = s.SA_ProfileImage,
+                UserPassword = s.SA_Password,
+                tblRole = s.tblRole,
+                UserIsActive = s.SA_IsActive.Value,
+                UserVerified = s.SA_Verified.Value,
+                UserOTP = s.SA_OTP,
+                UserIsArchive = s.SA_IsArchive.Value,
+                UserUpdatedBy = s.SA_UpdatedBy.Value,
+                UserUpdatedOn = s.SA_UpdatedOn.Value,
+                UserCreatedBy = s.SA_CreatedBy.Value,
+                UserCreatedOn = s.SA_CreatedOn.Value,
+            }).FirstOrDefault();
+
+            var doctor = _context.tblDoctors.Where(x => x.D_ID == Id).Select(s => new ValidateUsersProfiles()
             {
                 UserID = s.D_ID,
                 UserFirstName = s.D_FirstName,

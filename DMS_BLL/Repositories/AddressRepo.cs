@@ -40,7 +40,7 @@ namespace DMS_BLL.Repositories
         {
             try
             {
-                if (model != null)
+                if (model != null && model.AddressID > 0)
                 {
                     var addressId = dbObj.UpdateAddress(model);
                     if (addressId > 0)

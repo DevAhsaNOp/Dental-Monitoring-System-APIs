@@ -28,9 +28,9 @@ namespace DMS_WepApi.Models
                     }
                 }
 
-                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest, new GRMValidation()
+                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.PreconditionFailed, new GRMValidation()
                 {
-                    StatusCode = 400,
+                    StatusCode = 412,
                     Message = "Invalid data provided!",
                     Errorslist = errorsList,
                     Success = false
