@@ -6,6 +6,7 @@ using System.Net.Mail;
 using DMS_DAL.UserDefine;
 using System.Data.Entity;
 using DMS_BOL.Validation_Classes;
+using static System.Net.WebRequestMethods;
 
 namespace DMS_DAL.DBLayer
 {
@@ -64,6 +65,52 @@ namespace DMS_DAL.DBLayer
                 throw ex;
             }
         }
+
+        public bool InsertOTP(tblOTP model)
+        {
+            try
+            {
+                model.OT_IsActive = true;
+                model.OT_CreatedOn = DateTime.Now;
+                model.OT_UpdatedOn = null;
+                model.OT_IsArchive = false;
+                _context.tblOTPs.Add(model);
+                Save();
+                if (model.OT_ID > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool UpdatePatient(string Email)
+        {
+            try
+            {
+                var model = _context.tblOTPs.Where(x => x.OT_UsersEmail == Email).FirstOrDefault();
+                model.OT_IsActive = false;
+                model.OT_IsArchive = true;
+                model.OT_UpdatedOn= DateTime.Now;
+                _context.Entry(model).State = EntityState.Modified;
+                Save();
+                if (model.OT_ID > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public tblOTP GetOTPByID(int modelId)
+        {
+            return _context.tblOTPs.Find(modelId);
+        }
+
 
         public tblPatient GetPatientByID(int modelId)
         {
@@ -434,36 +481,31 @@ namespace DMS_DAL.DBLayer
 
         public bool GenerateUserOTP(string emailtext)
         {
-            var user = GetUserDetail(emailtext);
-            if (user != null)
+            if (!string.IsNullOrEmpty(emailtext) && emailtext.Length > 5)
             {
-                var superAdminData = GetSuperAdminByID(user.ID);
-                var adminData = GetAdminByID(user.ID);
-                var doctorData = GetDoctorByID(user.ID);
-                var patient = GetPatientByID(user.ID);
                 var otp = OTPGenerator.GenerateRandomOTP();
-                if (superAdminData != null)
+                var reasOTP = _context.tblOTPs.Where(x => x.OT_UsersEmail == emailtext && x.OT_IsActive == true).FirstOrDefault();
+                if (reasOTP != null)
                 {
-                    superAdminData.SA_OTP = otp;
-                    UpdateSuperAdmin(superAdminData);
+                    otp = reasOTP.OT_OTP;
+                    SendEmail(otp, emailtext);
+                    return true;
                 }
-                else if (adminData != null)
+                else
                 {
-                    adminData.A_OTP = otp;
-                    UpdateAdmin(adminData);
+                    tblOTP oTP = new tblOTP() 
+                    {
+                        OT_OTP = otp,
+                        OT_UsersEmail = emailtext                    
+                    };
+                    var reas = InsertOTP(oTP);
+                    if (reas)
+                    {
+                        SendEmail(otp, emailtext);
+                        return true;
+                    }
+                    return false;
                 }
-                else if (doctorData != null)
-                {
-                    doctorData.D_OTP = otp;
-                    UpdateDoctor(doctorData);
-                }
-                else if (patient != null)
-                {
-                    patient.P_OTP = otp;
-                    UpdatePatient(patient);
-                }
-                SendEmail(otp, emailtext);
-                return true;
             }
             else
                 return false;
@@ -471,12 +513,14 @@ namespace DMS_DAL.DBLayer
 
         public bool CheckOTP(string emailtext, string OTP)
         {
-            var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_Email == emailtext && x.SA_OTP == OTP).FirstOrDefault();
-            var admin = _context.tblAdmins.Where(x => x.A_Email == emailtext && x.A_OTP == OTP).FirstOrDefault();
-            var doctor = _context.tblDoctors.Where(x => x.D_Email == emailtext && x.D_OTP == OTP).FirstOrDefault();
-            var patient = _context.tblPatients.Where(x => x.P_Email == emailtext && x.P_OTP == OTP).FirstOrDefault();
-            if ((admin != null) || (patient != null) || (doctor != null) || (superAdmin != null))
-                return true;
+            var reas = _context.tblOTPs.Where(x => x.OT_UsersEmail == emailtext && x.OT_OTP == OTP && x.OT_IsActive == true).FirstOrDefault();
+            if (reas != null)
+            {
+                var reas1 = UpdatePatient(emailtext);
+                if (reas1)
+                    return true;
+                return false;
+            }
             else
                 return false;
         }

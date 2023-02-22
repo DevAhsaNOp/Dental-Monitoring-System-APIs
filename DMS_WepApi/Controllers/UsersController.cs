@@ -64,6 +64,38 @@ namespace DMS_WepApi.Controllers
                     Message = "Invalid data provided!"
                 });
         }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/Send/OTP")]
+        public HttpResponseMessage SendOTP(string Email)
+        {
+            if (!string.IsNullOrEmpty(Email) && Email.Length > 5)
+            {
+                var reas = UserRepoObj.GenerateUserOTP(Email);
+                if (reas)
+                    return Request.CreateResponse(HttpStatusCode.Created, new GRValidation()
+                    {
+                        StatusCode = 201,
+                        Success = true,
+                        Message = "OTP has been send at your email successfully!",
+                    });
+                else
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    {
+                        StatusCode = 500,
+                        Success = false,
+                        Message = "Error occured on sending OTP at your Email Account. Please ensure to input correct Email Account or try again later!",
+                    });
+            }
+            else
+                return Request.CreateResponse(HttpStatusCode.PreconditionFailed, new GRValidation()
+                {
+                    StatusCode = 412,
+                    Success = false,
+                    Message = "Invalid data provided!"
+                });
+        }
 
         [HttpPost]
         [ValidationActionFilter]

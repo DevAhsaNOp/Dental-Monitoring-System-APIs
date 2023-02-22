@@ -191,7 +191,7 @@ namespace DMS_BLL.Repositories
 
         public bool GenerateUserOTP(string emailtext)
         {
-            if (string.IsNullOrEmpty(emailtext) && emailtext.Length > 5)
+            if (!string.IsNullOrEmpty(emailtext) && emailtext.Length > 5)
             {
                 var reas = dbObj.GenerateUserOTP(emailtext);
                 if (reas)
@@ -204,7 +204,7 @@ namespace DMS_BLL.Repositories
 
         public bool CheckOTP(string emailtext, string OTP)
         {
-            if (string.IsNullOrEmpty(emailtext) && emailtext.Length > 5 && string.IsNullOrEmpty(OTP) && OTP.Length > 5)
+            if (!string.IsNullOrEmpty(emailtext) && emailtext.Length > 5 && !string.IsNullOrEmpty(OTP) && OTP.Length > 5)
             {
                 var reas = dbObj.CheckOTP(emailtext, OTP);
                 if (reas)
