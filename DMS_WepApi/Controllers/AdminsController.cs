@@ -1,39 +1,34 @@
-﻿using System;
-using System.Net;
-using Newtonsoft.Json;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DMS_WepApi.Models;
-using Newtonsoft.Json.Linq;
 using System.Web.Http.Cors;
 using DMS_BLL.Repositories;
 using DMS_WepApi.ResponseClasses;
 using DMS_BOL.Validation_Classes;
-using System.Collections.Generic;
 
 namespace DMS_WepApi.Controllers
 {
     [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class UsersController : ApiController
+    public class AdminsController : ApiController
     {
-        private UsersRepo UserRepoObj;
-        string URL = "https://localhost:44316/";
+        private AdminsRepo AdminRepoObj;
 
-        public UsersController()
+        public AdminsController()
         {
-            UserRepoObj = new UsersRepo();
+            AdminRepoObj = new AdminsRepo();
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidationActionFilter]
-        [Route("api/Register/Patient")]
-        public HttpResponseMessage RegisterPatient([FromBody] ValidatePatient user)
+        [Route("api/Register/Admin")]
+        public HttpResponseMessage RegisterAdmin([FromBody] ValidateAdmin user)
         {
             if (user != null)
             {
-                var reas = UserRepoObj.InsertPatient(user);
+                var reas = AdminRepoObj.InsertAdmin(user);
                 if (reas == 1)
                     return Request.CreateResponse(HttpStatusCode.Created, new GRValidation()
                     {
@@ -67,13 +62,13 @@ namespace DMS_WepApi.Controllers
 
         [HttpPost]
         [ValidationActionFilter]
-        [Route("api/Update/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient")]
-        public HttpResponseMessage UpdatePatient([FromBody] ValidatePatient user)
+        [Route("api/Update/Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public HttpResponseMessage UpdateAdmin([FromBody] ValidateAdmin user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
             {
-                var reas = UserRepoObj.UpdatePatient(user);
+                var reas = AdminRepoObj.UpdateAdmin(user);
                 if (reas)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
@@ -100,13 +95,13 @@ namespace DMS_WepApi.Controllers
 
         [HttpPost]
         [ValidationActionFilter]
-        [Route("api/InActive/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient")]
-        public HttpResponseMessage InActivePatient([FromBody] ValidateUsersIA user)
+        [Route("api/InActive/Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public HttpResponseMessage InActiveAdmin([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
             {
-                var reas = UserRepoObj.InActivePatient(user);
+                var reas = AdminRepoObj.InActiveAdmin(user);
                 if (reas)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
@@ -133,13 +128,13 @@ namespace DMS_WepApi.Controllers
 
         [HttpPost]
         [ValidationActionFilter]
-        [Route("api/ReActive/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
-        public HttpResponseMessage ReActivePatient([FromBody] ValidateUsersIA user)
+        [Route("api/ReActive/Admin")]
+        [Authorize(Roles = "SuperAdmin")]
+        public HttpResponseMessage ReActiveAdmin([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
             {
-                var reas = UserRepoObj.ReActivePatient(user);
+                var reas = AdminRepoObj.ReActiveAdmin(user);
                 if (reas)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
@@ -166,13 +161,13 @@ namespace DMS_WepApi.Controllers
 
         [HttpGet]
         [ValidationActionFilter]
-        [Route("api/Get/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
-        public HttpResponseMessage GetPatientByID(int PatientID)
+        [Route("api/Get/Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public HttpResponseMessage GetAdminByID(int AdminID)
         {
-            if (PatientID > 0)
+            if (AdminID > 0)
             {
-                var reas = UserRepoObj.GetUserDetailById(PatientID);
+                var reas = AdminRepoObj.GetUserDetailById(AdminID);
                 if (reas != null)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRIValidation()
                     {
@@ -198,60 +193,5 @@ namespace DMS_WepApi.Controllers
                 });
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("api/login")]
-        [ValidationActionFilter]
-        public HttpResponseMessage Login([FromBody] ValidateUsersLogin user)
-        {
-            if (user != null)
-            {
-                var reas = UserRepoObj.CheckLoginDetails(user.UserEmail, user.UserPassword);
-                if (reas != null)
-                {
-                    var keyValues = new List<KeyValuePair<string, string>>
-                        {
-                            new KeyValuePair<string, string>("username", user.UserEmail),
-                            new KeyValuePair<string, string>("password", user.UserPassword),
-                            new KeyValuePair<string, string>("grant_type", "password"),
-                        };
-
-                    var request = new HttpRequestMessage(HttpMethod.Post, URL + "token");
-                    request.Content = new FormUrlEncodedContent(keyValues);
-                    var client = new HttpClient();
-                    var response = client.SendAsync(request).Result;
-                    string accessToken = null, token_type = null;
-                    int accessTokenExpiration;
-                    using (HttpContent content = response.Content)
-                    {
-                        var json = content.ReadAsStringAsync();
-                        JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(json.Result);
-                        accessToken = jwtDynamic.Value<string>("access_token");
-                        token_type = jwtDynamic.Value<string>("token_type");
-                        accessTokenExpiration = jwtDynamic.Value<int>("expires_in");
-                    }
-
-                    return Request.CreateResponse(HttpStatusCode.OK, new LoginResponseValidation()
-                    {
-                        StatusCode = 200,
-                        Success = true,
-                        AccessToken = accessToken,
-                        ExpiresIn = accessTokenExpiration,
-                        TokenType = token_type,
-                        Username = reas.Name,
-                        Email = reas.Email,
-                        Role = reas.Role,
-                        IssuedTime = DateTime.Now.ToString("ddd, dd MMM yyyy hh:mm:ss tt"),
-                        ExpiredTime = DateTime.Now.AddSeconds(accessTokenExpiration).ToString("ddd, dd MMM yyyy hh:mm:ss tt"),
-                    });
-                }
-                else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, new GRValidation()
-                    { StatusCode = 404, Success = false, Message = "Invalid creds." });
-            }
-            else
-                return Request.CreateResponse(HttpStatusCode.NotFound, new GRValidation()
-                { StatusCode = 404, Success = false, Message = "Invalid creds." });
-        }
     }
 }

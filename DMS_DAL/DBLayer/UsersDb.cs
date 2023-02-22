@@ -169,9 +169,8 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetAdminByID(model.A_ID);
                 model.A_IsActive = false;
-                model.A_CreatedOn = GetAdminByID(model.A_ID).A_CreatedOn;
-                model.A_CreatedBy = GetAdminByID(model.A_ID).A_CreatedBy;
                 model.A_UpdatedOn = DateTime.Now;
                 model.A_RoleID = 2;
                 model.A_IsArchive = true;
@@ -191,9 +190,8 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetAdminByID(model.A_ID);
                 model.A_IsActive = true;
-                model.A_CreatedOn = GetAdminByID(model.A_ID).A_CreatedOn;
-                model.A_CreatedBy = GetAdminByID(model.A_ID).A_CreatedBy;
                 model.A_UpdatedOn = DateTime.Now;
                 model.A_RoleID = 2;
                 model.A_IsArchive = false;
@@ -492,7 +490,7 @@ namespace DMS_DAL.DBLayer
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_Email == emailtext).Select(s => new UserViewDetail()
             {
                 ID = s.SA_ID,
-                Name = string.Concat(s.SA_FirstName, s.SA_LastName),
+                Name = s.SA_FirstName,
                 Email = s.SA_Email,
                 Image = s.SA_ProfileImage,
                 Password = s.SA_Password,
@@ -505,7 +503,7 @@ namespace DMS_DAL.DBLayer
             var admin = _context.tblAdmins.Where(x => x.A_Email == emailtext).Select(s => new UserViewDetail()
             {
                 ID = s.A_ID,
-                Name = string.Concat(s.A_FirstName, s.A_LastName),
+                Name = s.A_FirstName,
                 Email = s.A_Email,
                 Image = s.A_ProfileImage,
                 Password = s.A_Password,
@@ -518,7 +516,7 @@ namespace DMS_DAL.DBLayer
             var doctor = _context.tblDoctors.Where(x => x.D_Email == emailtext).Select(s => new UserViewDetail()
             {
                 ID = s.D_ID,
-                Name = string.Concat(s.D_FirstName, s.D_LastName),
+                Name = s.D_FirstName,
                 Email = s.D_Email,
                 Image = s.D_ProfileImage,
                 Password = s.D_Password,
@@ -531,7 +529,7 @@ namespace DMS_DAL.DBLayer
             var patients = _context.tblPatients.Where(x => x.P_Email == emailtext).Select(s => new UserViewDetail()
             {
                 ID = s.P_ID,
-                Name = string.Concat(s.P_FirstName, s.P_LastName),
+                Name = s.P_FirstName,
                 Email = s.P_Email,
                 Image = s.P_ProfileImage,
                 Password = s.P_Password,
@@ -666,7 +664,7 @@ namespace DMS_DAL.DBLayer
             else
                 return null;
         }
-        
+
         public ValidateUsersProfiles GetUserDetailById(int Id)
         {
             var patients = _context.tblPatients.Where(x => x.P_ID == Id).Select(s => new ValidateUsersProfiles()

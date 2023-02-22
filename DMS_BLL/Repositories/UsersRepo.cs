@@ -1,6 +1,9 @@
 ﻿using DMS_BOL;
 using DMS_DAL.DBLayer;
 using DMS_BOL.Validation_Classes;
+using System;
+using DMS_DAL.UserDefine;
+using System.Runtime.Remoting.Contexts;
 
 namespace DMS_BLL.Repositories
 {
@@ -15,44 +18,49 @@ namespace DMS_BLL.Repositories
             addressRepo = new AddressRepo();
         }
 
-        public bool InsertPatient(ValidatePatient model)
+        public int InsertPatient(ValidatePatient model)
         {
             if (model != null)
             {
-                tblAddress AddrsObj = new tblAddress()
+                if (CheckOTP(model.UserEmail, model.UserOTP))
                 {
-                    AddressCountry = 1,
-                    AddressState = model.StateID,
-                    AddressCity = model.CityID,
-                    AddressZone = model.AreaID,
-                    AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress,
-                };
-                var addressID = addressRepo.InsertAddress(AddrsObj);
-                if (addressID > 0)
-                {
-                    tblPatient PatientObj = new tblPatient()
+                    tblAddress AddrsObj = new tblAddress()
                     {
-                        P_FirstName = model.UserFirstName,
-                        P_LastName = model.UserLastName,
-                        P_Email = model.UserEmail,
-                        P_AddressID = addressID,
-                        P_PhoneNumber = model.UserPhoneNumber,
-                        P_Password = EncDec.Encrypt(model.UserPassword),
-                        P_ProfileImage = model.UserProfileImage,
-                        P_OTP = model.UserOTP,
-                        P_Verified = model.UserVerified,
-                        P_CreatedBy = model.UserCreatedBy
+                        AddressCountry = 1,
+                        AddressState = model.StateID,
+                        AddressCity = model.CityID,
+                        AddressZone = model.AreaID,
+                        AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress,
                     };
-                    var reas = dbObj.InsertPatient(PatientObj);
-                    if (reas)
-                        return true;
-                    return false;
+                    var addressID = addressRepo.InsertAddress(AddrsObj);
+                    if (addressID > 0)
+                    {
+                        tblPatient PatientObj = new tblPatient()
+                        {
+                            P_FirstName = model.UserFirstName,
+                            P_LastName = model.UserLastName,
+                            P_Email = model.UserEmail,
+                            P_AddressID = addressID,
+                            P_PhoneNumber = model.UserPhoneNumber,
+                            P_Password = EncDec.Encrypt(model.UserPassword),
+                            P_ProfileImage = model.UserProfileImage,
+                            P_OTP = null,
+                            P_Verified = true,
+                            P_CreatedBy = model.UserCreatedBy
+                        };
+                        var reas = dbObj.InsertPatient(PatientObj);
+                        if (reas)
+                            return 1;
+                        return 0;
+                    }
+                    else
+                        return 0;
                 }
                 else
-                    return false;
+                    return -1;
             }
             else
-                return false;
+                return 0;
         }
 
         public bool UpdatePatient(ValidatePatient model)
@@ -153,6 +161,58 @@ namespace DMS_BLL.Repositories
                 return dbObj.GetUserDetailById(Id);
             else
                 return null;
+        }
+
+        public UserViewDetail CheckLoginDetails(string emailtext, string password)
+        {
+            try
+            {
+                var reas = dbObj.GetUserDetail(emailtext);
+                if (reas != null)
+                {
+                    if (EncDec.Decrypt(reas.Password).Equals(password))
+                    {
+                        var entity = dbObj.GetUserDetail(emailtext);
+                        return entity;
+                    }
+                    else
+                        return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool GenerateUserOTP(string emailtext)
+        {
+            if (string.IsNullOrEmpty(emailtext) && emailtext.Length > 5)
+            {
+                var reas = dbObj.GenerateUserOTP(emailtext);
+                if (reas)
+                    return true;
+                return false;
+            }
+            else
+                return false;
+        }
+
+        public bool CheckOTP(string emailtext, string OTP)
+        {
+            if (string.IsNullOrEmpty(emailtext) && emailtext.Length > 5 && string.IsNullOrEmpty(OTP) && OTP.Length > 5)
+            {
+                var reas = dbObj.CheckOTP(emailtext, OTP);
+                if (reas)
+                    return true;
+                return false;
+            }
+            else
+                return false;
         }
     }
 }

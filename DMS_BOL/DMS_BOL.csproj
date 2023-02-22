@@ -129,6 +129,7 @@
     <Compile Include="Validation Classes\ValidatePatient.cs" />
     <Compile Include="Validation Classes\ValidateSuperAdmin.cs" />
     <Compile Include="Validation Classes\ValidateUsersIA.cs" />
+    <Compile Include="Validation Classes\ValidateUsersLogin.cs" />
     <Compile Include="Validation Classes\ValidateUsersProfiles.cs" />
   </ItemGroup>
   <ItemGroup>
