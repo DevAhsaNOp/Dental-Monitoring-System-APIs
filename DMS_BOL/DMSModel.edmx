@@ -108,7 +108,6 @@
           <Property Name="D_Password" Type="varchar(max)" Nullable="false" />
           <Property Name="D_YearsOfExperience" Type="varchar(max)" Nullable="false" />
           <Property Name="D_Specialization" Type="varchar(max)" Nullable="false" />
-          <Property Name="D_OfferedServices" Type="varchar(max)" />
           <Property Name="D_WorkPhoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="D_AwardsAndAchievements" Type="varchar(max)" />
           <Property Name="D_AboutMe" Type="varchar(max)" />
@@ -984,7 +983,6 @@
           <Property Name="D_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_YearsOfExperience" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_Specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="D_OfferedServices" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_WorkPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="D_AwardsAndAchievements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1883,7 +1881,6 @@
                 <ScalarProperty Name="D_Password" ColumnName="D_Password" />
                 <ScalarProperty Name="D_YearsOfExperience" ColumnName="D_YearsOfExperience" />
                 <ScalarProperty Name="D_Specialization" ColumnName="D_Specialization" />
-                <ScalarProperty Name="D_OfferedServices" ColumnName="D_OfferedServices" />
                 <ScalarProperty Name="D_WorkPhoneNumber" ColumnName="D_WorkPhoneNumber" />
                 <ScalarProperty Name="D_AwardsAndAchievements" ColumnName="D_AwardsAndAchievements" />
                 <ScalarProperty Name="D_AboutMe" ColumnName="D_AboutMe" />

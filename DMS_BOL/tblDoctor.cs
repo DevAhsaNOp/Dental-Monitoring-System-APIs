@@ -37,7 +37,6 @@ namespace DMS_BOL
         public string D_Password { get; set; }
         public string D_YearsOfExperience { get; set; }
         public string D_Specialization { get; set; }
-        public string D_OfferedServices { get; set; }
         public string D_WorkPhoneNumber { get; set; }
         public string D_AwardsAndAchievements { get; set; }
         public string D_AboutMe { get; set; }

@@ -14,10 +14,6 @@ namespace DMS_BOL.Validation_Classes
         [Display(Name = "Year Of Experience")]
         public string DoctorYearsOfExperience { get; set; }
 
-        [Required(ErrorMessage = "Provide your offered services")]
-        [Display(Name = "Offered Services")]
-        public string DoctorOfferedServices { get; set; }
-
         [Required(ErrorMessage = "Provide your work phone number")]
         [Display(Name = "Work Phone Number")]
         public string DoctorWorkPhoneNumber { get; set; }

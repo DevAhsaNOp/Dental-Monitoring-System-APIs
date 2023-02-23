@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0edf8521766443279a521332e22dfbb7" Name="Diagram1">
+      <Diagram DiagramId="9ece307ea4a24e379716bce099e89d59" Name="Diagram1">
         <EntityTypeShape EntityType="dentalDBModel.sysdiagram" Width="1.5" PointX="3.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="0.75" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="11.25" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="6" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="11.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="6" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblDoctorReview" Width="1.5" PointX="13.5" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblDoctorService" Width="1.5" PointX="8.25" PointY="27.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblDoctorWorkExperience" Width="1.5" PointX="8.25" PointY="33.125" IsExpanded="true" />

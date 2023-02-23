@@ -18,7 +18,6 @@ namespace DMS_BOL
         public dentalDBEntities()
             : base("name=dentalDBEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

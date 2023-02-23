@@ -43,6 +43,20 @@ namespace DMS_WepApi.Controllers
                         Success = false,
                         Message = "Invalid OTP provided. Please ensure to enter correct OTP again!",
                     });
+                else if (reas == -2)
+                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    {
+                        StatusCode = 404,
+                        Success = false,
+                        Message = "Email already exists. Please ensure to enter not used email account again!",
+                    });
+                else if (reas == -3)
+                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    {
+                        StatusCode = 405,
+                        Success = false,
+                        Message = "Phone Number already exists. Please ensure to enter not used phone number again!",
+                    });
                 else
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
                     {
@@ -69,12 +83,26 @@ namespace DMS_WepApi.Controllers
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
             {
                 var reas = AdminRepoObj.UpdateAdmin(user);
-                if (reas)
+                if (reas == 1)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 200,
                         Success = true,
                         Message = "Your account details has been updated successfully!",
+                    });
+                else if (reas == -1)
+                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    {
+                        StatusCode = 404,
+                        Success = false,
+                        Message = "Email already exists. Please ensure to enter not used email account again!",
+                    });
+                else if (reas == -2)
+                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    {
+                        StatusCode = 405,
+                        Success = false,
+                        Message = "Phone Number already exists. Please ensure to enter not used phone number again!",
                     });
                 else
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()

@@ -1,23 +1,28 @@
-﻿using DMS_BOL;
+﻿using DMS_BOL.Validation_Classes;
+using DMS_BOL;
 using DMS_DAL.DBLayer;
-using DMS_BOL.Validation_Classes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DMS_BLL.Repositories
 {
-    public class AdminsRepo
+    public class DoctorsRepo
     {
         private UsersDb dbObj;
         private AddressRepo addressRepo;
         private UsersRepo usersRepo;
 
-        public AdminsRepo()
+        public DoctorsRepo()
         {
             dbObj = new UsersDb();
             addressRepo = new AddressRepo();
             usersRepo = new UsersRepo();
         }
 
-        public int InsertAdmin(ValidateAdmin model)
+        public int InsertDoctor(ValidateDoctor model)
         {
             if (model != null)
             {
@@ -38,20 +43,27 @@ namespace DMS_BLL.Repositories
                             var addressID = addressRepo.InsertAddress(AddrsObj);
                             if (addressID > 0)
                             {
-                                tblAdmin AdminObj = new tblAdmin()
+                                tblDoctor DoctorObj = new tblDoctor()
                                 {
-                                    A_FirstName = model.UserFirstName,
-                                    A_LastName = model.UserLastName,
-                                    A_Email = model.UserEmail,
-                                    A_AddressID = addressID,
-                                    A_PhoneNumber = model.UserPhoneNumber,
-                                    A_Password = EncDec.Encrypt(model.UserPassword),
-                                    A_ProfileImage = model.UserProfileImage,
-                                    A_OTP = null,
-                                    A_Verified = true,
-                                    A_CreatedBy = model.UserCreatedBy
+                                    D_FirstName = model.UserFirstName,
+                                    D_LastName = model.UserLastName,
+                                    D_Email = model.UserEmail,
+                                    D_AddressID = addressID,
+                                    D_PhoneNumber = model.UserPhoneNumber,
+                                    D_Password = EncDec.Encrypt(model.UserPassword),
+                                    D_ProfileImage = model.UserProfileImage,
+                                    D_OTP = null,
+                                    D_Verified = true,
+                                    D_CreatedBy = model.UserCreatedBy,
+                                    D_YearsOfExperience = model.DoctorYearsOfExperience,
+                                    D_Specialization = model.DoctorSpecialization,
+                                    D_WorkPhoneNumber = model.DoctorWorkPhoneNumber,
+                                    D_AwardsAndAchievements = model.DoctorAwardsAndAchievements,
+                                    D_AboutMe = model.DoctorAboutMe,
+                                    D_SatisfactionRate = model.DoctorSatisfactionRate,
+                                    D_ResponseTime = model.DoctorResponseTime
                                 };
-                                var reas = dbObj.InsertAdmin(AdminObj);
+                                var reas = dbObj.InsertDoctor(DoctorObj);
                                 if (reas)
                                     return 1;
                                 return 0;
@@ -72,7 +84,7 @@ namespace DMS_BLL.Repositories
                 return 0;
         }
 
-        public int UpdateAdmin(ValidateAdmin model)
+        public int UpdateDoctor(ValidateDoctor model)
         {
             if (model != null)
             {
@@ -82,7 +94,7 @@ namespace DMS_BLL.Repositories
                     {
                         tblAddress AddrsObj = new tblAddress()
                         {
-                            AddressID = GetAdminByID(model.UserID).A_AddressID.Value,
+                            AddressID = GetDoctorByID(model.UserID).D_AddressID.Value,
                             AddressCountry = 1,
                             AddressState = model.StateID,
                             AddressCity = model.CityID,
@@ -92,19 +104,25 @@ namespace DMS_BLL.Repositories
                         var addressID = addressRepo.UpdateAddress(AddrsObj);
                         if (addressID > 0)
                         {
-                            var AdminObj = GetAdminByID(model.UserID);
-                            AdminObj.A_ID = model.UserID;
-                            AdminObj.A_FirstName = model.UserFirstName;
-                            AdminObj.A_LastName = model.UserLastName;
-                            AdminObj.A_Email = model.UserEmail;
-                            AdminObj.A_AddressID = addressID;
-                            AdminObj.A_PhoneNumber = model.UserPhoneNumber;
-                            AdminObj.A_Password = EncDec.Encrypt(model.UserPassword);
-                            AdminObj.A_ProfileImage = model.UserProfileImage;
-                            AdminObj.A_OTP = model.UserOTP;
-                            AdminObj.A_Verified = true;
-                            AdminObj.A_UpdatedBy = model.UserUpdatedBy;
-                            var reas = dbObj.UpdateAdmin(AdminObj);
+                            var DoctorObj = GetDoctorByID(model.UserID);
+                            DoctorObj.D_ID = model.UserID;
+                            DoctorObj.D_FirstName = model.UserFirstName;
+                            DoctorObj.D_LastName = model.UserLastName;
+                            DoctorObj.D_Email = model.UserEmail;
+                            DoctorObj.D_AddressID = addressID;
+                            DoctorObj.D_PhoneNumber = model.UserPhoneNumber;
+                            DoctorObj.D_Password = EncDec.Encrypt(model.UserPassword);
+                            DoctorObj.D_ProfileImage = model.UserProfileImage;
+                            DoctorObj.D_AboutMe = model.DoctorAboutMe;
+                            DoctorObj.D_AwardsAndAchievements = model.DoctorAwardsAndAchievements;
+                            DoctorObj.D_ResponseTime = model.DoctorResponseTime;
+                            DoctorObj.D_SatisfactionRate = model.DoctorSatisfactionRate;
+                            DoctorObj.D_Specialization = model.DoctorSpecialization;
+                            DoctorObj.D_WorkPhoneNumber = model.DoctorWorkPhoneNumber;
+                            DoctorObj.D_OTP = model.UserOTP;
+                            DoctorObj.D_Verified = true;
+                            DoctorObj.D_UpdatedBy = model.UserUpdatedBy;
+                            var reas = dbObj.UpdateDoctor(DoctorObj);
                             if (reas)
                                 return 1;
                             return 0;
@@ -122,16 +140,16 @@ namespace DMS_BLL.Repositories
                 return 0;
         }
 
-        public bool InActiveAdmin(ValidateUsersIA model)
+        public bool InActiveDoctor(ValidateUsersIA model)
         {
             if (model != null)
             {
-                tblAdmin AdminObj = new tblAdmin()
+                tblDoctor DoctorObj = new tblDoctor()
                 {
-                    A_ID = model.UserID,
-                    A_UpdatedBy = model.UserUpdatedBy
+                    D_ID = model.UserID,
+                    D_UpdatedBy = model.UserUpdatedBy
                 };
-                var reas = dbObj.InActiveAdmin(AdminObj);
+                var reas = dbObj.InActiveDoctor(DoctorObj);
                 if (reas)
                     return true;
                 return false;
@@ -140,16 +158,16 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
-        public bool ReActiveAdmin(ValidateUsersIA model)
+        public bool ReActiveDoctor(ValidateUsersIA model)
         {
             if (model != null)
             {
-                tblAdmin AdminObj = new tblAdmin()
+                tblDoctor DoctorObj = new tblDoctor()
                 {
-                    A_ID = model.UserID,
-                    A_UpdatedBy = model.UserUpdatedBy
+                    D_ID = model.UserID,
+                    D_UpdatedBy = model.UserUpdatedBy
                 };
-                var reas = dbObj.ReActiveAdmin(AdminObj);
+                var reas = dbObj.ReActiveDoctor(DoctorObj);
                 if (reas)
                     return true;
                 return false;
@@ -158,10 +176,10 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
-        public tblAdmin GetAdminByID(int modelId)
+        public tblDoctor GetDoctorByID(int modelId)
         {
             if (modelId > 0)
-                return dbObj.GetAdminByID(modelId);
+                return dbObj.GetDoctorByID(modelId);
             else
                 return null;
         }
@@ -173,6 +191,5 @@ namespace DMS_BLL.Repositories
             else
                 return null;
         }
-
     }
 }

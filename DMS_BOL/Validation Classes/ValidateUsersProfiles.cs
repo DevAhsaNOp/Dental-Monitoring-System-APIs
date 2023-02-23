@@ -24,6 +24,10 @@ namespace DMS_BOL.Validation_Classes
         [Display(Name = "Phone Number")]
         [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
         public string UserPhoneNumber { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
+        public string UserUpdatePhoneNumber { get; set; }
         
         [Display(Name ="User Address")]
         public int UserAddressID { get; set; }
@@ -39,6 +43,10 @@ namespace DMS_BOL.Validation_Classes
         [Display(Name = "Email Address")]
         [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Invalid Email Address")]
         public string UserEmail { get; set; }
+
+        [Display(Name = "Email Address")]
+        [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Invalid Email Address")]
+        public string UserUpdateEmail { get; set; }
 
         [Required(ErrorMessage = "Provide secure password")]
         [Display(Name = "Password")]

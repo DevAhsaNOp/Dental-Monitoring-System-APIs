@@ -517,7 +517,7 @@ namespace DMS_DAL.DBLayer
 
         #region Get_Users_Details
 
-        public UserViewDetail GetUserDetail(string emailtext)
+        public UserViewDetail GetUserDetailByEmail(string emailtext)
         {
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_Email == emailtext).Select(s => new UserViewDetail()
             {
@@ -794,6 +794,48 @@ namespace DMS_DAL.DBLayer
             else if (patients != null)
             {
                 return patients;
+            }
+            else if (doctor != null)
+            {
+                return doctor;
+            }
+            else
+                return null;
+        }
+
+        public UserViewDetail GetUserDetailsByPhoneNumber(string phone)
+        {
+            var user = _context.tblPatients.Where(x => x.P_PhoneNumber == phone).Select(s => new UserViewDetail()
+            {
+                PhoneNumber = s.P_PhoneNumber
+            }).FirstOrDefault();
+
+            var admin = _context.tblAdmins.Where(x => x.A_PhoneNumber == phone).Select(s => new UserViewDetail()
+            {
+                PhoneNumber = s.A_PhoneNumber
+            }).FirstOrDefault();
+
+            var doctor = _context.tblDoctors.Where(x => x.D_PhoneNumber == phone && x.D_WorkPhoneNumber == phone).Select(s => new UserViewDetail()
+            {
+                PhoneNumber = s.D_PhoneNumber == null ? null : s.D_WorkPhoneNumber,
+            }).FirstOrDefault();
+
+            var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_PhoneNumber == phone).Select(s => new UserViewDetail()
+            {
+                PhoneNumber = s.SA_PhoneNumber
+            }).FirstOrDefault();
+
+            if (user != null)
+            {
+                return user;
+            }
+            else if (admin != null)
+            {
+                return admin;
+            }
+            else if (superAdmin != null)
+            {
+                return superAdmin;
             }
             else if (doctor != null)
             {
