@@ -18,6 +18,7 @@ namespace DMS_BOL
         public dentalDBEntities()
             : base("name=dentalDBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -34,6 +35,7 @@ namespace DMS_BOL
         public virtual DbSet<tblDiagnostic> tblDiagnostics { get; set; }
         public virtual DbSet<tblDoctor> tblDoctors { get; set; }
         public virtual DbSet<tblDoctorReview> tblDoctorReviews { get; set; }
+        public virtual DbSet<tblDoctorService> tblDoctorServices { get; set; }
         public virtual DbSet<tblDoctorWorkExperience> tblDoctorWorkExperiences { get; set; }
         public virtual DbSet<tblMessage> tblMessages { get; set; }
         public virtual DbSet<tblMessageDetail> tblMessageDetails { get; set; }
@@ -42,6 +44,7 @@ namespace DMS_BOL
         public virtual DbSet<tblOTP> tblOTPs { get; set; }
         public virtual DbSet<tblPatient> tblPatients { get; set; }
         public virtual DbSet<tblRole> tblRoles { get; set; }
+        public virtual DbSet<tblService> tblServices { get; set; }
         public virtual DbSet<tblState> tblStates { get; set; }
         public virtual DbSet<tblSuperAdmin> tblSuperAdmins { get; set; }
         public virtual DbSet<tblZone> tblZones { get; set; }

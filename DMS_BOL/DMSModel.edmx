@@ -143,6 +143,16 @@
           <Property Name="DR_UpdatedBy" Type="int" />
           <Property Name="DR_UpdatedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblDoctorServices">
+          <Key>
+            <PropertyRef Name="DS_ID" />
+          </Key>
+          <Property Name="DS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_DoctorID" Type="int" />
+          <Property Name="DS_ServicesID" Type="int" />
+          <Property Name="DS_CreatedOn" Type="datetime" />
+          <Property Name="DS_CreatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="tblDoctorWorkExperience">
           <Key>
             <PropertyRef Name="WEX_ID" />
@@ -285,6 +295,20 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="UpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblServices">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_Name" Type="varchar" MaxLength="250" />
+          <Property Name="S_URL" Type="varchar(max)" />
+          <Property Name="S_IsActive" Type="bit" />
+          <Property Name="S_IsArchive" Type="bit" />
+          <Property Name="S_CreatedOn" Type="datetime" />
+          <Property Name="S_UpdatedOn" Type="datetime" />
+          <Property Name="S_CreatedBy" Type="int" />
+          <Property Name="S_UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="tblState">
           <Key>
@@ -530,6 +554,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorServices_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorServices" Type="Self.tblDoctorServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorServices">
+              <PropertyRef Name="DS_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorServices_tblServices">
+          <End Role="tblServices" Type="Self.tblServices" Multiplicity="0..1" />
+          <End Role="tblDoctorServices" Type="Self.tblDoctorServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServices">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorServices">
+              <PropertyRef Name="DS_ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorWorkExperience_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
           <End Role="tblDoctorWorkExperience" Type="Self.tblDoctorWorkExperience" Multiplicity="*" />
@@ -672,6 +720,7 @@
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctor" EntityType="Self.tblDoctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorReviews" EntityType="Self.tblDoctorReviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDoctorServices" EntityType="Self.tblDoctorServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorWorkExperience" EntityType="Self.tblDoctorWorkExperience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessage" EntityType="Self.tblMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMessageDetails" EntityType="Self.tblMessageDetails" Schema="dbo" store:Type="Tables" />
@@ -680,6 +729,7 @@
           <EntitySet Name="tblOTP" EntityType="Self.tblOTP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPatient" EntityType="Self.tblPatient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblServices" EntityType="Self.tblServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSuperAdmin" EntityType="Self.tblSuperAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblZone" EntityType="Self.tblZone" Schema="dbo" store:Type="Tables" />
@@ -750,6 +800,14 @@
           <AssociationSet Name="FK_tblDoctorReviews_tblPatient" Association="Self.FK_tblDoctorReviews_tblPatient">
             <End Role="tblPatient" EntitySet="tblPatient" />
             <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorServices_tblDoctor" Association="Self.FK_tblDoctorServices_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblDoctorServices" EntitySet="tblDoctorServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorServices_tblServices" Association="Self.FK_tblDoctorServices_tblServices">
+            <End Role="tblServices" EntitySet="tblServices" />
+            <End Role="tblDoctorServices" EntitySet="tblDoctorServices" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="Self.FK_tblDoctorWorkExperience_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctor" />
@@ -945,6 +1003,7 @@
           <NavigationProperty Name="tblDiagnostics" Relationship="Self.FK_tblDiagnostics_tblDoctor" FromRole="tblDoctor" ToRole="tblDiagnostics" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblDoctor_tblRoles" FromRole="tblDoctor" ToRole="tblRoles" />
           <NavigationProperty Name="tblDoctorReviews" Relationship="Self.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorReviews" />
+          <NavigationProperty Name="tblDoctorServices" Relationship="Self.FK_tblDoctorServices_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorServices" />
           <NavigationProperty Name="tblDoctorWorkExperiences" Relationship="Self.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorWorkExperience" />
           <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="Self.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOfflineConsultaionDetails" />
           <NavigationProperty Name="tblOnlineConsultaionDetails" Relationship="Self.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOnlineConsultaionDetails" />
@@ -972,6 +1031,18 @@
           <NavigationProperty Name="tblDiagnostic" Relationship="Self.FK_tblDoctorReviews_tblDiagnostics" FromRole="tblDoctorReviews" ToRole="tblDiagnostics" />
           <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctorReviews" ToRole="tblDoctor" />
           <NavigationProperty Name="tblPatient" Relationship="Self.FK_tblDoctorReviews_tblPatient" FromRole="tblDoctorReviews" ToRole="tblPatient" />
+        </EntityType>
+        <EntityType Name="tblDoctorService">
+          <Key>
+            <PropertyRef Name="DS_ID" />
+          </Key>
+          <Property Name="DS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_DoctorID" Type="Int32" />
+          <Property Name="DS_ServicesID" Type="Int32" />
+          <Property Name="DS_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="DS_CreatedBy" Type="Int32" />
+          <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDoctorServices_tblDoctor" FromRole="tblDoctorServices" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblService" Relationship="Self.FK_tblDoctorServices_tblServices" FromRole="tblDoctorServices" ToRole="tblServices" />
         </EntityType>
         <EntityType Name="tblDoctorWorkExperience">
           <Key>
@@ -1130,6 +1201,21 @@
           <NavigationProperty Name="tblDoctors" Relationship="Self.FK_tblDoctor_tblRoles" FromRole="tblRoles" ToRole="tblDoctor" />
           <NavigationProperty Name="tblPatients" Relationship="Self.FK_tblPatient_tblRoles" FromRole="tblRoles" ToRole="tblPatient" />
           <NavigationProperty Name="tblSuperAdmins" Relationship="Self.FK_tblSuperAdmin_tblRoles" FromRole="tblRoles" ToRole="tblSuperAdmin" />
+        </EntityType>
+        <EntityType Name="tblService">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="S_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="S_IsActive" Type="Boolean" />
+          <Property Name="S_IsArchive" Type="Boolean" />
+          <Property Name="S_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="S_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="S_CreatedBy" Type="Int32" />
+          <Property Name="S_UpdatedBy" Type="Int32" />
+          <NavigationProperty Name="tblDoctorServices" Relationship="Self.FK_tblDoctorServices_tblServices" FromRole="tblServices" ToRole="tblDoctorServices" />
         </EntityType>
         <EntityType Name="tblState">
           <Key>
@@ -1430,6 +1516,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorServices_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorServices" Type="Self.tblDoctorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorServices">
+              <PropertyRef Name="DS_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorWorkExperience_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
           <End Role="tblDoctorWorkExperience" Type="Self.tblDoctorWorkExperience" Multiplicity="*" />
@@ -1475,6 +1573,18 @@
             </Principal>
             <Dependent Role="tblDoctorReviews">
               <PropertyRef Name="DR_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorServices_tblServices">
+          <End Role="tblServices" Type="Self.tblService" Multiplicity="0..1" />
+          <End Role="tblDoctorServices" Type="Self.tblDoctorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServices">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorServices">
+              <PropertyRef Name="DS_ServicesID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1524,6 +1634,7 @@
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostic" />
           <EntitySet Name="tblDoctors" EntityType="Self.tblDoctor" />
           <EntitySet Name="tblDoctorReviews" EntityType="Self.tblDoctorReview" />
+          <EntitySet Name="tblDoctorServices" EntityType="Self.tblDoctorService" />
           <EntitySet Name="tblDoctorWorkExperiences" EntityType="Self.tblDoctorWorkExperience" />
           <EntitySet Name="tblMessages" EntityType="Self.tblMessage" />
           <EntitySet Name="tblMessageDetails" EntityType="Self.tblMessageDetail" />
@@ -1532,6 +1643,7 @@
           <EntitySet Name="tblOTPs" EntityType="Self.tblOTP" />
           <EntitySet Name="tblPatients" EntityType="Self.tblPatient" />
           <EntitySet Name="tblRoles" EntityType="Self.tblRole" />
+          <EntitySet Name="tblServices" EntityType="Self.tblService" />
           <EntitySet Name="tblStates" EntityType="Self.tblState" />
           <EntitySet Name="tblSuperAdmins" EntityType="Self.tblSuperAdmin" />
           <EntitySet Name="tblZones" EntityType="Self.tblZone" />
@@ -1619,6 +1731,10 @@
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorServices_tblDoctor" Association="Self.FK_tblDoctorServices_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblDoctorServices" EntitySet="tblDoctorServices" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDoctorWorkExperience_tblDoctor" Association="Self.FK_tblDoctorWorkExperience_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperiences" />
@@ -1634,6 +1750,10 @@
           <AssociationSet Name="FK_tblDoctorReviews_tblPatient" Association="Self.FK_tblDoctorReviews_tblPatient">
             <End Role="tblPatient" EntitySet="tblPatients" />
             <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorServices_tblServices" Association="Self.FK_tblDoctorServices_tblServices">
+            <End Role="tblServices" EntitySet="tblServices" />
+            <End Role="tblDoctorServices" EntitySet="tblDoctorServices" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="Self.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessages" />
@@ -1801,6 +1921,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblDoctorServices">
+            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorService">
+              <MappingFragment StoreEntitySet="tblDoctorServices">
+                <ScalarProperty Name="DS_ID" ColumnName="DS_ID" />
+                <ScalarProperty Name="DS_DoctorID" ColumnName="DS_DoctorID" />
+                <ScalarProperty Name="DS_ServicesID" ColumnName="DS_ServicesID" />
+                <ScalarProperty Name="DS_CreatedOn" ColumnName="DS_CreatedOn" />
+                <ScalarProperty Name="DS_CreatedBy" ColumnName="DS_CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblDoctorWorkExperiences">
             <EntityTypeMapping TypeName="dentalDBModel.tblDoctorWorkExperience">
               <MappingFragment StoreEntitySet="tblDoctorWorkExperience">
@@ -1949,6 +2080,21 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblServices">
+            <EntityTypeMapping TypeName="dentalDBModel.tblService">
+              <MappingFragment StoreEntitySet="tblServices">
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="S_Name" ColumnName="S_Name" />
+                <ScalarProperty Name="S_URL" ColumnName="S_URL" />
+                <ScalarProperty Name="S_IsActive" ColumnName="S_IsActive" />
+                <ScalarProperty Name="S_IsArchive" ColumnName="S_IsArchive" />
+                <ScalarProperty Name="S_CreatedOn" ColumnName="S_CreatedOn" />
+                <ScalarProperty Name="S_UpdatedOn" ColumnName="S_UpdatedOn" />
+                <ScalarProperty Name="S_CreatedBy" ColumnName="S_CreatedBy" />
+                <ScalarProperty Name="S_UpdatedBy" ColumnName="S_UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
