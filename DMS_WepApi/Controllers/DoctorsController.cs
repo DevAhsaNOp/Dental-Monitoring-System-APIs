@@ -80,7 +80,7 @@ namespace DMS_WepApi.Controllers
         [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage UpdateDoctor([FromBody] ValidateDoctor user)
         {
-            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
+            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
             {
                 var reas = DoctorRepoObj.UpdateDoctor(user);
                 if (reas == 1)

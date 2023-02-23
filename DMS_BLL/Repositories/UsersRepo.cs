@@ -76,9 +76,9 @@ namespace DMS_BLL.Repositories
         {
             if (model != null)
             {
-                if (!IsPhoneNumberExist(model.UserPhoneNumber) && model.UserUpdatePhoneNumber != model.UserPhoneNumber)
+                if (!IsUpdatePhoneNumberExist(model.UserPhoneNumber, model.UserUpdatePhoneNumber))
                 {
-                    if (!IsEmailExist(model.UserEmail) && model.UserUpdateEmail != model.UserEmail)
+                    if (!IsUpdateEmailExist(model.UserEmail, model.UserUpdateEmail))
                     {
                         tblAddress AddrsObj = new tblAddress()
                         {
@@ -202,6 +202,34 @@ namespace DMS_BLL.Repositories
             {
                 var reas = dbObj.GetUserDetailsByPhoneNumber(PhoneNumber);
                 if (reas != null)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        public bool IsUpdateEmailExist(string Email, string CurrentEmail)
+        {
+            if (!string.IsNullOrEmpty(Email) && Email.Length > 5 && !string.IsNullOrEmpty(CurrentEmail) && CurrentEmail.Length > 5 && Email != CurrentEmail)
+            {
+                var reas = IsEmailExist(Email);
+                if (reas)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        public bool IsUpdatePhoneNumberExist(string PhoneNumber, string CurrentPhoneNumber)
+        {
+            if (!string.IsNullOrEmpty(PhoneNumber) && PhoneNumber.Length == 11 && !string.IsNullOrEmpty(CurrentPhoneNumber) && CurrentPhoneNumber.Length == 11 && PhoneNumber != CurrentPhoneNumber)
+            {
+                var reas = IsPhoneNumberExist(PhoneNumber);
+                if (reas)
                     return true;
                 else
                     return false;

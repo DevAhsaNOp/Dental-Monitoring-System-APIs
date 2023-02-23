@@ -88,9 +88,9 @@ namespace DMS_BLL.Repositories
         {
             if (model != null)
             {
-                if (!usersRepo.IsPhoneNumberExist(model.UserPhoneNumber) && model.UserUpdatePhoneNumber != model.UserPhoneNumber)
+                if (!usersRepo.IsUpdatePhoneNumberExist(model.UserPhoneNumber, model.UserUpdatePhoneNumber))
                 {
-                    if (!usersRepo.IsEmailExist(model.UserEmail) && model.UserUpdateEmail != model.UserEmail)
+                    if (!usersRepo.IsUpdateEmailExist(model.UserEmail, model.UserUpdateEmail))
                     {
                         tblAddress AddrsObj = new tblAddress()
                         {

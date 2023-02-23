@@ -117,7 +117,7 @@ namespace DMS_WepApi.Controllers
         [Authorize(Roles = "Admin,SuperAdmin,Patient")]
         public HttpResponseMessage UpdatePatient([FromBody] ValidatePatient user)
         {
-            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
+            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
             {
                 var reas = UserRepoObj.UpdatePatient(user);
                 if (reas == 1)

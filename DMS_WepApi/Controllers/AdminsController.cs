@@ -80,7 +80,7 @@ namespace DMS_WepApi.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage UpdateAdmin([FromBody] ValidateAdmin user)
         {
-            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
+            if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
             {
                 var reas = AdminRepoObj.UpdateAdmin(user);
                 if (reas == 1)
@@ -117,7 +117,7 @@ namespace DMS_WepApi.Controllers
                 {
                     StatusCode = 412,
                     Success = false,
-                    Message = "Invalid data provided. Please provide User ID or Updated By!"
+                    Message = "Invalid data provided. Please provide User ID or Updated By or User Update Email/Phone Number!"
                 });
         }
 
