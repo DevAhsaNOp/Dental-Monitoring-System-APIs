@@ -86,7 +86,7 @@ namespace DMS_DAL.DBLayer
             }
         }
 
-        public bool UpdatePatient(string Email)
+        public bool UpdateOTP(string Email)
         {
             try
             {
@@ -124,7 +124,6 @@ namespace DMS_DAL.DBLayer
                 model = GetPatientByID(model.P_ID);
                 model.P_IsActive = false;
                 model.P_UpdatedOn = DateTime.Now;
-                model.P_RoleID = 4;
                 model.P_IsArchive = true;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -145,7 +144,6 @@ namespace DMS_DAL.DBLayer
                 model = GetPatientByID(model.P_ID);
                 model.P_IsActive = true;
                 model.P_UpdatedOn = DateTime.Now;
-                model.P_RoleID = 4;
                 model.P_IsArchive = false;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -219,7 +217,6 @@ namespace DMS_DAL.DBLayer
                 model = GetAdminByID(model.A_ID);
                 model.A_IsActive = false;
                 model.A_UpdatedOn = DateTime.Now;
-                model.A_RoleID = 2;
                 model.A_IsArchive = true;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -240,7 +237,6 @@ namespace DMS_DAL.DBLayer
                 model = GetAdminByID(model.A_ID);
                 model.A_IsActive = true;
                 model.A_UpdatedOn = DateTime.Now;
-                model.A_RoleID = 2;
                 model.A_IsArchive = false;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -311,11 +307,9 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetSuperAdminByID(model.SA_ID);
                 model.SA_IsActive = false;
-                model.SA_CreatedOn = GetSuperAdminByID(model.SA_ID).SA_CreatedOn;
-                model.SA_CreatedBy = GetSuperAdminByID(model.SA_ID).SA_CreatedBy;
                 model.SA_UpdatedOn = DateTime.Now;
-                model.SA_RoleID = 1;
                 model.SA_IsArchive = true;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -333,11 +327,9 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetSuperAdminByID(model.SA_ID);
                 model.SA_IsActive = true;
-                model.SA_CreatedOn = GetSuperAdminByID(model.SA_ID).SA_CreatedOn;
-                model.SA_CreatedBy = GetSuperAdminByID(model.SA_ID).SA_CreatedBy;
                 model.SA_UpdatedOn = DateTime.Now;
-                model.SA_RoleID = 1;
                 model.SA_IsArchive = false;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -408,11 +400,9 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetDoctorByID(model.D_ID);
                 model.D_IsActive = false;
-                model.D_CreatedOn = GetDoctorByID(model.D_ID).D_CreatedOn;
-                model.D_CreatedBy = GetDoctorByID(model.D_ID).D_CreatedBy;
                 model.D_UpdatedOn = DateTime.Now;
-                model.D_RoleID = 3;
                 model.D_IsArchive = true;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -430,11 +420,9 @@ namespace DMS_DAL.DBLayer
         {
             try
             {
+                model = GetDoctorByID(model.D_ID);
                 model.D_IsActive = true;
-                model.D_CreatedOn = GetDoctorByID(model.D_ID).D_CreatedOn;
-                model.D_CreatedBy = GetDoctorByID(model.D_ID).D_CreatedBy;
                 model.D_UpdatedOn = DateTime.Now;
-                model.D_RoleID = 3;
                 model.D_IsArchive = false;
                 _context.Entry(model).State = EntityState.Modified;
                 Save();
@@ -516,7 +504,7 @@ namespace DMS_DAL.DBLayer
             var reas = _context.tblOTPs.Where(x => x.OT_UsersEmail == emailtext && x.OT_OTP == OTP && x.OT_IsActive == true).FirstOrDefault();
             if (reas != null)
             {
-                var reas1 = UpdatePatient(emailtext);
+                var reas1 = UpdateOTP(emailtext);
                 if (reas1)
                     return true;
                 return false;

@@ -4,20 +4,20 @@ using DMS_BOL.Validation_Classes;
 
 namespace DMS_BLL.Repositories
 {
-    public class AdminsRepo
+    public class SuperAdminsRepo
     {
         private UsersDb dbObj;
         private AddressRepo addressRepo;
         private UsersRepo usersRepo;
 
-        public AdminsRepo()
+        public SuperAdminsRepo()
         {
             dbObj = new UsersDb();
             addressRepo = new AddressRepo();
             usersRepo = new UsersRepo();
         }
 
-        public int InsertAdmin(ValidateAdmin model)
+        public int InsertSuperAdmin(ValidateSuperAdmin model)
         {
             if (model != null)
             {
@@ -34,20 +34,20 @@ namespace DMS_BLL.Repositories
                     var addressID = addressRepo.InsertAddress(AddrsObj);
                     if (addressID > 0)
                     {
-                        tblAdmin AdminObj = new tblAdmin()
+                        tblSuperAdmin SuperAdminObj = new tblSuperAdmin()
                         {
-                            A_FirstName = model.UserFirstName,
-                            A_LastName = model.UserLastName,
-                            A_Email = model.UserEmail,
-                            A_AddressID = addressID,
-                            A_PhoneNumber = model.UserPhoneNumber,
-                            A_Password = EncDec.Encrypt(model.UserPassword),
-                            A_ProfileImage = model.UserProfileImage,
-                            A_OTP = null,
-                            A_Verified = true,
-                            A_CreatedBy = model.UserCreatedBy
+                            SA_FirstName = model.UserFirstName,
+                            SA_LastName = model.UserLastName,
+                            SA_Email = model.UserEmail,
+                            SA_AddressID = addressID,
+                            SA_PhoneNumber = model.UserPhoneNumber,
+                            SA_Password = EncDec.Encrypt(model.UserPassword),
+                            SA_ProfileImage = model.UserProfileImage,
+                            SA_OTP = null,
+                            SA_Verified = true,
+                            SA_CreatedBy = model.UserCreatedBy
                         };
-                        var reas = dbObj.InsertAdmin(AdminObj);
+                        var reas = dbObj.InsertSuperAdmin(SuperAdminObj);
                         if (reas)
                             return 1;
                         return 0;
@@ -62,13 +62,13 @@ namespace DMS_BLL.Repositories
                 return 0;
         }
 
-        public bool UpdateAdmin(ValidateAdmin model)
+        public bool UpdateSuperAdmin(ValidateSuperAdmin model)
         {
             if (model != null)
             {
                 tblAddress AddrsObj = new tblAddress()
                 {
-                    AddressID = GetAdminByID(model.UserID).A_AddressID.Value,
+                    AddressID = GetSuperAdminByID(model.UserID).SA_AddressID.Value,
                     AddressCountry = 1,
                     AddressState = model.StateID,
                     AddressCity = model.CityID,
@@ -78,19 +78,19 @@ namespace DMS_BLL.Repositories
                 var addressID = addressRepo.UpdateAddress(AddrsObj);
                 if (addressID > 0)
                 {
-                    var AdminObj = GetAdminByID(model.UserID);
-                    AdminObj.A_ID = model.UserID;
-                    AdminObj.A_FirstName = model.UserFirstName;
-                    AdminObj.A_LastName = model.UserLastName;
-                    AdminObj.A_Email = model.UserEmail;
-                    AdminObj.A_AddressID = addressID;
-                    AdminObj.A_PhoneNumber = model.UserPhoneNumber;
-                    AdminObj.A_Password = EncDec.Encrypt(model.UserPassword);
-                    AdminObj.A_ProfileImage = model.UserProfileImage;
-                    AdminObj.A_OTP = model.UserOTP;
-                    AdminObj.A_Verified = model.UserVerified;
-                    AdminObj.A_UpdatedBy = model.UserUpdatedBy;
-                    var reas = dbObj.UpdateAdmin(AdminObj);
+                    var SuperAdminObj = GetSuperAdminByID(model.UserID);
+                    SuperAdminObj.SA_ID = model.UserID;
+                    SuperAdminObj.SA_FirstName = model.UserFirstName;
+                    SuperAdminObj.SA_LastName = model.UserLastName;
+                    SuperAdminObj.SA_Email = model.UserEmail;
+                    SuperAdminObj.SA_AddressID = addressID;
+                    SuperAdminObj.SA_PhoneNumber = model.UserPhoneNumber;
+                    SuperAdminObj.SA_Password = EncDec.Encrypt(model.UserPassword);
+                    SuperAdminObj.SA_ProfileImage = model.UserProfileImage;
+                    SuperAdminObj.SA_OTP = model.UserOTP;
+                    SuperAdminObj.SA_Verified = model.UserVerified;
+                    SuperAdminObj.SA_UpdatedBy = model.UserUpdatedBy;
+                    var reas = dbObj.UpdateSuperAdmin(SuperAdminObj);
                     if (reas)
                         return true;
                     return false;
@@ -102,16 +102,16 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
-        public bool InActiveAdmin(ValidateUsersIA model)
+        public bool InActiveSuperAdmin(ValidateUsersIA model)
         {
             if (model != null)
             {
-                tblAdmin AdminObj = new tblAdmin()
+                tblSuperAdmin SuperAdminObj = new tblSuperAdmin()
                 {
-                    A_ID = model.UserID,
-                    A_UpdatedBy = model.UserUpdatedBy
+                    SA_ID = model.UserID,
+                    SA_UpdatedBy = model.UserUpdatedBy
                 };
-                var reas = dbObj.InActiveAdmin(AdminObj);
+                var reas = dbObj.InActiveSuperAdmin(SuperAdminObj);
                 if (reas)
                     return true;
                 return false;
@@ -120,16 +120,16 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
-        public bool ReActiveAdmin(ValidateUsersIA model)
+        public bool ReActiveSuperAdmin(ValidateUsersIA model)
         {
             if (model != null)
             {
-                tblAdmin AdminObj = new tblAdmin()
+                tblSuperAdmin SuperAdminObj = new tblSuperAdmin()
                 {
-                    A_ID = model.UserID,
-                    A_UpdatedBy = model.UserUpdatedBy
+                    SA_ID = model.UserID,
+                    SA_UpdatedBy = model.UserUpdatedBy
                 };
-                var reas = dbObj.ReActiveAdmin(AdminObj);
+                var reas = dbObj.ReActiveSuperAdmin(SuperAdminObj);
                 if (reas)
                     return true;
                 return false;
@@ -138,10 +138,10 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
-        public tblAdmin GetAdminByID(int modelId)
+        public tblSuperAdmin GetSuperAdminByID(int modelId)
         {
             if (modelId > 0)
-                return dbObj.GetAdminByID(modelId);
+                return dbObj.GetSuperAdminByID(modelId);
             else
                 return null;
         }
