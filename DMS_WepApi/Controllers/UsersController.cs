@@ -18,7 +18,7 @@ namespace DMS_WepApi.Controllers
     public class UsersController : ApiController
     {
         private UsersRepo UserRepoObj;
-        string URL = "https://localhost:44316/";
+        string URL = "https://dmswepapi.azurewebsites.net/";
 
         public UsersController()
         {
