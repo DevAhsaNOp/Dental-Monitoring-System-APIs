@@ -8,7 +8,6 @@ using DMS_WepApi.ResponseClasses;
 
 namespace DMS_WepApi.Controllers
 {
-    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AddressController : ApiController
     {
@@ -56,7 +55,6 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/State")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetAllState()
         {
             var reas = AddressRepoObj.GetAllState();
@@ -80,7 +78,6 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/City")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetAllCity()
         {
             var reas = AddressRepoObj.GetAllCity();
@@ -104,7 +101,6 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/Zone")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetAllZone()
         {
             var reas = AddressRepoObj.GetAllZone();
@@ -128,7 +124,6 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/CityByState")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetCitiesByState(int StateID)
         {
             var reas = AddressRepoObj.GetCitiesByState(StateID);
@@ -152,7 +147,6 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/ZoneByCity")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetZoneByCity(int CityID)
         {
             var reas = AddressRepoObj.GetZoneByCity(CityID);
