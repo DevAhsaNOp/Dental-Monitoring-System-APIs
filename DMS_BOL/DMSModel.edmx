@@ -34,6 +34,7 @@
           <Property Name="A_FirstName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="A_LastName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="A_PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="A_Gender" Type="varchar" MaxLength="50" />
           <Property Name="A_AddressID" Type="int" />
           <Property Name="A_RoleID" Type="int" />
           <Property Name="A_ProfileImage" Type="varchar(max)" Nullable="false" />
@@ -101,6 +102,7 @@
           <Property Name="D_FirstName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="D_LastName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="D_PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="D_Gender" Type="varchar" MaxLength="50" />
           <Property Name="D_AddressID" Type="int" />
           <Property Name="D_RoleID" Type="int" />
           <Property Name="D_ProfileImage" Type="varchar(max)" Nullable="false" />
@@ -268,6 +270,7 @@
           <Property Name="P_FirstName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="P_LastName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="P_PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="P_Gender" Type="varchar" MaxLength="50" />
           <Property Name="P_AddressID" Type="int" />
           <Property Name="P_RoleID" Type="int" />
           <Property Name="P_ProfileImage" Type="varchar(max)" Nullable="false" />
@@ -325,6 +328,7 @@
           <Property Name="SA_FirstName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="SA_LastName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="SA_PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SA_Gender" Type="varchar" MaxLength="50" />
           <Property Name="SA_AddressID" Type="int" />
           <Property Name="SA_RoleID" Type="int" />
           <Property Name="SA_ProfileImage" Type="varchar(max)" Nullable="false" />
@@ -589,6 +593,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblMessage_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="FromDoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblDoctor1">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="ToDoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblPatient">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="FromUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblPatient1">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="ToUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblMessageDetails_tblMessage">
           <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="1" />
           <End Role="tblMessageDetails" Type="Self.tblMessageDetails" Multiplicity="*" />
@@ -812,6 +864,22 @@
             <End Role="tblDoctor" EntitySet="tblDoctor" />
             <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperience" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblDoctor" Association="Self.FK_tblMessage_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblMessage" EntitySet="tblMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblDoctor1" Association="Self.FK_tblMessage_tblDoctor1">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblMessage" EntitySet="tblMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblPatient" Association="Self.FK_tblMessage_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatient" />
+            <End Role="tblMessage" EntitySet="tblMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblPatient1" Association="Self.FK_tblMessage_tblPatient1">
+            <End Role="tblPatient" EntitySet="tblPatient" />
+            <End Role="tblMessage" EntitySet="tblMessage" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="Self.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessage" />
             <End Role="tblMessageDetails" EntitySet="tblMessageDetails" />
@@ -896,6 +964,7 @@
           <Property Name="A_FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="A_LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="A_PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="A_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="A_AddressID" Type="Int32" />
           <Property Name="A_RoleID" Type="Int32" />
           <Property Name="A_ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -976,6 +1045,7 @@
           <Property Name="D_FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="D_AddressID" Type="Int32" />
           <Property Name="D_RoleID" Type="Int32" />
           <Property Name="D_ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1003,6 +1073,8 @@
           <NavigationProperty Name="tblDoctorReviews" Relationship="Self.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorReviews" />
           <NavigationProperty Name="tblDoctorServices" Relationship="Self.FK_tblDoctorServices_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorServices" />
           <NavigationProperty Name="tblDoctorWorkExperiences" Relationship="Self.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorWorkExperience" />
+          <NavigationProperty Name="tblMessages" Relationship="Self.FK_tblMessage_tblDoctor" FromRole="tblDoctor" ToRole="tblMessage" />
+          <NavigationProperty Name="tblMessages1" Relationship="Self.FK_tblMessage_tblDoctor1" FromRole="tblDoctor" ToRole="tblMessage" />
           <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="Self.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOfflineConsultaionDetails" />
           <NavigationProperty Name="tblOnlineConsultaionDetails" Relationship="Self.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOnlineConsultaionDetails" />
         </EntityType>
@@ -1068,6 +1140,10 @@
           <Property Name="ToDoctorID" Type="Int32" />
           <Property Name="FromDoctorID" Type="Int32" />
           <Property Name="ToUserID" Type="Int32" />
+          <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblMessage_tblDoctor" FromRole="tblMessage" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblDoctor1" Relationship="Self.FK_tblMessage_tblDoctor1" FromRole="tblMessage" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblPatient" Relationship="Self.FK_tblMessage_tblPatient" FromRole="tblMessage" ToRole="tblPatient" />
+          <NavigationProperty Name="tblPatient1" Relationship="Self.FK_tblMessage_tblPatient1" FromRole="tblMessage" ToRole="tblPatient" />
           <NavigationProperty Name="tblMessageDetails" Relationship="Self.FK_tblMessageDetails_tblMessage" FromRole="tblMessage" ToRole="tblMessageDetails" />
         </EntityType>
         <EntityType Name="tblMessageDetail">
@@ -1164,6 +1240,7 @@
           <Property Name="P_FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="P_LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="P_PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="P_AddressID" Type="Int32" />
           <Property Name="P_RoleID" Type="Int32" />
           <Property Name="P_ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1181,6 +1258,8 @@
           <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblPatient" FromRole="tblPatient" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="Self.FK_tblDiagnostics_tblPatient" FromRole="tblPatient" ToRole="tblDiagnostics" />
           <NavigationProperty Name="tblDoctorReviews" Relationship="Self.FK_tblDoctorReviews_tblPatient" FromRole="tblPatient" ToRole="tblDoctorReviews" />
+          <NavigationProperty Name="tblMessages" Relationship="Self.FK_tblMessage_tblPatient" FromRole="tblPatient" ToRole="tblMessage" />
+          <NavigationProperty Name="tblMessages1" Relationship="Self.FK_tblMessage_tblPatient1" FromRole="tblPatient" ToRole="tblMessage" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblPatient_tblRoles" FromRole="tblPatient" ToRole="tblRoles" />
         </EntityType>
         <EntityType Name="tblRole">
@@ -1234,6 +1313,7 @@
           <Property Name="SA_FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SA_LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SA_PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SA_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SA_AddressID" Type="Int32" />
           <Property Name="SA_RoleID" Type="Int32" />
           <Property Name="SA_ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1538,6 +1618,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblMessage_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="FromDoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblDoctor1">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="ToDoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblOfflineConsultaionDetails_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="1" />
           <End Role="tblOfflineConsultaionDetails" Type="Self.tblOfflineConsultaionDetail" Multiplicity="*" />
@@ -1583,6 +1687,30 @@
             </Principal>
             <Dependent Role="tblDoctorServices">
               <PropertyRef Name="DS_ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblPatient">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="FromUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMessage_tblPatient1">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblMessage">
+              <PropertyRef Name="ToUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1737,6 +1865,14 @@
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblDoctorWorkExperience" EntitySet="tblDoctorWorkExperiences" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblDoctor" Association="Self.FK_tblMessage_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblMessage" EntitySet="tblMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblDoctor1" Association="Self.FK_tblMessage_tblDoctor1">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblMessage" EntitySet="tblMessages" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblOfflineConsultaionDetails_tblDoctor" Association="Self.FK_tblOfflineConsultaionDetails_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblOfflineConsultaionDetails" EntitySet="tblOfflineConsultaionDetails" />
@@ -1752,6 +1888,14 @@
           <AssociationSet Name="FK_tblDoctorServices_tblServices" Association="Self.FK_tblDoctorServices_tblServices">
             <End Role="tblServices" EntitySet="tblServices" />
             <End Role="tblDoctorServices" EntitySet="tblDoctorServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblPatient" Association="Self.FK_tblMessage_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatients" />
+            <End Role="tblMessage" EntitySet="tblMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMessage_tblPatient1" Association="Self.FK_tblMessage_tblPatient1">
+            <End Role="tblPatient" EntitySet="tblPatients" />
+            <End Role="tblMessage" EntitySet="tblMessages" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMessageDetails_tblMessage" Association="Self.FK_tblMessageDetails_tblMessage">
             <End Role="tblMessage" EntitySet="tblMessages" />
@@ -1802,6 +1946,7 @@
                 <ScalarProperty Name="A_FirstName" ColumnName="A_FirstName" />
                 <ScalarProperty Name="A_LastName" ColumnName="A_LastName" />
                 <ScalarProperty Name="A_PhoneNumber" ColumnName="A_PhoneNumber" />
+                <ScalarProperty Name="A_Gender" ColumnName="A_Gender" />
                 <ScalarProperty Name="A_AddressID" ColumnName="A_AddressID" />
                 <ScalarProperty Name="A_RoleID" ColumnName="A_RoleID" />
                 <ScalarProperty Name="A_ProfileImage" ColumnName="A_ProfileImage" />
@@ -1874,6 +2019,7 @@
                 <ScalarProperty Name="D_FirstName" ColumnName="D_FirstName" />
                 <ScalarProperty Name="D_LastName" ColumnName="D_LastName" />
                 <ScalarProperty Name="D_PhoneNumber" ColumnName="D_PhoneNumber" />
+                <ScalarProperty Name="D_Gender" ColumnName="D_Gender" />
                 <ScalarProperty Name="D_AddressID" ColumnName="D_AddressID" />
                 <ScalarProperty Name="D_RoleID" ColumnName="D_RoleID" />
                 <ScalarProperty Name="D_ProfileImage" ColumnName="D_ProfileImage" />
@@ -2050,6 +2196,7 @@
                 <ScalarProperty Name="P_FirstName" ColumnName="P_FirstName" />
                 <ScalarProperty Name="P_LastName" ColumnName="P_LastName" />
                 <ScalarProperty Name="P_PhoneNumber" ColumnName="P_PhoneNumber" />
+                <ScalarProperty Name="P_Gender" ColumnName="P_Gender" />
                 <ScalarProperty Name="P_AddressID" ColumnName="P_AddressID" />
                 <ScalarProperty Name="P_RoleID" ColumnName="P_RoleID" />
                 <ScalarProperty Name="P_ProfileImage" ColumnName="P_ProfileImage" />
@@ -2111,6 +2258,7 @@
                 <ScalarProperty Name="SA_FirstName" ColumnName="SA_FirstName" />
                 <ScalarProperty Name="SA_LastName" ColumnName="SA_LastName" />
                 <ScalarProperty Name="SA_PhoneNumber" ColumnName="SA_PhoneNumber" />
+                <ScalarProperty Name="SA_Gender" ColumnName="SA_Gender" />
                 <ScalarProperty Name="SA_AddressID" ColumnName="SA_AddressID" />
                 <ScalarProperty Name="SA_RoleID" ColumnName="SA_RoleID" />
                 <ScalarProperty Name="SA_ProfileImage" ColumnName="SA_ProfileImage" />

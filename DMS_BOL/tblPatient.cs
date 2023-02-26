@@ -20,12 +20,15 @@ namespace DMS_BOL
             this.tblAppointments = new HashSet<tblAppointment>();
             this.tblDiagnostics = new HashSet<tblDiagnostic>();
             this.tblDoctorReviews = new HashSet<tblDoctorReview>();
+            this.tblMessages = new HashSet<tblMessage>();
+            this.tblMessages1 = new HashSet<tblMessage>();
         }
     
         public int P_ID { get; set; }
         public string P_FirstName { get; set; }
         public string P_LastName { get; set; }
         public string P_PhoneNumber { get; set; }
+        public string P_Gender { get; set; }
         public Nullable<int> P_AddressID { get; set; }
         public Nullable<int> P_RoleID { get; set; }
         public string P_ProfileImage { get; set; }
@@ -47,6 +50,10 @@ namespace DMS_BOL
         public virtual ICollection<tblDiagnostic> tblDiagnostics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMessage> tblMessages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMessage> tblMessages1 { get; set; }
         public virtual tblRole tblRole { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace DMS_BOL
             this.tblDoctorReviews = new HashSet<tblDoctorReview>();
             this.tblDoctorServices = new HashSet<tblDoctorService>();
             this.tblDoctorWorkExperiences = new HashSet<tblDoctorWorkExperience>();
+            this.tblMessages = new HashSet<tblMessage>();
+            this.tblMessages1 = new HashSet<tblMessage>();
             this.tblOfflineConsultaionDetails = new HashSet<tblOfflineConsultaionDetail>();
             this.tblOnlineConsultaionDetails = new HashSet<tblOnlineConsultaionDetail>();
         }
@@ -30,6 +32,7 @@ namespace DMS_BOL
         public string D_FirstName { get; set; }
         public string D_LastName { get; set; }
         public string D_PhoneNumber { get; set; }
+        public string D_Gender { get; set; }
         public Nullable<int> D_AddressID { get; set; }
         public Nullable<int> D_RoleID { get; set; }
         public string D_ProfileImage { get; set; }
@@ -63,6 +66,10 @@ namespace DMS_BOL
         public virtual ICollection<tblDoctorService> tblDoctorServices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDoctorWorkExperience> tblDoctorWorkExperiences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMessage> tblMessages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMessage> tblMessages1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOfflineConsultaionDetail> tblOfflineConsultaionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -45,6 +45,7 @@ namespace DMS_BLL.Repositories
                                     SA_Email = model.UserEmail,
                                     SA_AddressID = addressID,
                                     SA_PhoneNumber = model.UserPhoneNumber,
+                                    SA_Gender = model.Gender,
                                     SA_Password = EncDec.Encrypt(model.UserPassword),
                                     SA_ProfileImage = model.UserProfileImage,
                                     SA_OTP = null,
@@ -99,6 +100,7 @@ namespace DMS_BLL.Repositories
                             SuperAdminObj.SA_Email = model.UserEmail;
                             SuperAdminObj.SA_AddressID = addressID;
                             SuperAdminObj.SA_PhoneNumber = model.UserPhoneNumber;
+                            SuperAdminObj.SA_Gender = model.Gender;
                             SuperAdminObj.SA_Password = EncDec.Encrypt(model.UserPassword);
                             SuperAdminObj.SA_ProfileImage = model.UserProfileImage;
                             SuperAdminObj.SA_OTP = model.UserOTP;

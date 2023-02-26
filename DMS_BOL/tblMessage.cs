@@ -26,6 +26,10 @@ namespace DMS_BOL
         public Nullable<int> FromDoctorID { get; set; }
         public Nullable<int> ToUserID { get; set; }
     
+        public virtual tblDoctor tblDoctor { get; set; }
+        public virtual tblDoctor tblDoctor1 { get; set; }
+        public virtual tblPatient tblPatient { get; set; }
+        public virtual tblPatient tblPatient1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMessageDetail> tblMessageDetails { get; set; }
     }

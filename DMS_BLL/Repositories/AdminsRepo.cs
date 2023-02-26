@@ -47,6 +47,7 @@ namespace DMS_BLL.Repositories
                                     A_PhoneNumber = model.UserPhoneNumber,
                                     A_Password = EncDec.Encrypt(model.UserPassword),
                                     A_ProfileImage = model.UserProfileImage,
+                                    A_Gender = model.Gender,
                                     A_OTP = null,
                                     A_Verified = true,
                                     A_CreatedBy = model.UserCreatedBy
@@ -99,6 +100,7 @@ namespace DMS_BLL.Repositories
                             AdminObj.A_Email = model.UserEmail;
                             AdminObj.A_AddressID = addressID;
                             AdminObj.A_PhoneNumber = model.UserPhoneNumber;
+                            AdminObj.A_Gender = model.Gender;
                             AdminObj.A_Password = EncDec.Encrypt(model.UserPassword);
                             AdminObj.A_ProfileImage = model.UserProfileImage;
                             AdminObj.A_OTP = model.UserOTP;

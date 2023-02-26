@@ -53,9 +53,10 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Password should contain minimum 8 characters in length and At least one uppercase, lowercase English letter and one digit and special character")]
         public string UserPassword { get; set; }
 
-        //[Required(ErrorMessage = "Provide your password")]
-        //[Display(Name = "Password")]
-        //public string UserLoginPassword { get; set; }
+        [Required(ErrorMessage = "Provide your gender")]
+        [Display(Name = "Gender")]
+        [Range(1, int.MaxValue, ErrorMessage = "Must select a Gender")]
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Provide created by user id")]
         [Display(Name = "Created By")]

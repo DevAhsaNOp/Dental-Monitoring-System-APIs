@@ -50,6 +50,7 @@ namespace DMS_BLL.Repositories
                                     D_Email = model.UserEmail,
                                     D_AddressID = addressID,
                                     D_PhoneNumber = model.UserPhoneNumber,
+                                    D_Gender = model.Gender,
                                     D_Password = EncDec.Encrypt(model.UserPassword),
                                     D_ProfileImage = model.UserProfileImage,
                                     D_OTP = null,
@@ -111,6 +112,7 @@ namespace DMS_BLL.Repositories
                             DoctorObj.D_Email = model.UserEmail;
                             DoctorObj.D_AddressID = addressID;
                             DoctorObj.D_PhoneNumber = model.UserPhoneNumber;
+                            DoctorObj.D_Gender = model.Gender;
                             DoctorObj.D_Password = EncDec.Encrypt(model.UserPassword);
                             DoctorObj.D_ProfileImage = model.UserProfileImage;
                             DoctorObj.D_AboutMe = model.DoctorAboutMe;

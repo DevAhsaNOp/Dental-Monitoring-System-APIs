@@ -19,6 +19,8 @@ namespace DMS_DAL.UserDefine
         public string OTP { get; set; }
 
         public string Role { get; set; }
+        
+        public string Gender { get; set; }
 
         public string Image { get; set; }
 

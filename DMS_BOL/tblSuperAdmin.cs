@@ -18,6 +18,7 @@ namespace DMS_BOL
         public string SA_FirstName { get; set; }
         public string SA_LastName { get; set; }
         public string SA_PhoneNumber { get; set; }
+        public string SA_Gender { get; set; }
         public Nullable<int> SA_AddressID { get; set; }
         public Nullable<int> SA_RoleID { get; set; }
         public string SA_ProfileImage { get; set; }
