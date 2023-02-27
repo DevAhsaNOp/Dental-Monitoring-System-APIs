@@ -827,7 +827,7 @@ namespace DMS_DAL.DBLayer
                 PhoneNumber = s.A_PhoneNumber
             }).FirstOrDefault();
 
-            var doctor = _context.tblDoctors.Where(x => x.D_PhoneNumber == phone && x.D_WorkPhoneNumber == phone).Select(s => new UserViewDetail()
+            var doctor = _context.tblDoctors.Where(x => x.D_PhoneNumber == phone).Select(s => new UserViewDetail()
             {
                 PhoneNumber = s.D_PhoneNumber == null ? null : s.D_WorkPhoneNumber,
             }).FirstOrDefault();
