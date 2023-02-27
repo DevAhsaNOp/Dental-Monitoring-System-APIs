@@ -79,7 +79,7 @@ namespace DMS_WepApi.Controllers
                 });
         }
         
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         [Route("api/Send/OTP")]
         public HttpResponseMessage SendOTP(string Email)
