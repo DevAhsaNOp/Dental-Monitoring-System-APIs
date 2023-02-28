@@ -120,7 +120,7 @@ namespace DMS_WepApi.Controllers
             {
                 var reas = UserRepoObj.IsEmailExist(Email);
                 if (reas)
-                    return Request.CreateResponse(HttpStatusCode.Found, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 302,
                         Success = true,
@@ -152,7 +152,7 @@ namespace DMS_WepApi.Controllers
             {
                 var reas = UserRepoObj.IsPhoneNumberExist(PhoneNumber);
                 if (reas)
-                    return Request.CreateResponse(HttpStatusCode.Found, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 302,
                         Success = true,

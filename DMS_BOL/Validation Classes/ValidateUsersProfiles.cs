@@ -55,7 +55,6 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage = "Provide your gender")]
         [Display(Name = "Gender")]
-        [Range(1, int.MaxValue, ErrorMessage = "Must select a Gender")]
         public string Gender { get; set; }
 
         [Required(ErrorMessage = "Provide created by user id")]

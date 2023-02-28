@@ -108,8 +108,8 @@
           <Property Name="D_ProfileImage" Type="varchar(max)" Nullable="false" />
           <Property Name="D_Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="D_Password" Type="varchar(max)" Nullable="false" />
-          <Property Name="D_YearsOfExperience" Type="varchar(max)" Nullable="false" />
-          <Property Name="D_Specialization" Type="varchar(max)" Nullable="false" />
+          <Property Name="D_YearsOfExperience" Type="varchar(max)" />
+          <Property Name="D_Specialization" Type="varchar(max)" />
           <Property Name="D_WorkPhoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="D_AwardsAndAchievements" Type="varchar(max)" />
           <Property Name="D_AboutMe" Type="varchar(max)" />
@@ -1051,8 +1051,8 @@
           <Property Name="D_ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="D_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="D_YearsOfExperience" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="D_Specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_YearsOfExperience" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="D_Specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_WorkPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="D_AwardsAndAchievements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="D_AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
