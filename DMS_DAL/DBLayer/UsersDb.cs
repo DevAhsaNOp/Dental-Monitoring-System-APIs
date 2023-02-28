@@ -829,7 +829,7 @@ namespace DMS_DAL.DBLayer
 
             var doctor = _context.tblDoctors.Where(x => x.D_PhoneNumber == phone).Select(s => new UserViewDetail()
             {
-                PhoneNumber = s.D_PhoneNumber == null ? null : s.D_WorkPhoneNumber,
+                PhoneNumber = s.D_PhoneNumber,
             }).FirstOrDefault();
 
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_PhoneNumber == phone).Select(s => new UserViewDetail()

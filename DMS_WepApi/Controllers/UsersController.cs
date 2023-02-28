@@ -110,6 +110,70 @@ namespace DMS_WepApi.Controllers
                     Message = "Invalid data provided!"
                 });
         }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/Check/EmailExist")]
+        public HttpResponseMessage IsEmailExist(string Email)
+        {
+            if (!string.IsNullOrEmpty(Email) && Email.Length > 5)
+            {
+                var reas = UserRepoObj.IsEmailExist(Email);
+                if (reas)
+                    return Request.CreateResponse(HttpStatusCode.Found, new GRValidation()
+                    {
+                        StatusCode = 302,
+                        Success = true,
+                        Message = "Email Exist Already",
+                    });
+                else
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
+                    {
+                        StatusCode = 200,
+                        Success = true,
+                        Message = "Email Not Exist!",
+                    });
+            }
+            else
+                return Request.CreateResponse(HttpStatusCode.PreconditionFailed, new GRValidation()
+                {
+                    StatusCode = 412,
+                    Success = false,
+                    Message = "Invalid data provided!"
+                });
+        }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/Check/PhoneNumberExist")]
+        public HttpResponseMessage IsPhoneNumberExist(string PhoneNumber)
+        {
+            if (!string.IsNullOrEmpty(PhoneNumber) && PhoneNumber.Length > 5)
+            {
+                var reas = UserRepoObj.IsPhoneNumberExist(PhoneNumber);
+                if (reas)
+                    return Request.CreateResponse(HttpStatusCode.Found, new GRValidation()
+                    {
+                        StatusCode = 302,
+                        Success = true,
+                        Message = "Phone Number Exist Already",
+                    });
+                else
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
+                    {
+                        StatusCode = 200,
+                        Success = true,
+                        Message = "Phone Number Not Exist!",
+                    });
+            }
+            else
+                return Request.CreateResponse(HttpStatusCode.PreconditionFailed, new GRValidation()
+                {
+                    StatusCode = 412,
+                    Success = false,
+                    Message = "Invalid data provided!"
+                });
+        }
 
         [HttpPost]
         [ValidationActionFilter]
