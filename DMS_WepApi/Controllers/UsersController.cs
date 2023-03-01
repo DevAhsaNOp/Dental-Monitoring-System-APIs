@@ -370,7 +370,7 @@ namespace DMS_WepApi.Controllers
                     });
                 }
                 else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     { StatusCode = 404, Success = false, Message = "Invalid creds." });
             }
             else
