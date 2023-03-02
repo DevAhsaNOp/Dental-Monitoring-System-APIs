@@ -42,6 +42,8 @@ namespace DMS_WepApi.ResponseClasses
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }
         public bool Success { get; set; }
+        public int UserID { get; set; }
+        public string UserImage { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Role { get; internal set; }

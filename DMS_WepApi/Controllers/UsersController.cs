@@ -362,6 +362,8 @@ namespace DMS_WepApi.Controllers
                         AccessToken = accessToken,
                         ExpiresIn = accessTokenExpiration,
                         TokenType = token_type,
+                        UserID = reas.ID,
+                        UserImage = reas.Image,
                         Username = reas.Name,
                         Email = reas.Email,
                         Role = reas.Role,
