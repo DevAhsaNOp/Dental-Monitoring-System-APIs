@@ -123,6 +123,7 @@
           <Property Name="D_Verified" Type="bit" />
           <Property Name="D_SatisfactionRate" Type="int" />
           <Property Name="D_ResponseTime" Type="int" />
+          <Property Name="D_IsProfileCompleted" Type="bit" />
         </EntityType>
         <EntityType Name="tblDoctorReviews">
           <Key>
@@ -1066,6 +1067,7 @@
           <Property Name="D_Verified" Type="Boolean" />
           <Property Name="D_SatisfactionRate" Type="Int32" />
           <Property Name="D_ResponseTime" Type="Int32" />
+          <Property Name="D_IsProfileCompleted" Type="Boolean" />
           <NavigationProperty Name="tblAddress" Relationship="Self.FK_tblDoctor_tblAddress" FromRole="tblDoctor" ToRole="tblAddress" />
           <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblDoctor" FromRole="tblDoctor" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="Self.FK_tblDiagnostics_tblDoctor" FromRole="tblDoctor" ToRole="tblDiagnostics" />
@@ -2040,6 +2042,7 @@
                 <ScalarProperty Name="D_Verified" ColumnName="D_Verified" />
                 <ScalarProperty Name="D_SatisfactionRate" ColumnName="D_SatisfactionRate" />
                 <ScalarProperty Name="D_ResponseTime" ColumnName="D_ResponseTime" />
+                <ScalarProperty Name="D_IsProfileCompleted" ColumnName="D_IsProfileCompleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

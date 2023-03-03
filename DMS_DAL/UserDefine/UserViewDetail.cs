@@ -26,6 +26,8 @@ namespace DMS_DAL.UserDefine
 
         public bool Active { get; set; }
 
+        public bool IsProfileCompleted { get; set; }
+
         public string PhoneNumber { get; set; }
         public string CRole { get; internal set; }
     }

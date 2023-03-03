@@ -87,6 +87,9 @@ namespace DMS_BOL.Validation_Classes
         [Display(Name = "User Verified")]
         public bool? UserVerified { get; set; }
 
+        [Display(Name = "Is Profile Completed")]
+        public bool? IsProfileCompleted { get; set; }
+
         //[Required(ErrorMessage = "*")]
         //[Display(Name = "State")]
         //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a State")]

@@ -53,6 +53,7 @@ namespace DMS_BOL
         public Nullable<bool> D_Verified { get; set; }
         public Nullable<int> D_SatisfactionRate { get; set; }
         public Nullable<int> D_ResponseTime { get; set; }
+        public Nullable<bool> D_IsProfileCompleted { get; set; }
     
         public virtual tblAddress tblAddress { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

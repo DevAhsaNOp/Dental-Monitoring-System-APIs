@@ -357,6 +357,7 @@ namespace DMS_DAL.DBLayer
                 model.D_UpdatedBy = null;
                 model.D_IsArchive = false;
                 model.D_RoleID = 3;
+                model.D_IsProfileCompleted = false;
                 _context.tblDoctors.Add(model);
                 Save();
                 if (model.D_ID > 0)
@@ -531,6 +532,7 @@ namespace DMS_DAL.DBLayer
                 Active = s.SA_IsActive.Value,
                 PhoneNumber = s.SA_PhoneNumber,
                 Gender = s.SA_Gender,
+                IsProfileCompleted = true
             }).FirstOrDefault();
 
             var admin = _context.tblAdmins.Where(x => x.A_Email == emailtext).Select(s => new UserViewDetail()
@@ -545,6 +547,7 @@ namespace DMS_DAL.DBLayer
                 Active = s.A_IsActive.Value,
                 PhoneNumber = s.A_PhoneNumber,
                 Gender = s.A_Gender,
+                IsProfileCompleted = true
             }).FirstOrDefault();
 
             var doctor = _context.tblDoctors.Where(x => x.D_Email == emailtext).Select(s => new UserViewDetail()
@@ -559,6 +562,7 @@ namespace DMS_DAL.DBLayer
                 Active = s.D_IsActive.Value,
                 PhoneNumber = s.D_PhoneNumber,
                 Gender = s.D_Gender,
+                IsProfileCompleted = s.D_IsProfileCompleted == null ? false : s.D_IsProfileCompleted.Value,
             }).FirstOrDefault();
 
             var patients = _context.tblPatients.Where(x => x.P_Email == emailtext).Select(s => new UserViewDetail()
@@ -573,6 +577,7 @@ namespace DMS_DAL.DBLayer
                 Active = s.P_IsActive.Value,
                 PhoneNumber = s.P_PhoneNumber,
                 Gender = s.P_Gender,
+                IsProfileCompleted = true
             }).FirstOrDefault();
 
             if (superAdmin != null)
@@ -617,6 +622,7 @@ namespace DMS_DAL.DBLayer
                 UserCreatedBy = s.P_CreatedBy.Value,
                 UserCreatedOn = s.P_CreatedOn.Value,
                 Gender = s.P_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var admin = _context.tblAdmins.Where(x => x.A_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -639,6 +645,7 @@ namespace DMS_DAL.DBLayer
                 UserCreatedBy = s.A_CreatedBy.Value,
                 UserCreatedOn = s.A_CreatedOn.Value,
                 Gender = s.A_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -661,6 +668,7 @@ namespace DMS_DAL.DBLayer
                 UserCreatedBy = s.SA_CreatedBy.Value,
                 UserCreatedOn = s.SA_CreatedOn.Value,
                 Gender = s.SA_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var doctor = _context.tblDoctors.Where(x => x.D_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -683,6 +691,7 @@ namespace DMS_DAL.DBLayer
                 UserCreatedBy = s.D_CreatedBy.Value,
                 UserCreatedOn = s.D_CreatedOn.Value,
                 Gender = s.D_Gender,
+                IsProfileCompleted = s.D_IsProfileCompleted == null ? false : s.D_IsProfileCompleted.Value,
             }).FirstOrDefault();
 
             if (superAdmin != null)
@@ -727,6 +736,7 @@ namespace DMS_DAL.DBLayer
                 UserCreatedBy = s.P_CreatedBy.Value,
                 UserCreatedOn = s.P_CreatedOn.Value,
                 Gender = s.P_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var admin = _context.tblAdmins.Where(x => x.A_ID == Id).Select(s => new ValidateUsersProfiles()
@@ -748,7 +758,8 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.A_UpdatedOn.Value,
                 UserCreatedBy = s.A_CreatedBy.Value,
                 UserCreatedOn = s.A_CreatedOn.Value,
-                Gender = s.A_Gender
+                Gender = s.A_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_ID == Id).Select(s => new ValidateUsersProfiles()
@@ -770,7 +781,8 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.SA_UpdatedOn.Value,
                 UserCreatedBy = s.SA_CreatedBy.Value,
                 UserCreatedOn = s.SA_CreatedOn.Value,
-                Gender = s.SA_Gender
+                Gender = s.SA_Gender,
+                IsProfileCompleted = true,
             }).FirstOrDefault();
 
             var doctor = _context.tblDoctors.Where(x => x.D_ID == Id).Select(s => new ValidateUsersProfiles()
@@ -792,7 +804,8 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.D_UpdatedOn.Value,
                 UserCreatedBy = s.D_CreatedBy.Value,
                 UserCreatedOn = s.D_CreatedOn.Value,
-                Gender = s.D_Gender
+                Gender = s.D_Gender,
+                IsProfileCompleted = s.D_IsProfileCompleted == null ? false : s.D_IsProfileCompleted.Value,
             }).FirstOrDefault();
 
             if (superAdmin != null)

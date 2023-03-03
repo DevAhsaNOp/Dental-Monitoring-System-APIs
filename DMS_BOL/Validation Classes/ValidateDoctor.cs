@@ -20,7 +20,10 @@ namespace DMS_BOL.Validation_Classes
 
         [Display(Name = "About Me")]
         public string DoctorAboutMe { get; set; }
-        
+
+        [Display(Name = "Is Profile Completed")]
+        public bool? D_IsProfileCompleted { get; set; }
+
         public int? DoctorSatisfactionRate { get; set; }
 
         [Display(Name = "Response Time")]

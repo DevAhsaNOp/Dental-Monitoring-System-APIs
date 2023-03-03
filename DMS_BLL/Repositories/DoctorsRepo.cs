@@ -124,6 +124,8 @@ namespace DMS_BLL.Repositories
                             DoctorObj.D_OTP = model.UserOTP;
                             DoctorObj.D_Verified = true;
                             DoctorObj.D_UpdatedBy = model.UserUpdatedBy;
+                            DoctorObj.D_IsProfileCompleted = DoctorObj.D_IsProfileCompleted;
+                            DoctorObj.D_YearsOfExperience = DoctorObj.D_YearsOfExperience;
                             var reas = dbObj.UpdateDoctor(DoctorObj);
                             if (reas)
                                 return 1;
