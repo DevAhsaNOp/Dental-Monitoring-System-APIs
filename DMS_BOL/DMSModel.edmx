@@ -154,6 +154,10 @@
           <Property Name="DS_ServicesID" Type="int" />
           <Property Name="DS_CreatedOn" Type="datetime" />
           <Property Name="DS_CreatedBy" Type="int" />
+          <Property Name="DS_UpdatedOn" Type="datetime" />
+          <Property Name="DS_UpdatedBy" Type="int" />
+          <Property Name="DS_IsActive" Type="bit" />
+          <Property Name="DS_IsArchive" Type="bit" />
         </EntityType>
         <EntityType Name="tblDoctorWorkExperience">
           <Key>
@@ -164,6 +168,8 @@
           <Property Name="WEX_HospitalName" Type="varchar" MaxLength="500" />
           <Property Name="WEX_Designation" Type="varchar" MaxLength="250" />
           <Property Name="WEX_IsWorking" Type="bit" />
+          <Property Name="WEX_FromDate" Type="date" />
+          <Property Name="WEX_ToDate" Type="date" />
           <Property Name="WEX_IsActive" Type="bit" />
           <Property Name="WEX_IsArchive" Type="bit" />
           <Property Name="WEX_CreatedBy" Type="int" />
@@ -1113,6 +1119,10 @@
           <Property Name="DS_ServicesID" Type="Int32" />
           <Property Name="DS_CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="DS_CreatedBy" Type="Int32" />
+          <Property Name="DS_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="DS_UpdatedBy" Type="Int32" />
+          <Property Name="DS_IsActive" Type="Boolean" />
+          <Property Name="DS_IsArchive" Type="Boolean" />
           <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDoctorServices_tblDoctor" FromRole="tblDoctorServices" ToRole="tblDoctor" />
           <NavigationProperty Name="tblService" Relationship="Self.FK_tblDoctorServices_tblServices" FromRole="tblDoctorServices" ToRole="tblServices" />
         </EntityType>
@@ -1125,6 +1135,8 @@
           <Property Name="WEX_HospitalName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="WEX_Designation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="WEX_IsWorking" Type="Boolean" />
+          <Property Name="WEX_FromDate" Type="DateTime" Precision="0" />
+          <Property Name="WEX_ToDate" Type="DateTime" Precision="0" />
           <Property Name="WEX_IsActive" Type="Boolean" />
           <Property Name="WEX_IsArchive" Type="Boolean" />
           <Property Name="WEX_CreatedBy" Type="Int32" />
@@ -2075,6 +2087,10 @@
                 <ScalarProperty Name="DS_ServicesID" ColumnName="DS_ServicesID" />
                 <ScalarProperty Name="DS_CreatedOn" ColumnName="DS_CreatedOn" />
                 <ScalarProperty Name="DS_CreatedBy" ColumnName="DS_CreatedBy" />
+                <ScalarProperty Name="DS_UpdatedOn" ColumnName="DS_UpdatedOn" />
+                <ScalarProperty Name="DS_UpdatedBy" ColumnName="DS_UpdatedBy" />
+                <ScalarProperty Name="DS_IsActive" ColumnName="DS_IsActive" />
+                <ScalarProperty Name="DS_IsArchive" ColumnName="DS_IsArchive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2086,6 +2102,8 @@
                 <ScalarProperty Name="WEX_HospitalName" ColumnName="WEX_HospitalName" />
                 <ScalarProperty Name="WEX_Designation" ColumnName="WEX_Designation" />
                 <ScalarProperty Name="WEX_IsWorking" ColumnName="WEX_IsWorking" />
+                <ScalarProperty Name="WEX_FromDate" ColumnName="WEX_FromDate" />
+                <ScalarProperty Name="WEX_ToDate" ColumnName="WEX_ToDate" />
                 <ScalarProperty Name="WEX_IsActive" ColumnName="WEX_IsActive" />
                 <ScalarProperty Name="WEX_IsArchive" ColumnName="WEX_IsArchive" />
                 <ScalarProperty Name="WEX_CreatedBy" ColumnName="WEX_CreatedBy" />

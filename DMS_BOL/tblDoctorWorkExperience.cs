@@ -19,6 +19,8 @@ namespace DMS_BOL
         public string WEX_HospitalName { get; set; }
         public string WEX_Designation { get; set; }
         public Nullable<bool> WEX_IsWorking { get; set; }
+        public Nullable<System.DateTime> WEX_FromDate { get; set; }
+        public Nullable<System.DateTime> WEX_ToDate { get; set; }
         public Nullable<bool> WEX_IsActive { get; set; }
         public Nullable<bool> WEX_IsArchive { get; set; }
         public Nullable<int> WEX_CreatedBy { get; set; }

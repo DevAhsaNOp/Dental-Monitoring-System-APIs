@@ -19,6 +19,10 @@ namespace DMS_BOL
         public Nullable<int> DS_ServicesID { get; set; }
         public Nullable<System.DateTime> DS_CreatedOn { get; set; }
         public Nullable<int> DS_CreatedBy { get; set; }
+        public Nullable<System.DateTime> DS_UpdatedOn { get; set; }
+        public Nullable<int> DS_UpdatedBy { get; set; }
+        public Nullable<bool> DS_IsActive { get; set; }
+        public Nullable<bool> DS_IsArchive { get; set; }
     
         public virtual tblDoctor tblDoctor { get; set; }
         public virtual tblService tblService { get; set; }
