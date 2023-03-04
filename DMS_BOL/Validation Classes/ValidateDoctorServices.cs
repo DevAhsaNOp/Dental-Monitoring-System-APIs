@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DMS_BOL.Validation_Classes
@@ -9,11 +10,13 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage ="Provide Doctor ID")]
         [Display(Name ="Doctor ID")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Doctor ID")]
         public int? DS_DoctorID { get; set; }
 
         [Required(ErrorMessage = "Provide Services ID")]
         [Display(Name = "Services ID")]
-        public int? DS_ServicesID { get; set; }
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Services ID")]
+        public List<int?> DS_ServicesID { get; set; }
 
         public DateTime? DS_CreatedOn { get; set; }
 

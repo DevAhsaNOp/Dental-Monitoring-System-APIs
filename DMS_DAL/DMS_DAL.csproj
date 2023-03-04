@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBLayer\AddressDb.cs" />
+    <Compile Include="DBLayer\DoctorOfflineConsultaionDetailsDb.cs" />
+    <Compile Include="DBLayer\DoctorOnlineConsultaionDetailsDb.cs" />
+    <Compile Include="DBLayer\DoctorServicesDb.cs" />
+    <Compile Include="DBLayer\DoctorWorkExperienceDb.cs" />
     <Compile Include="DBLayer\UsersDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDefine\OTPGenerator.cs" />

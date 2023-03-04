@@ -135,6 +135,8 @@
     <Compile Include="Validation Classes\ValidateAddress.cs" />
     <Compile Include="Validation Classes\ValidateAdmin.cs" />
     <Compile Include="Validation Classes\ValidateDoctor.cs" />
+    <Compile Include="Validation Classes\ValidateDoctorOfflineConsultaionDetails.cs" />
+    <Compile Include="Validation Classes\ValidateDoctorOnlineConsultaionDetails.cs" />
     <Compile Include="Validation Classes\ValidateDoctorWorkExperience.cs" />
     <Compile Include="Validation Classes\ValidateDoctorServices.cs" />
     <Compile Include="Validation Classes\ValidatePatient.cs" />
