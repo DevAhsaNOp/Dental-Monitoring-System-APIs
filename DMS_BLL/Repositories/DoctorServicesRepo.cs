@@ -87,7 +87,7 @@ namespace DMS_BLL.Repositories
             }
         }
 
-        public bool ReActiveDoctorServices(tblDoctorService model)
+        public bool ReActiveDoctorServices(ValidateDoctorServices model)
         {
             try
             {

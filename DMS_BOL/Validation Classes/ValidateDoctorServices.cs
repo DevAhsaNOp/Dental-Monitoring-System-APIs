@@ -22,12 +22,16 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage = "Provide Created By")]
         [Display(Name = "Created By")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Created By")]
+        [Range(1, int.MaxValue, ErrorMessage = "Invalid Created By")]
         public int? DS_CreatedBy { get; set; }
 
         public DateTime? DS_UpdatedOn { get; set; }
 
         [Required(ErrorMessage = "Provide Updated By")]
         [Display(Name = "Updated By")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Updated By")]
+        [Range(1, int.MaxValue, ErrorMessage = "Invalid Updated By")]
         public int? DS_UpdatedBy { get; set; }
         public bool? DS_IsActive { get; set; }
         public bool? DS_IsArchive { get; set; }

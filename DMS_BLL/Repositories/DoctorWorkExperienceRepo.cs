@@ -118,7 +118,7 @@ namespace DMS_BLL.Repositories
             }
         }
 
-        public bool ReActiveDoctorWorkExperience(tblDoctorWorkExperience model)
+        public bool ReActiveDoctorWorkExperience(ValidateDoctorWorkExperience model)
         {
             try
             {

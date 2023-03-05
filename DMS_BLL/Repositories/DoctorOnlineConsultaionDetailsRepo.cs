@@ -15,7 +15,7 @@ namespace DMS_BLL.Repositories
             ocdRepo = new DoctorOnlineConsultaionDetailsDb();
         }
 
-        public bool InsertDoctorOnlineConsultaionDetail(ValidateDoctorOnlineConsultaionDetails model)
+        public bool InsertOnlineConsultaionDetail(ValidateDoctorOnlineConsultaionDetails model)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace DMS_BLL.Repositories
             }
         }
 
-        public bool ReActiveOnlineConsultaionDetail(tblOnlineConsultaionDetail model)
+        public bool ReActiveOnlineConsultaionDetail(ValidateDoctorOnlineConsultaionDetails model)
         {
             try
             {

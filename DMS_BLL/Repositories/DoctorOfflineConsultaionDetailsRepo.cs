@@ -15,7 +15,7 @@ namespace DMS_BLL.Repositories
             ofcdRepo = new DoctorOfflineConsultaionDetailsDb();
         }
 
-        public bool InsertDoctorOfflineConsultaionDetail(ValidateDoctorOfflineConsultaionDetails model)
+        public bool InsertOfflineConsultaionDetail(ValidateDoctorOfflineConsultaionDetails model)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace DMS_BLL.Repositories
             }
         }
 
-        public bool ReActiveOfflineConsultaionDetail(tblOfflineConsultaionDetail model)
+        public bool ReActiveOfflineConsultaionDetail(ValidateDoctorOfflineConsultaionDetails model)
         {
             try
             {
