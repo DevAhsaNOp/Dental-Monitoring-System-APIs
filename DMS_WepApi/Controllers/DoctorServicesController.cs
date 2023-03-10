@@ -190,7 +190,8 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/AllServices")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        [AllowAnonymous]
         public HttpResponseMessage GetAllServices()
         {
             var reas = servicesRepoObj.GetAllDoctorServices();
