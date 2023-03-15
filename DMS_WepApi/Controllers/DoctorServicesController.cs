@@ -37,7 +37,7 @@ namespace DMS_WepApi.Controllers
                         Datalist = reas
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -70,7 +70,7 @@ namespace DMS_WepApi.Controllers
                         Message = "Services has been deactivated successfully!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -103,7 +103,7 @@ namespace DMS_WepApi.Controllers
                         Message = "Services has been activated successfully!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -137,7 +137,7 @@ namespace DMS_WepApi.Controllers
                         Datalist = reas
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -171,7 +171,7 @@ namespace DMS_WepApi.Controllers
                         Datalist = reas
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,

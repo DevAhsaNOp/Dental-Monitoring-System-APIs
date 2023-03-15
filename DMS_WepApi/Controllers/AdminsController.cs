@@ -37,28 +37,28 @@ namespace DMS_WepApi.Controllers
                         Message = "Your account has been registered successfully!",
                     });
                 else if (reas == -1)
-                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 403,
                         Success = false,
                         Message = "Invalid OTP provided. Please ensure to enter correct OTP again!",
                     });
                 else if (reas == -2)
-                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 404,
                         Success = false,
                         Message = "Email already exists. Please ensure to enter not used email account again!",
                     });
                 else if (reas == -3)
-                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 405,
                         Success = false,
                         Message = "Phone Number already exists. Please ensure to enter not used phone number again!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -91,21 +91,21 @@ namespace DMS_WepApi.Controllers
                         Message = "Your account details has been updated successfully!",
                     });
                 else if (reas == -1)
-                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 404,
                         Success = false,
                         Message = "Email already exists. Please ensure to enter not used email account again!",
                     });
                 else if (reas == -2)
-                    return Request.CreateResponse(HttpStatusCode.Forbidden, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 405,
                         Success = false,
                         Message = "Phone Number already exists. Please ensure to enter not used phone number again!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -138,7 +138,7 @@ namespace DMS_WepApi.Controllers
                         Message = "Account has been deactivated successfully!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -171,7 +171,7 @@ namespace DMS_WepApi.Controllers
                         Message = "Account has been activated successfully!",
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
@@ -205,7 +205,7 @@ namespace DMS_WepApi.Controllers
                         Datalist = reas
                     });
                 else
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new GRValidation()
+                    return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
                     {
                         StatusCode = 500,
                         Success = false,
