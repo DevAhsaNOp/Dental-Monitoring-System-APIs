@@ -22,7 +22,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Insert/Services")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InsertDoctorServices([FromBody] ValidateDoctorServices services)
         {
             if (services != null)
@@ -56,7 +56,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/Services")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InActiveDoctorServices([FromBody] ValidateDoctorServices services)
         {
             if (services != null && services.DS_ID > 0)
@@ -89,7 +89,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/Services")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActiveDoctorServices([FromBody] ValidateDoctorServices services)
         {
             if (services != null && services.DS_ID > 0)
@@ -122,7 +122,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/Services")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage GetDoctorServicesByID(int ServiceID)
         {
             if (ServiceID > 0)
@@ -156,7 +156,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/DoctorServices")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetAllDoctorServicesByID(int DoctorID)
         {
             if (DoctorID > 0)

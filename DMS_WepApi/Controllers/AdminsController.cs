@@ -9,7 +9,7 @@ using DMS_BOL.Validation_Classes;
 
 namespace DMS_WepApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AdminsController : ApiController
     {
@@ -77,7 +77,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/Admin")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage UpdateAdmin([FromBody] ValidateAdmin user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
@@ -124,7 +124,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/Admin")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage InActiveAdmin([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -157,7 +157,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/Admin")]
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public HttpResponseMessage ReActiveAdmin([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -190,7 +190,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/Admin")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage GetAdminByID(int AdminID)
         {
             if (AdminID > 0)

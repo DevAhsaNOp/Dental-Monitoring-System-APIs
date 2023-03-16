@@ -22,7 +22,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Insert/OfflineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        ///*[Authorize(Roles = "Admin,SuperAdmin,Doctor")]*/
         public HttpResponseMessage InsertOfflineConsultaionDetail([FromBody] ValidateDoctorOfflineConsultaionDetails OfflineConsultaionDetail)
         {
             if (OfflineConsultaionDetail != null)
@@ -56,7 +56,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/OfflineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage UpdateDoctorOfflineConsultaionDetail([FromBody] ValidateDoctorOfflineConsultaionDetails OfflineConsultaionDetail)
         {
             if (OfflineConsultaionDetail != null && OfflineConsultaionDetail.OFCD_ID > 0)
@@ -90,7 +90,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/OfflineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InActiveDoctorOfflineConsultaionDetail([FromBody] ValidateDoctorOfflineConsultaionDetails OfflineConsultaionDetail)
         {
             if (OfflineConsultaionDetail != null && OfflineConsultaionDetail.OFCD_ID > 0)
@@ -123,7 +123,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/OfflineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActiveDoctorOfflineConsultaionDetail([FromBody] ValidateDoctorOfflineConsultaionDetails OfflineConsultaionDetail)
         {
             if (OfflineConsultaionDetail != null && OfflineConsultaionDetail.OFCD_ID > 0)
@@ -156,7 +156,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/OfflineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage GetDoctorOfflineConsultaionDetailByID(int OFConsultationID)
         {
             if (OFConsultationID > 0)
@@ -190,7 +190,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/DoctorOfflineConsultaionDetails")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetDoctorAllOfflineConsultaionDetailsByID(int DoctorID)
         {
             if (DoctorID > 0)

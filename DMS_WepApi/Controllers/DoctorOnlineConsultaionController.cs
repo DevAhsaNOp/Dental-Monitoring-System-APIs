@@ -22,7 +22,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Insert/OnlineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InsertOnlineConsultaionDetail([FromBody] ValidateDoctorOnlineConsultaionDetails OnlineConsultaionDetail)
         {
             if (OnlineConsultaionDetail != null)
@@ -56,7 +56,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/OnlineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage UpdateDoctorOnlineConsultaionDetail([FromBody] ValidateDoctorOnlineConsultaionDetails OnlineConsultaionDetail)
         {
             if (OnlineConsultaionDetail != null && OnlineConsultaionDetail.OCD_ID > 0)
@@ -90,7 +90,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/OnlineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InActiveDoctorOnlineConsultaionDetail([FromBody] ValidateDoctorOnlineConsultaionDetails OnlineConsultaionDetail)
         {
             if (OnlineConsultaionDetail != null && OnlineConsultaionDetail.OCD_ID > 0)
@@ -123,7 +123,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/OnlineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActiveDoctorOnlineConsultaionDetail([FromBody] ValidateDoctorOnlineConsultaionDetails OnlineConsultaionDetail)
         {
             if (OnlineConsultaionDetail != null && OnlineConsultaionDetail.OCD_ID > 0)
@@ -156,7 +156,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/OnlineConsultaion")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage GetDoctorOnlineConsultaionDetailByID(int OConsultationID)
         {
             if (OConsultationID > 0)
@@ -190,7 +190,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/DoctorOnlineConsultaionDetails")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetDoctorAllOnlineConsultaionDetailsByID(int DoctorID)
         {
             if (DoctorID > 0)

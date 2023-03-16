@@ -13,12 +13,12 @@ using System.Collections.Generic;
 
 namespace DMS_WepApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private UsersRepo UserRepoObj;
-        string URL = "https://dmswepapi.azurewebsites.net/";
+        string URL = "https://localhost:44316/";
 
         public UsersController()
         {
@@ -178,7 +178,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient")]
         public HttpResponseMessage UpdatePatient([FromBody] ValidatePatient user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
@@ -225,7 +225,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient")]
         public HttpResponseMessage InActivePatient([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -258,7 +258,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActivePatient([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -291,7 +291,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/Patient")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetPatientByID(int PatientID)
         {
             if (PatientID > 0)

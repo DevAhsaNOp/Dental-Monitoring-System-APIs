@@ -22,7 +22,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Insert/WorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InsertDoctorWorkExperience([FromBody] ValidateDoctorWorkExperience WorkExperience)
         {
             if (WorkExperience != null)
@@ -56,7 +56,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/WorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage UpdateDoctorWorkExperience([FromBody] ValidateDoctorWorkExperience WorkExperience)
         {
             if (WorkExperience != null && WorkExperience.WEX_ID > 0)
@@ -90,7 +90,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/WorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InActiveDoctorWorkExperience([FromBody] ValidateDoctorWorkExperience WorkExperience)
         {
             if (WorkExperience != null && WorkExperience.WEX_ID > 0)
@@ -123,7 +123,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/WorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActiveDoctorWorkExperience([FromBody] ValidateDoctorWorkExperience WorkExperience)
         {
             if (WorkExperience != null && WorkExperience.WEX_ID > 0)
@@ -156,7 +156,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/WorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage GetDoctorWorkExperienceByID(int WExperienceID)
         {
             if (WExperienceID > 0)
@@ -190,7 +190,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/DoctorWorkExperience")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetDoctorAllWorkExperiencesByID(int DoctorID)
         {
             if (DoctorID > 0)

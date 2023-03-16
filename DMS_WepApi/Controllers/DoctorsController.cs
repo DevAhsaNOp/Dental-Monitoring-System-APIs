@@ -9,7 +9,7 @@ using DMS_WepApi.ResponseClasses;
 
 namespace DMS_WepApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DoctorsController : ApiController
     {
@@ -77,7 +77,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/Update/Doctor")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage UpdateDoctor([FromBody] ValidateDoctor user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0 && !string.IsNullOrEmpty(user.UserUpdatePhoneNumber) && !string.IsNullOrEmpty(user.UserUpdateEmail))
@@ -124,7 +124,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/InActive/Doctor")]
-        [Authorize(Roles = "Admin,SuperAdmin,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Doctor")]
         public HttpResponseMessage InActiveDoctor([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -157,7 +157,7 @@ namespace DMS_WepApi.Controllers
         [HttpPost]
         [ValidationActionFilter]
         [Route("api/ReActive/Doctor")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public HttpResponseMessage ReActiveDoctor([FromBody] ValidateUsersIA user)
         {
             if (user != null && user.UserUpdatedBy > 0 && user.UserID > 0)
@@ -190,7 +190,7 @@ namespace DMS_WepApi.Controllers
         [HttpGet]
         [ValidationActionFilter]
         [Route("api/Get/Doctor")]
-        [Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
         public HttpResponseMessage GetDoctorByID(int DoctorID)
         {
             if (DoctorID > 0)
