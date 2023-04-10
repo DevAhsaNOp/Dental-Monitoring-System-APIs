@@ -22,6 +22,7 @@ namespace DMS_BOL
             this.tblDoctorReviews = new HashSet<tblDoctorReview>();
             this.tblMessages = new HashSet<tblMessage>();
             this.tblMessages1 = new HashSet<tblMessage>();
+            this.tblPatientTests = new HashSet<tblPatientTest>();
         }
     
         public int P_ID { get; set; }
@@ -55,5 +56,7 @@ namespace DMS_BOL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMessage> tblMessages1 { get; set; }
         public virtual tblRole tblRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPatientTest> tblPatientTests { get; set; }
     }
 }

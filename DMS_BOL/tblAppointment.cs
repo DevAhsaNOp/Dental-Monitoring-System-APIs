@@ -17,23 +17,28 @@ namespace DMS_BOL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblAppointment()
         {
+            this.tblAppointmentDetails = new HashSet<tblAppointmentDetail>();
             this.tblDoctorReviews = new HashSet<tblDoctorReview>();
         }
     
         public int AP_ID { get; set; }
         public Nullable<int> AP_PatientID { get; set; }
         public Nullable<int> AP_DoctorID { get; set; }
-        public string AP_Subject { get; set; }
-        public string AP_Description { get; set; }
-        public Nullable<System.DateTime> AP_Datetime { get; set; }
+        public Nullable<System.DateTime> AP_ConfirmDatetime { get; set; }
         public Nullable<bool> AP_IsApproved { get; set; }
         public Nullable<bool> AP_IsUserRead { get; set; }
         public Nullable<bool> AP_IsDoctorRead { get; set; }
         public Nullable<bool> AP_IsActive { get; set; }
         public Nullable<bool> AP_IsArchive { get; set; }
+        public Nullable<int> AP_CreatedBy { get; set; }
+        public Nullable<System.DateTime> AP_CreatedOn { get; set; }
+        public Nullable<int> AP_UpdatedBy { get; set; }
+        public Nullable<System.DateTime> AP_UpdatedOn { get; set; }
     
         public virtual tblDoctor tblDoctor { get; set; }
         public virtual tblPatient tblPatient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAppointmentDetail> tblAppointmentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
     }

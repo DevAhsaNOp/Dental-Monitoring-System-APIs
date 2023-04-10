@@ -56,14 +56,33 @@
           <Property Name="AP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AP_PatientID" Type="int" />
           <Property Name="AP_DoctorID" Type="int" />
-          <Property Name="AP_Subject" Type="varchar(max)" />
-          <Property Name="AP_Description" Type="varchar(max)" />
-          <Property Name="AP_Datetime" Type="datetime" />
+          <Property Name="AP_ConfirmDatetime" Type="datetime" />
           <Property Name="AP_IsApproved" Type="bit" />
           <Property Name="AP_IsUserRead" Type="bit" />
           <Property Name="AP_IsDoctorRead" Type="bit" />
           <Property Name="AP_IsActive" Type="bit" />
           <Property Name="AP_IsArchive" Type="bit" />
+          <Property Name="AP_CreatedBy" Type="int" />
+          <Property Name="AP_CreatedOn" Type="datetime" />
+          <Property Name="AP_UpdatedBy" Type="int" />
+          <Property Name="AP_UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblAppointmentDetails">
+          <Key>
+            <PropertyRef Name="APD_ID" />
+          </Key>
+          <Property Name="APD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APD_AppointmentID" Type="int" />
+          <Property Name="APD_PatientID" Type="int" />
+          <Property Name="APD_DoctorID" Type="int" />
+          <Property Name="APD_Email" Type="varchar" MaxLength="100" />
+          <Property Name="APD_PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="APD_Purpose" Type="varchar(max)" />
+          <Property Name="APD_Date" Type="datetime" />
+          <Property Name="APD_CreatedBy" Type="int" />
+          <Property Name="APD_CreatedOn" Type="datetime" />
+          <Property Name="APD_UpdatedBy" Type="int" />
+          <Property Name="APD_UpdatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="tblCity">
           <Key>
@@ -91,6 +110,8 @@
           <Property Name="DG_DoctorID" Type="int" />
           <Property Name="DG_DiseaseName" Type="varchar" MaxLength="250" />
           <Property Name="DG_Remarks" Type="varchar(max)" />
+          <Property Name="DG_Images" Type="varchar(max)" />
+          <Property Name="DG_Pdf" Type="varchar(max)" />
           <Property Name="DG_IsActive" Type="bit" />
           <Property Name="DG_IsArchive" Type="bit" />
         </EntityType>
@@ -292,6 +313,20 @@
           <Property Name="P_OTP" Type="varchar" MaxLength="50" />
           <Property Name="P_Verified" Type="bit" />
         </EntityType>
+        <EntityType Name="tblPatientTest">
+          <Key>
+            <PropertyRef Name="PT_ID" />
+          </Key>
+          <Property Name="PT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PT_PatientID" Type="int" />
+          <Property Name="PT_Datetime" Type="datetime" />
+          <Property Name="PT_Images" Type="varchar(max)" />
+          <Property Name="PT_Pdf" Type="varchar(max)" />
+          <Property Name="PT_IdentifiedDiseases" Type="varchar(max)" />
+          <Property Name="PT_Remarks" Type="varchar(max)" />
+          <Property Name="PT_IsActive" Type="bit" />
+          <Property Name="PT_IsArchive" Type="bit" />
+        </EntityType>
         <EntityType Name="tblRoles">
           <Key>
             <PropertyRef Name="RoleID" />
@@ -453,6 +488,18 @@
             </Principal>
             <Dependent Role="tblAppointment">
               <PropertyRef Name="AP_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAppointmentDetails_tblAppointment">
+          <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="0..1" />
+          <End Role="tblAppointmentDetails" Type="Self.tblAppointmentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointment">
+              <PropertyRef Name="AP_ID" />
+            </Principal>
+            <Dependent Role="tblAppointmentDetails">
+              <PropertyRef Name="APD_AppointmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -720,6 +767,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblPatientTest_tblPatient">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblPatientTest" Type="Self.tblPatientTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblPatientTest">
+              <PropertyRef Name="PT_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblState_tblCountry">
           <End Role="tblCountry" Type="Self.tblCountry" Multiplicity="0..1" />
           <End Role="tblState" Type="Self.tblState" Multiplicity="*" />
@@ -773,6 +832,7 @@
           <EntitySet Name="tblAddress" EntityType="Self.tblAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAppointment" EntityType="Self.tblAppointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAppointmentDetails" EntityType="Self.tblAppointmentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostics" Schema="dbo" store:Type="Tables" />
@@ -786,6 +846,7 @@
           <EntitySet Name="tblOnlineConsultaionDetails" EntityType="Self.tblOnlineConsultaionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOTP" EntityType="Self.tblOTP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPatient" EntityType="Self.tblPatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPatientTest" EntityType="Self.tblPatientTest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblServices" EntityType="Self.tblServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
@@ -822,6 +883,10 @@
           <AssociationSet Name="FK_tblAppointment_tblPatient" Association="Self.FK_tblAppointment_tblPatient">
             <End Role="tblPatient" EntitySet="tblPatient" />
             <End Role="tblAppointment" EntitySet="tblAppointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAppointmentDetails_tblAppointment" Association="Self.FK_tblAppointmentDetails_tblAppointment">
+            <End Role="tblAppointment" EntitySet="tblAppointment" />
+            <End Role="tblAppointmentDetails" EntitySet="tblAppointmentDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCity_tblState" Association="Self.FK_tblCity_tblState">
             <End Role="tblState" EntitySet="tblState" />
@@ -911,6 +976,10 @@
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblPatient" EntitySet="tblPatient" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblPatientTest_tblPatient" Association="Self.FK_tblPatientTest_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatient" />
+            <End Role="tblPatientTest" EntitySet="tblPatientTest" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblState_tblCountry" Association="Self.FK_tblState_tblCountry">
             <End Role="tblCountry" EntitySet="tblCountry" />
             <End Role="tblState" EntitySet="tblState" />
@@ -995,17 +1064,38 @@
           <Property Name="AP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AP_PatientID" Type="Int32" />
           <Property Name="AP_DoctorID" Type="Int32" />
-          <Property Name="AP_Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AP_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AP_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="AP_ConfirmDatetime" Type="DateTime" Precision="3" />
           <Property Name="AP_IsApproved" Type="Boolean" />
           <Property Name="AP_IsUserRead" Type="Boolean" />
           <Property Name="AP_IsDoctorRead" Type="Boolean" />
           <Property Name="AP_IsActive" Type="Boolean" />
           <Property Name="AP_IsArchive" Type="Boolean" />
+          <Property Name="AP_CreatedBy" Type="Int32" />
+          <Property Name="AP_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="AP_UpdatedBy" Type="Int32" />
+          <Property Name="AP_UpdatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblAppointment_tblDoctor" FromRole="tblAppointment" ToRole="tblDoctor" />
           <NavigationProperty Name="tblPatient" Relationship="Self.FK_tblAppointment_tblPatient" FromRole="tblAppointment" ToRole="tblPatient" />
+          <NavigationProperty Name="tblAppointmentDetails" Relationship="Self.FK_tblAppointmentDetails_tblAppointment" FromRole="tblAppointment" ToRole="tblAppointmentDetails" />
           <NavigationProperty Name="tblDoctorReviews" Relationship="Self.FK_tblDoctorReviews_tblAppointment" FromRole="tblAppointment" ToRole="tblDoctorReviews" />
+        </EntityType>
+        <EntityType Name="tblAppointmentDetail">
+          <Key>
+            <PropertyRef Name="APD_ID" />
+          </Key>
+          <Property Name="APD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APD_AppointmentID" Type="Int32" />
+          <Property Name="APD_PatientID" Type="Int32" />
+          <Property Name="APD_DoctorID" Type="Int32" />
+          <Property Name="APD_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APD_PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APD_Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="APD_Date" Type="DateTime" Precision="3" />
+          <Property Name="APD_CreatedBy" Type="Int32" />
+          <Property Name="APD_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="APD_UpdatedBy" Type="Int32" />
+          <Property Name="APD_UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblAppointment" Relationship="Self.FK_tblAppointmentDetails_tblAppointment" FromRole="tblAppointmentDetails" ToRole="tblAppointment" />
         </EntityType>
         <EntityType Name="tblCity">
           <Key>
@@ -1038,6 +1128,8 @@
           <Property Name="DG_DoctorID" Type="Int32" />
           <Property Name="DG_DiseaseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DG_Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DG_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DG_Pdf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DG_IsActive" Type="Boolean" />
           <Property Name="DG_IsArchive" Type="Boolean" />
           <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDiagnostics_tblDoctor" FromRole="tblDiagnostics" ToRole="tblDoctor" />
@@ -1275,6 +1367,22 @@
           <NavigationProperty Name="tblMessages" Relationship="Self.FK_tblMessage_tblPatient" FromRole="tblPatient" ToRole="tblMessage" />
           <NavigationProperty Name="tblMessages1" Relationship="Self.FK_tblMessage_tblPatient1" FromRole="tblPatient" ToRole="tblMessage" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblPatient_tblRoles" FromRole="tblPatient" ToRole="tblRoles" />
+          <NavigationProperty Name="tblPatientTests" Relationship="Self.FK_tblPatientTest_tblPatient" FromRole="tblPatient" ToRole="tblPatientTest" />
+        </EntityType>
+        <EntityType Name="tblPatientTest">
+          <Key>
+            <PropertyRef Name="PT_ID" />
+          </Key>
+          <Property Name="PT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PT_PatientID" Type="Int32" />
+          <Property Name="PT_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="PT_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PT_Pdf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PT_IdentifiedDiseases" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PT_Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PT_IsActive" Type="Boolean" />
+          <Property Name="PT_IsArchive" Type="Boolean" />
+          <NavigationProperty Name="tblPatient" Relationship="Self.FK_tblPatientTest_tblPatient" FromRole="tblPatientTest" ToRole="tblPatient" />
         </EntityType>
         <EntityType Name="tblRole">
           <Key>
@@ -1497,6 +1605,18 @@
             </Principal>
             <Dependent Role="tblAppointment">
               <PropertyRef Name="AP_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAppointmentDetails_tblAppointment">
+          <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="0..1" />
+          <End Role="tblAppointmentDetails" Type="Self.tblAppointmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointment">
+              <PropertyRef Name="AP_ID" />
+            </Principal>
+            <Dependent Role="tblAppointmentDetails">
+              <PropertyRef Name="APD_AppointmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1752,6 +1872,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblPatientTest_tblPatient">
+          <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
+          <End Role="tblPatientTest" Type="Self.tblPatientTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPatient">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="tblPatientTest">
+              <PropertyRef Name="PT_PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblSuperAdmin_tblRoles">
           <End Role="tblRoles" Type="Self.tblRole" Multiplicity="0..1" />
           <End Role="tblSuperAdmin" Type="Self.tblSuperAdmin" Multiplicity="*" />
@@ -1769,6 +1901,7 @@
           <EntitySet Name="tblAddresses" EntityType="Self.tblAddress" />
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
           <EntitySet Name="tblAppointments" EntityType="Self.tblAppointment" />
+          <EntitySet Name="tblAppointmentDetails" EntityType="Self.tblAppointmentDetail" />
           <EntitySet Name="tblCities" EntityType="Self.tblCity" />
           <EntitySet Name="tblCountries" EntityType="Self.tblCountry" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostic" />
@@ -1782,6 +1915,7 @@
           <EntitySet Name="tblOnlineConsultaionDetails" EntityType="Self.tblOnlineConsultaionDetail" />
           <EntitySet Name="tblOTPs" EntityType="Self.tblOTP" />
           <EntitySet Name="tblPatients" EntityType="Self.tblPatient" />
+          <EntitySet Name="tblPatientTests" EntityType="Self.tblPatientTest" />
           <EntitySet Name="tblRoles" EntityType="Self.tblRole" />
           <EntitySet Name="tblServices" EntityType="Self.tblService" />
           <EntitySet Name="tblStates" EntityType="Self.tblState" />
@@ -1834,6 +1968,10 @@
           <AssociationSet Name="FK_tblAppointment_tblPatient" Association="Self.FK_tblAppointment_tblPatient">
             <End Role="tblPatient" EntitySet="tblPatients" />
             <End Role="tblAppointment" EntitySet="tblAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAppointmentDetails_tblAppointment" Association="Self.FK_tblAppointmentDetails_tblAppointment">
+            <End Role="tblAppointment" EntitySet="tblAppointments" />
+            <End Role="tblAppointmentDetails" EntitySet="tblAppointmentDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorReviews_tblAppointment" Association="Self.FK_tblDoctorReviews_tblAppointment">
             <End Role="tblAppointment" EntitySet="tblAppointments" />
@@ -1919,6 +2057,10 @@
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblPatient" EntitySet="tblPatients" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblPatientTest_tblPatient" Association="Self.FK_tblPatientTest_tblPatient">
+            <End Role="tblPatient" EntitySet="tblPatients" />
+            <End Role="tblPatientTest" EntitySet="tblPatientTests" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblSuperAdmin_tblRoles" Association="Self.FK_tblSuperAdmin_tblRoles">
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblSuperAdmin" EntitySet="tblSuperAdmins" />
@@ -1983,14 +2125,34 @@
                 <ScalarProperty Name="AP_ID" ColumnName="AP_ID" />
                 <ScalarProperty Name="AP_PatientID" ColumnName="AP_PatientID" />
                 <ScalarProperty Name="AP_DoctorID" ColumnName="AP_DoctorID" />
-                <ScalarProperty Name="AP_Subject" ColumnName="AP_Subject" />
-                <ScalarProperty Name="AP_Description" ColumnName="AP_Description" />
-                <ScalarProperty Name="AP_Datetime" ColumnName="AP_Datetime" />
+                <ScalarProperty Name="AP_ConfirmDatetime" ColumnName="AP_ConfirmDatetime" />
                 <ScalarProperty Name="AP_IsApproved" ColumnName="AP_IsApproved" />
                 <ScalarProperty Name="AP_IsUserRead" ColumnName="AP_IsUserRead" />
                 <ScalarProperty Name="AP_IsDoctorRead" ColumnName="AP_IsDoctorRead" />
                 <ScalarProperty Name="AP_IsActive" ColumnName="AP_IsActive" />
                 <ScalarProperty Name="AP_IsArchive" ColumnName="AP_IsArchive" />
+                <ScalarProperty Name="AP_CreatedBy" ColumnName="AP_CreatedBy" />
+                <ScalarProperty Name="AP_CreatedOn" ColumnName="AP_CreatedOn" />
+                <ScalarProperty Name="AP_UpdatedBy" ColumnName="AP_UpdatedBy" />
+                <ScalarProperty Name="AP_UpdatedOn" ColumnName="AP_UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAppointmentDetails">
+            <EntityTypeMapping TypeName="dentalDBModel.tblAppointmentDetail">
+              <MappingFragment StoreEntitySet="tblAppointmentDetails">
+                <ScalarProperty Name="APD_ID" ColumnName="APD_ID" />
+                <ScalarProperty Name="APD_AppointmentID" ColumnName="APD_AppointmentID" />
+                <ScalarProperty Name="APD_PatientID" ColumnName="APD_PatientID" />
+                <ScalarProperty Name="APD_DoctorID" ColumnName="APD_DoctorID" />
+                <ScalarProperty Name="APD_Email" ColumnName="APD_Email" />
+                <ScalarProperty Name="APD_PhoneNumber" ColumnName="APD_PhoneNumber" />
+                <ScalarProperty Name="APD_Purpose" ColumnName="APD_Purpose" />
+                <ScalarProperty Name="APD_Date" ColumnName="APD_Date" />
+                <ScalarProperty Name="APD_CreatedBy" ColumnName="APD_CreatedBy" />
+                <ScalarProperty Name="APD_CreatedOn" ColumnName="APD_CreatedOn" />
+                <ScalarProperty Name="APD_UpdatedBy" ColumnName="APD_UpdatedBy" />
+                <ScalarProperty Name="APD_UpdatedOn" ColumnName="APD_UpdatedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2021,6 +2183,8 @@
                 <ScalarProperty Name="DG_DoctorID" ColumnName="DG_DoctorID" />
                 <ScalarProperty Name="DG_DiseaseName" ColumnName="DG_DiseaseName" />
                 <ScalarProperty Name="DG_Remarks" ColumnName="DG_Remarks" />
+                <ScalarProperty Name="DG_Images" ColumnName="DG_Images" />
+                <ScalarProperty Name="DG_Pdf" ColumnName="DG_Pdf" />
                 <ScalarProperty Name="DG_IsActive" ColumnName="DG_IsActive" />
                 <ScalarProperty Name="DG_IsArchive" ColumnName="DG_IsArchive" />
               </MappingFragment>
@@ -2231,6 +2395,21 @@
                 <ScalarProperty Name="P_IsArchive" ColumnName="P_IsArchive" />
                 <ScalarProperty Name="P_OTP" ColumnName="P_OTP" />
                 <ScalarProperty Name="P_Verified" ColumnName="P_Verified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPatientTests">
+            <EntityTypeMapping TypeName="dentalDBModel.tblPatientTest">
+              <MappingFragment StoreEntitySet="tblPatientTest">
+                <ScalarProperty Name="PT_ID" ColumnName="PT_ID" />
+                <ScalarProperty Name="PT_PatientID" ColumnName="PT_PatientID" />
+                <ScalarProperty Name="PT_Datetime" ColumnName="PT_Datetime" />
+                <ScalarProperty Name="PT_Images" ColumnName="PT_Images" />
+                <ScalarProperty Name="PT_Pdf" ColumnName="PT_Pdf" />
+                <ScalarProperty Name="PT_IdentifiedDiseases" ColumnName="PT_IdentifiedDiseases" />
+                <ScalarProperty Name="PT_Remarks" ColumnName="PT_Remarks" />
+                <ScalarProperty Name="PT_IsActive" ColumnName="PT_IsActive" />
+                <ScalarProperty Name="PT_IsArchive" ColumnName="PT_IsArchive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

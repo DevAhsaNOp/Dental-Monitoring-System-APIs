@@ -30,6 +30,7 @@ namespace DMS_BOL
         public virtual DbSet<tblAddress> tblAddresses { get; set; }
         public virtual DbSet<tblAdmin> tblAdmins { get; set; }
         public virtual DbSet<tblAppointment> tblAppointments { get; set; }
+        public virtual DbSet<tblAppointmentDetail> tblAppointmentDetails { get; set; }
         public virtual DbSet<tblCity> tblCities { get; set; }
         public virtual DbSet<tblCountry> tblCountries { get; set; }
         public virtual DbSet<tblDiagnostic> tblDiagnostics { get; set; }
@@ -43,6 +44,7 @@ namespace DMS_BOL
         public virtual DbSet<tblOnlineConsultaionDetail> tblOnlineConsultaionDetails { get; set; }
         public virtual DbSet<tblOTP> tblOTPs { get; set; }
         public virtual DbSet<tblPatient> tblPatients { get; set; }
+        public virtual DbSet<tblPatientTest> tblPatientTests { get; set; }
         public virtual DbSet<tblRole> tblRoles { get; set; }
         public virtual DbSet<tblService> tblServices { get; set; }
         public virtual DbSet<tblState> tblStates { get; set; }

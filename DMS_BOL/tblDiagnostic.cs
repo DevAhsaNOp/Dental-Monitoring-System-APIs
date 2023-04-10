@@ -27,6 +27,8 @@ namespace DMS_BOL
         public Nullable<int> DG_DoctorID { get; set; }
         public string DG_DiseaseName { get; set; }
         public string DG_Remarks { get; set; }
+        public string DG_Images { get; set; }
+        public string DG_Pdf { get; set; }
         public Nullable<bool> DG_IsActive { get; set; }
         public Nullable<bool> DG_IsArchive { get; set; }
     

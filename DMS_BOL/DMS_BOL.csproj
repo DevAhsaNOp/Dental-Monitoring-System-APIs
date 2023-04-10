@@ -50,88 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMSModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DMSModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DMSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DMSModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DMSModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblAddress.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblAdmin.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblAppointment.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblCity.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblCountry.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblDiagnostic.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblDoctor.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblDoctorReview.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblDoctorService.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblDoctorWorkExperience.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblMessage.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblMessageDetail.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblOfflineConsultaionDetail.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblOnlineConsultaionDetail.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblOTP.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblPatient.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblRole.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblService.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblState.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblSuperAdmin.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblZone.cs">
-      <DependentUpon>DMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Validation Classes\ValidateAddress.cs" />
     <Compile Include="Validation Classes\ValidateAdmin.cs" />
     <Compile Include="Validation Classes\ValidateDoctor.cs" />
@@ -147,29 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DMSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DMSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DMSModel.edmx.diagram">
-      <DependentUpon>DMSModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DMSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DMSModel.edmx</DependentUpon>
-      <LastGenOutput>DMSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DMSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DMSModel.edmx</DependentUpon>
-      <LastGenOutput>DMSModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
