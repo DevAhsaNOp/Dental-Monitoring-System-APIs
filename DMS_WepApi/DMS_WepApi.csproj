@@ -178,6 +178,7 @@
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\DoctorServicesController.cs" />
     <Compile Include="Controllers\DoctorWorkExperienceController.cs" />
+    <Compile Include="Controllers\PatientTestController.cs" />
     <Compile Include="Controllers\SuperAdminsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">

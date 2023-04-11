@@ -50,6 +50,7 @@
     <Compile Include="Repositories\DoctorServicesRepo.cs" />
     <Compile Include="Repositories\DoctorsRepo.cs" />
     <Compile Include="Repositories\DoctorWorkExperienceRepo.cs" />
+    <Compile Include="Repositories\PatientTestRepo.cs" />
     <Compile Include="Repositories\SuperAdminsRepo.cs" />
     <Compile Include="Repositories\UsersRepo.cs" />
   </ItemGroup>
