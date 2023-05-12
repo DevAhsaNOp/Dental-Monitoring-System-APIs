@@ -146,6 +146,20 @@
           <Property Name="D_ResponseTime" Type="int" />
           <Property Name="D_IsProfileCompleted" Type="bit" />
         </EntityType>
+        <EntityType Name="tblDoctorApproved">
+          <Key>
+            <PropertyRef Name="N_ID" />
+          </Key>
+          <Property Name="N_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="N_DoctorID" Type="int" />
+          <Property Name="N_IsApproved" Type="bit" />
+          <Property Name="N_IsArchive" Type="bit" />
+          <Property Name="N_IsRead" Type="bit" />
+          <Property Name="N_CreateadOn" Type="datetime" Nullable="false" />
+          <Property Name="N_CreatedBy" Type="bit" Nullable="false" />
+          <Property Name="N_UpdatedOn" Type="datetime" />
+          <Property Name="N_UpdatedBy" Type="bit" />
+        </EntityType>
         <EntityType Name="tblDoctorReviews">
           <Key>
             <PropertyRef Name="DR_ID" />
@@ -563,6 +577,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorApproved_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorReviews_tblAppointment">
           <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="0..1" />
           <End Role="tblDoctorReviews" Type="Self.tblDoctorReviews" Multiplicity="*" />
@@ -837,6 +863,7 @@
           <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctor" EntityType="Self.tblDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDoctorApproved" EntityType="Self.tblDoctorApproved" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorReviews" EntityType="Self.tblDoctorReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorServices" EntityType="Self.tblDoctorServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDoctorWorkExperience" EntityType="Self.tblDoctorWorkExperience" Schema="dbo" store:Type="Tables" />
@@ -907,6 +934,10 @@
           <AssociationSet Name="FK_tblDoctor_tblRoles" Association="Self.FK_tblDoctor_tblRoles">
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblDoctor" Association="Self.FK_tblDoctorApproved_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproved" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorReviews_tblAppointment" Association="Self.FK_tblDoctorReviews_tblAppointment">
             <End Role="tblAppointment" EntitySet="tblAppointment" />
@@ -1170,6 +1201,7 @@
           <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblDoctor" FromRole="tblDoctor" ToRole="tblAppointment" />
           <NavigationProperty Name="tblDiagnostics" Relationship="Self.FK_tblDiagnostics_tblDoctor" FromRole="tblDoctor" ToRole="tblDiagnostics" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblDoctor_tblRoles" FromRole="tblDoctor" ToRole="tblRoles" />
+          <NavigationProperty Name="tblDoctorApproveds" Relationship="Self.FK_tblDoctorApproved_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorApproved" />
           <NavigationProperty Name="tblDoctorReviews" Relationship="Self.FK_tblDoctorReviews_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorReviews" />
           <NavigationProperty Name="tblDoctorServices" Relationship="Self.FK_tblDoctorServices_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorServices" />
           <NavigationProperty Name="tblDoctorWorkExperiences" Relationship="Self.FK_tblDoctorWorkExperience_tblDoctor" FromRole="tblDoctor" ToRole="tblDoctorWorkExperience" />
@@ -1177,6 +1209,21 @@
           <NavigationProperty Name="tblMessages1" Relationship="Self.FK_tblMessage_tblDoctor1" FromRole="tblDoctor" ToRole="tblMessage" />
           <NavigationProperty Name="tblOfflineConsultaionDetails" Relationship="Self.FK_tblOfflineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOfflineConsultaionDetails" />
           <NavigationProperty Name="tblOnlineConsultaionDetails" Relationship="Self.FK_tblOnlineConsultaionDetails_tblDoctor" FromRole="tblDoctor" ToRole="tblOnlineConsultaionDetails" />
+        </EntityType>
+        <EntityType Name="tblDoctorApproved">
+          <Key>
+            <PropertyRef Name="N_ID" />
+          </Key>
+          <Property Name="N_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="N_DoctorID" Type="Int32" />
+          <Property Name="N_IsApproved" Type="Boolean" />
+          <Property Name="N_IsArchive" Type="Boolean" />
+          <Property Name="N_IsRead" Type="Boolean" />
+          <Property Name="N_CreateadOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="N_CreatedBy" Type="Boolean" Nullable="false" />
+          <Property Name="N_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="N_UpdatedBy" Type="Boolean" />
+          <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDoctorApproved_tblDoctor" FromRole="tblDoctorApproved" ToRole="tblDoctor" />
         </EntityType>
         <EntityType Name="tblDoctorReview">
           <Key>
@@ -1716,6 +1763,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorApproved_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorReviews_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
           <End Role="tblDoctorReviews" Type="Self.tblDoctorReview" Multiplicity="*" />
@@ -1906,6 +1965,7 @@
           <EntitySet Name="tblCountries" EntityType="Self.tblCountry" />
           <EntitySet Name="tblDiagnostics" EntityType="Self.tblDiagnostic" />
           <EntitySet Name="tblDoctors" EntityType="Self.tblDoctor" />
+          <EntitySet Name="tblDoctorApproveds" EntityType="Self.tblDoctorApproved" />
           <EntitySet Name="tblDoctorReviews" EntityType="Self.tblDoctorReview" />
           <EntitySet Name="tblDoctorServices" EntityType="Self.tblDoctorService" />
           <EntitySet Name="tblDoctorWorkExperiences" EntityType="Self.tblDoctorWorkExperience" />
@@ -2004,6 +2064,10 @@
           <AssociationSet Name="FK_tblDoctor_tblRoles" Association="Self.FK_tblDoctor_tblRoles">
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblDoctor" Association="Self.FK_tblDoctorApproved_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproveds" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorReviews_tblDoctor" Association="Self.FK_tblDoctorReviews_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
@@ -2219,6 +2283,21 @@
                 <ScalarProperty Name="D_SatisfactionRate" ColumnName="D_SatisfactionRate" />
                 <ScalarProperty Name="D_ResponseTime" ColumnName="D_ResponseTime" />
                 <ScalarProperty Name="D_IsProfileCompleted" ColumnName="D_IsProfileCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDoctorApproveds">
+            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorApproved">
+              <MappingFragment StoreEntitySet="tblDoctorApproved">
+                <ScalarProperty Name="N_ID" ColumnName="N_ID" />
+                <ScalarProperty Name="N_DoctorID" ColumnName="N_DoctorID" />
+                <ScalarProperty Name="N_IsApproved" ColumnName="N_IsApproved" />
+                <ScalarProperty Name="N_IsArchive" ColumnName="N_IsArchive" />
+                <ScalarProperty Name="N_IsRead" ColumnName="N_IsRead" />
+                <ScalarProperty Name="N_CreateadOn" ColumnName="N_CreateadOn" />
+                <ScalarProperty Name="N_CreatedBy" ColumnName="N_CreatedBy" />
+                <ScalarProperty Name="N_UpdatedOn" ColumnName="N_UpdatedOn" />
+                <ScalarProperty Name="N_UpdatedBy" ColumnName="N_UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

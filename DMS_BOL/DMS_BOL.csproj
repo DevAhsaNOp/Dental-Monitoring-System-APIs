@@ -93,6 +93,9 @@
     <Compile Include="tblDoctor.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblDoctorApproved.cs">
+      <DependentUpon>DMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblDoctorReview.cs">
       <DependentUpon>DMSModel.tt</DependentUpon>
     </Compile>

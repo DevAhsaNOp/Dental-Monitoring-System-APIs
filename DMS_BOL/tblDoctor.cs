@@ -19,6 +19,7 @@ namespace DMS_BOL
         {
             this.tblAppointments = new HashSet<tblAppointment>();
             this.tblDiagnostics = new HashSet<tblDiagnostic>();
+            this.tblDoctorApproveds = new HashSet<tblDoctorApproved>();
             this.tblDoctorReviews = new HashSet<tblDoctorReview>();
             this.tblDoctorServices = new HashSet<tblDoctorService>();
             this.tblDoctorWorkExperiences = new HashSet<tblDoctorWorkExperience>();
@@ -61,6 +62,8 @@ namespace DMS_BOL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDiagnostic> tblDiagnostics { get; set; }
         public virtual tblRole tblRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblDoctorApproved> tblDoctorApproveds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDoctorReview> tblDoctorReviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

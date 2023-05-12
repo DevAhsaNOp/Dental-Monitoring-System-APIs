@@ -35,6 +35,7 @@ namespace DMS_BOL
         public virtual DbSet<tblCountry> tblCountries { get; set; }
         public virtual DbSet<tblDiagnostic> tblDiagnostics { get; set; }
         public virtual DbSet<tblDoctor> tblDoctors { get; set; }
+        public virtual DbSet<tblDoctorApproved> tblDoctorApproveds { get; set; }
         public virtual DbSet<tblDoctorReview> tblDoctorReviews { get; set; }
         public virtual DbSet<tblDoctorService> tblDoctorServices { get; set; }
         public virtual DbSet<tblDoctorWorkExperience> tblDoctorWorkExperiences { get; set; }

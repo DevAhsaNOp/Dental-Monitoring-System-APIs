@@ -4,31 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8609fc041dfc451a8b9cb317cc0db871" Name="Diagram1">
+      <Diagram DiagramId="a9df1a5a0b204643929ad79b0e8f34a6" Name="Diagram1">
         <EntityTypeShape EntityType="dentalDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="0.75" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="3" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="14.25" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblAppointmentDetail" Width="1.5" PointX="16.5" PointY="30.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="1.5" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="1.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="11.25" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="6" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctorReview" Width="1.5" PointX="19.5" PointY="28.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctorService" Width="1.5" PointX="11.25" PointY="34.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblDoctorWorkExperience" Width="1.5" PointX="8.25" PointY="40.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblMessage" Width="1.5" PointX="14.25" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblMessageDetail" Width="1.5" PointX="16.5" PointY="26" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblOfflineConsultaionDetail" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblOnlineConsultaionDetail" Width="1.5" PointX="8.25" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAddress" Width="1.5" PointX="0.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAdmin" Width="1.5" PointX="3" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAppointment" Width="1.5" PointX="14.25" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblAppointmentDetail" Width="1.5" PointX="16.5" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCity" Width="1.5" PointX="1.5" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblCountry" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDiagnostic" Width="1.5" PointX="11.25" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctor" Width="1.5" PointX="6" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorApproved" Width="1.5" PointX="8.25" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorReview" Width="1.5" PointX="19.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorService" Width="1.5" PointX="11.25" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblDoctorWorkExperience" Width="1.5" PointX="8.25" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblMessage" Width="1.5" PointX="14.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblMessageDetail" Width="1.5" PointX="16.5" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblOfflineConsultaionDetail" Width="1.5" PointX="8.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblOnlineConsultaionDetail" Width="1.5" PointX="8.25" PointY="59.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dentalDBModel.tblOTP" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblPatient" Width="1.5" PointX="9" PointY="29.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblPatientTest" Width="1.5" PointX="11.25" PointY="30.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblRole" Width="1.5" PointX="0.75" PointY="30.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblService" Width="1.5" PointX="9" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblState" Width="1.5" PointX="1.5" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblSuperAdmin" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dentalDBModel.tblZone" Width="1.5" PointX="1.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblPatient" Width="1.5" PointX="9" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblPatientTest" Width="1.5" PointX="11.25" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblRole" Width="1.5" PointX="0.75" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblService" Width="1.5" PointX="9" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblState" Width="1.5" PointX="1.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblSuperAdmin" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dentalDBModel.tblZone" Width="1.5" PointX="1.5" PointY="37.5" IsExpanded="true" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCity" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblCountry" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblAddress_tblState" ManuallyRouted="false" />
@@ -50,6 +51,7 @@
         <AssociationConnector Association="dentalDBModel.FK_tblDiagnostics_tblPatient" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblDiagnostics" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctor_tblRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="dentalDBModel.FK_tblDoctorApproved_tblDoctor" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctorReviews_tblDoctor" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctorServices_tblDoctor" ManuallyRouted="false" />
         <AssociationConnector Association="dentalDBModel.FK_tblDoctorWorkExperience_tblDoctor" ManuallyRouted="false" />
