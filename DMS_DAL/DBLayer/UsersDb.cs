@@ -457,7 +457,7 @@ namespace DMS_DAL.DBLayer
             var email = "saafali804@gmail.com";
             using (MailMessage mm = new MailMessage(email, emailtext))
             {
-                mm.Subject = "Password Reset OTP";
+                mm.Subject = "Denticon Sign Up Verification Code";
                 mm.Body = "<p>Your <b>OTP:" + otp + "</b><br/>Don't share it with anyone!</p>";
                 mm.IsBodyHtml = true;
                 using (SmtpClient smtp = new SmtpClient())
