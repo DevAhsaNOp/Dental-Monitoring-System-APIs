@@ -10,6 +10,7 @@ using DMS_BLL.Repositories;
 using DMS_WepApi.ResponseClasses;
 using DMS_BOL.Validation_Classes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DMS_WepApi.Controllers
 {
@@ -78,7 +79,7 @@ namespace DMS_WepApi.Controllers
                     Message = "Invalid data provided!"
                 });
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         [Route("api/Send/OTP")]
@@ -110,7 +111,7 @@ namespace DMS_WepApi.Controllers
                     Message = "Invalid data provided!"
                 });
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         [Route("api/Check/EmailExist")]
@@ -142,7 +143,7 @@ namespace DMS_WepApi.Controllers
                     Message = "Invalid data provided!"
                 });
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         [Route("api/Check/PhoneNumberExist")]
@@ -322,6 +323,30 @@ namespace DMS_WepApi.Controllers
                 });
         }
 
+        [HttpGet]
+        [ValidationActionFilter]
+        [Route("api/Get/AllPatients")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        public HttpResponseMessage GetAllPatients()
+        {
+            var reas = UserRepoObj.GetAllPatients();
+            if (reas != null && reas.Count() > 0)
+                return Request.CreateResponse(HttpStatusCode.OK, new GRIValidation()
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    Message = "All patients record has been recieved successfully!",
+                    Datalist = reas
+                });
+            else
+                return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    Message = "Error occured on getting Patients details. Please try again later!",
+                });
+        }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("api/login")]
@@ -366,7 +391,7 @@ namespace DMS_WepApi.Controllers
                         UserImage = reas.Image,
                         Username = reas.Name,
                         Email = reas.Email,
-                        Role = reas.Role,      
+                        Role = reas.Role,
                         PhoneNumber = reas.PhoneNumber,
                         IssuedTime = DateTime.Now.ToString("ddd, dd MMM yyyy hh:mm:ss tt"),
                         ExpiredTime = DateTime.Now.AddSeconds(accessTokenExpiration).ToString("ddd, dd MMM yyyy hh:mm:ss tt"),

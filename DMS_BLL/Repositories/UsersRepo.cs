@@ -3,6 +3,8 @@ using DMS_DAL.DBLayer;
 using DMS_BOL.Validation_Classes;
 using System;
 using DMS_DAL.UserDefine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DMS_BLL.Repositories
 {
@@ -166,6 +168,16 @@ namespace DMS_BLL.Repositories
                 return dbObj.GetPatientByID(modelId);
             else
                 return null;
+        }
+        
+        public IEnumerable<tblPatient> GetAllPatients()
+        {
+            var reas = dbObj.GetAllPatients();
+            if (reas != null && reas.Count() > 0)
+                return reas;
+            else
+                return null;
+
         }
 
         public ValidateUsersProfiles GetUserDetailById(int Id, string Role)
