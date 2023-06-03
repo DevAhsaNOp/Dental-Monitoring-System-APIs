@@ -122,9 +122,9 @@ namespace DMS_BOL.Validation_Classes
         [Range(1, int.MaxValue, ErrorMessage = "Enter valid City")]
         public int CityID { get; set; }
 
-        [Required(ErrorMessage = "Provide you area")]
+        //[Required(ErrorMessage = "Provide you area")]
         [Display(Name = "Area")]
-        [Range(1, int.MaxValue, ErrorMessage = "Enter valid Area")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Enter valid Area")]
         public int AreaID { get; set; }
 
         [Display(Name = "Address")]
