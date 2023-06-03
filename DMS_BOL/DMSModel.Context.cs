@@ -13,10 +13,10 @@ namespace DMS_BOL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dentalDBEntities : DbContext
+    public partial class dmswebapp_dentalDBEntities : DbContext
     {
-        public dentalDBEntities()
-            : base("name=dentalDBEntities")
+        public dmswebapp_dentalDBEntities()
+            : base("name=dmswebapp_dentalDBEntities")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }

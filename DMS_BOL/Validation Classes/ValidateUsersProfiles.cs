@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace DMS_BOL.Validation_Classes
 {
@@ -22,11 +25,11 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage = "Provide your phone number")]
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
+        [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[-]?[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
         public string UserPhoneNumber { get; set; }
 
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
+        [RegularExpression(@"03[0-9]{2}(?!1234567)(?!1111111)(?!7654321)[-]?[0-9]{7}", ErrorMessage = "Invalid Phone Number")]
         public string UserUpdatePhoneNumber { get; set; }
         
         [Display(Name ="User Address")]
@@ -92,29 +95,36 @@ namespace DMS_BOL.Validation_Classes
 
         //[Required(ErrorMessage = "*")]
         //[Display(Name = "State")]
-        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a State")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Must select a State")]
         //public string State { get; set; }
+        
+        //[Required(ErrorMessage = "*")]
+        //[Display(Name = "Service")]
+        //public List<int?> Service { get; set; }
 
         //[Required(ErrorMessage = "*")]
         //[Display(Name = "City")]
-        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a City")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Must select a City")]
         //public string City { get; set; }
 
         //[Required(ErrorMessage = "*")]
         //[Display(Name = "Area")]
-        //[Range(1, Int32.MaxValue, ErrorMessage = "Must select a Area")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Must select a Area")]
         //public string Area { get; set; }
 
         [Required(ErrorMessage = "Provide your state")]
         [Display(Name = "State")]
+        [Range(1, int.MaxValue, ErrorMessage = "Enter valid State")]
         public int StateID { get; set; }
 
         [Required(ErrorMessage = "Provide your city")]
         [Display(Name = "City")]
+        [Range(1, int.MaxValue, ErrorMessage = "Enter valid City")]
         public int CityID { get; set; }
 
         [Required(ErrorMessage = "Provide you area")]
         [Display(Name = "Area")]
+        [Range(1, int.MaxValue, ErrorMessage = "Enter valid Area")]
         public int AreaID { get; set; }
 
         [Display(Name = "Address")]

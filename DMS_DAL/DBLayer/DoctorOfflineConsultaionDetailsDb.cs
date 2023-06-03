@@ -8,11 +8,11 @@ namespace DMS_DAL.DBLayer
 {
     public class DoctorOfflineConsultaionDetailsDb
     {
-        private dentalDBEntities _context;
+        private dmswebapp_dentalDBEntities _context;
 
         public DoctorOfflineConsultaionDetailsDb()
         {
-            _context = new dentalDBEntities();
+            _context = new dmswebapp_dentalDBEntities();
         }
 
         public bool InsertOfflineConsultaionDetails(tblOfflineConsultaionDetail model)

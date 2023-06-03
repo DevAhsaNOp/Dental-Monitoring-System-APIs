@@ -14,7 +14,8 @@ namespace DMS_BOL.Validation_Classes
 
         [Required(ErrorMessage = "Provide Patinet ID")]
         [Display(Name = "Patient ID")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Patient ID Type")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Patient ID")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please Select Patient")]
         public int? PT_PatientID { get; set; }
 
         public DateTime? PT_Datetime { get; set; }
@@ -29,6 +30,10 @@ namespace DMS_BOL.Validation_Classes
         public string PT_Remarks { get; set; }
         public bool? PT_IsActive { get; set; }
         public bool? PT_IsArchive { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Range(5, 50, ErrorMessage = "Minimum 5 images you need to upload")]
+        public int ImagesCount { get; set; }
 
         public virtual tblPatient tblPatient { get; set; }
     }

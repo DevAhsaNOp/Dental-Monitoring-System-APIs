@@ -24,7 +24,7 @@ namespace DMS_BLL.Repositories
                     tblOnlineConsultaionDetail doctorService = new tblOnlineConsultaionDetail()
                     {
                         OCD_DoctorID = model.OCD_DoctorID,
-                        OCD_Charges = model.OCD_Charges,
+                        OCD_Charges = model.OCD_Charges.Value,
                         OCD_MondayStartTime = model.OCD_MondayStartTime,
                         OCD_MondayEndTime = model.OCD_MondayEndTime,
                         OCD_TuesdayStartTime = model.OCD_TuesdayStartTime,
@@ -62,7 +62,7 @@ namespace DMS_BLL.Repositories
                 {
                     var modelOCD = GetOnlineConsultaionDetailByID(model.OCD_ID);
                     modelOCD.OCD_DoctorID = model.OCD_DoctorID;
-                    modelOCD.OCD_Charges = model.OCD_Charges;
+                    modelOCD.OCD_Charges = model.OCD_Charges.Value;
                     modelOCD.OCD_MondayStartTime = model.OCD_MondayStartTime;
                     modelOCD.OCD_MondayEndTime = model.OCD_MondayEndTime;
                     modelOCD.OCD_TuesdayStartTime = model.OCD_TuesdayStartTime;

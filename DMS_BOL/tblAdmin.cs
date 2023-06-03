@@ -14,6 +14,12 @@ namespace DMS_BOL
     
     public partial class tblAdmin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblAdmin()
+        {
+            this.tblDoctorApproveds = new HashSet<tblDoctorApproved>();
+        }
+    
         public int A_ID { get; set; }
         public string A_FirstName { get; set; }
         public string A_LastName { get; set; }
@@ -35,5 +41,7 @@ namespace DMS_BOL
     
         public virtual tblAddress tblAddress { get; set; }
         public virtual tblRole tblRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblDoctorApproved> tblDoctorApproveds { get; set; }
     }
 }

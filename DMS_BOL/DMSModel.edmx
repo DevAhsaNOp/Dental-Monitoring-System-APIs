@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dentalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dmswebapp_dentalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -152,6 +152,8 @@
           </Key>
           <Property Name="N_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="N_DoctorID" Type="int" />
+          <Property Name="N_AdminID" Type="int" />
+          <Property Name="N_SuperAdminID" Type="int" />
           <Property Name="N_IsApproved" Type="bit" />
           <Property Name="N_IsArchive" Type="bit" />
           <Property Name="N_IsRead" Type="bit" />
@@ -577,6 +579,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorApproved_tblAdmin">
+          <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdmin">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorApproved_tblDoctor">
           <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="0..1" />
           <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
@@ -586,6 +600,18 @@
             </Principal>
             <Dependent Role="tblDoctorApproved">
               <PropertyRef Name="N_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorApproved_tblSuperAdmin">
+          <End Role="tblSuperAdmin" Type="Self.tblSuperAdmin" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSuperAdmin">
+              <PropertyRef Name="SA_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_SuperAdminID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -853,7 +879,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dentalDBModelStoreContainer">
+        <EntityContainer Name="dmswebapp_dentalDBModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAddress" EntityType="Self.tblAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
@@ -935,8 +961,16 @@
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblDoctor" EntitySet="tblDoctor" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblAdmin" Association="Self.FK_tblDoctorApproved_tblAdmin">
+            <End Role="tblAdmin" EntitySet="tblAdmin" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproved" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDoctorApproved_tblDoctor" Association="Self.FK_tblDoctorApproved_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproved" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblSuperAdmin" Association="Self.FK_tblDoctorApproved_tblSuperAdmin">
+            <End Role="tblSuperAdmin" EntitySet="tblSuperAdmin" />
             <End Role="tblDoctorApproved" EntitySet="tblDoctorApproved" />
           </AssociationSet>
           <AssociationSet Name="FK_tblDoctorReviews_tblAppointment" Association="Self.FK_tblDoctorReviews_tblAppointment">
@@ -1032,7 +1066,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dentalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dmswebapp_dentalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -1087,6 +1121,7 @@
           <Property Name="A_Verified" Type="Boolean" />
           <NavigationProperty Name="tblAddress" Relationship="Self.FK_tblAdmin_tblAddress" FromRole="tblAdmin" ToRole="tblAddress" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblAdmin_tblRoles" FromRole="tblAdmin" ToRole="tblRoles" />
+          <NavigationProperty Name="tblDoctorApproveds" Relationship="Self.FK_tblDoctorApproved_tblAdmin" FromRole="tblAdmin" ToRole="tblDoctorApproved" />
         </EntityType>
         <EntityType Name="tblAppointment">
           <Key>
@@ -1216,6 +1251,8 @@
           </Key>
           <Property Name="N_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="N_DoctorID" Type="Int32" />
+          <Property Name="N_AdminID" Type="Int32" />
+          <Property Name="N_SuperAdminID" Type="Int32" />
           <Property Name="N_IsApproved" Type="Boolean" />
           <Property Name="N_IsArchive" Type="Boolean" />
           <Property Name="N_IsRead" Type="Boolean" />
@@ -1223,7 +1260,9 @@
           <Property Name="N_CreatedBy" Type="Boolean" Nullable="false" />
           <Property Name="N_UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="N_UpdatedBy" Type="Boolean" />
+          <NavigationProperty Name="tblAdmin" Relationship="Self.FK_tblDoctorApproved_tblAdmin" FromRole="tblDoctorApproved" ToRole="tblAdmin" />
           <NavigationProperty Name="tblDoctor" Relationship="Self.FK_tblDoctorApproved_tblDoctor" FromRole="tblDoctorApproved" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblSuperAdmin" Relationship="Self.FK_tblDoctorApproved_tblSuperAdmin" FromRole="tblDoctorApproved" ToRole="tblSuperAdmin" />
         </EntityType>
         <EntityType Name="tblDoctorReview">
           <Key>
@@ -1497,6 +1536,7 @@
           <Property Name="SA_OTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SA_Verified" Type="Boolean" />
           <NavigationProperty Name="tblAddress" Relationship="Self.FK_tblSuperAdmin_tblAddress" FromRole="tblSuperAdmin" ToRole="tblAddress" />
+          <NavigationProperty Name="tblDoctorApproveds" Relationship="Self.FK_tblDoctorApproved_tblSuperAdmin" FromRole="tblSuperAdmin" ToRole="tblDoctorApproved" />
           <NavigationProperty Name="tblRole" Relationship="Self.FK_tblSuperAdmin_tblRoles" FromRole="tblSuperAdmin" ToRole="tblRoles" />
         </EntityType>
         <EntityType Name="tblZone">
@@ -1628,6 +1668,18 @@
             </Principal>
             <Dependent Role="tblAdmin">
               <PropertyRef Name="A_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDoctorApproved_tblAdmin">
+          <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdmin">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_AdminID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1859,6 +1911,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDoctorApproved_tblSuperAdmin">
+          <End Role="tblSuperAdmin" Type="Self.tblSuperAdmin" Multiplicity="0..1" />
+          <End Role="tblDoctorApproved" Type="Self.tblDoctorApproved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSuperAdmin">
+              <PropertyRef Name="SA_ID" />
+            </Principal>
+            <Dependent Role="tblDoctorApproved">
+              <PropertyRef Name="N_SuperAdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDoctorReviews_tblPatient">
           <End Role="tblPatient" Type="Self.tblPatient" Multiplicity="0..1" />
           <End Role="tblDoctorReviews" Type="Self.tblDoctorReview" Multiplicity="*" />
@@ -1955,7 +2019,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dentalDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dmswebapp_dentalDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblAddresses" EntityType="Self.tblAddress" />
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
@@ -2020,6 +2084,10 @@
           <AssociationSet Name="FK_tblAdmin_tblRoles" Association="Self.FK_tblAdmin_tblRoles">
             <End Role="tblRoles" EntitySet="tblRoles" />
             <End Role="tblAdmin" EntitySet="tblAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblAdmin" Association="Self.FK_tblDoctorApproved_tblAdmin">
+            <End Role="tblAdmin" EntitySet="tblAdmins" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproveds" />
           </AssociationSet>
           <AssociationSet Name="FK_tblAppointment_tblDoctor" Association="Self.FK_tblAppointment_tblDoctor">
             <End Role="tblDoctor" EntitySet="tblDoctors" />
@@ -2097,6 +2165,10 @@
             <End Role="tblDoctor" EntitySet="tblDoctors" />
             <End Role="tblOnlineConsultaionDetails" EntitySet="tblOnlineConsultaionDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblDoctorApproved_tblSuperAdmin" Association="Self.FK_tblDoctorApproved_tblSuperAdmin">
+            <End Role="tblSuperAdmin" EntitySet="tblSuperAdmins" />
+            <End Role="tblDoctorApproved" EntitySet="tblDoctorApproveds" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDoctorReviews_tblPatient" Association="Self.FK_tblDoctorReviews_tblPatient">
             <End Role="tblPatient" EntitySet="tblPatients" />
             <End Role="tblDoctorReviews" EntitySet="tblDoctorReviews" />
@@ -2135,9 +2207,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dentalDBModelStoreContainer" CdmEntityContainer="dentalDBEntities">
+        <EntityContainerMapping StorageEntityContainer="dmswebapp_dentalDBModelStoreContainer" CdmEntityContainer="dmswebapp_dentalDBEntities">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="dentalDBModel.sysdiagram">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -2148,7 +2220,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAddresses">
-            <EntityTypeMapping TypeName="dentalDBModel.tblAddress">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblAddress">
               <MappingFragment StoreEntitySet="tblAddress">
                 <ScalarProperty Name="AddressID" ColumnName="AddressID" />
                 <ScalarProperty Name="AddressCountry" ColumnName="AddressCountry" />
@@ -2160,7 +2232,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAdmins">
-            <EntityTypeMapping TypeName="dentalDBModel.tblAdmin">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblAdmin">
               <MappingFragment StoreEntitySet="tblAdmin">
                 <ScalarProperty Name="A_ID" ColumnName="A_ID" />
                 <ScalarProperty Name="A_FirstName" ColumnName="A_FirstName" />
@@ -2184,7 +2256,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAppointments">
-            <EntityTypeMapping TypeName="dentalDBModel.tblAppointment">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblAppointment">
               <MappingFragment StoreEntitySet="tblAppointment">
                 <ScalarProperty Name="AP_ID" ColumnName="AP_ID" />
                 <ScalarProperty Name="AP_PatientID" ColumnName="AP_PatientID" />
@@ -2203,7 +2275,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAppointmentDetails">
-            <EntityTypeMapping TypeName="dentalDBModel.tblAppointmentDetail">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblAppointmentDetail">
               <MappingFragment StoreEntitySet="tblAppointmentDetails">
                 <ScalarProperty Name="APD_ID" ColumnName="APD_ID" />
                 <ScalarProperty Name="APD_AppointmentID" ColumnName="APD_AppointmentID" />
@@ -2221,7 +2293,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblCities">
-            <EntityTypeMapping TypeName="dentalDBModel.tblCity">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblCity">
               <MappingFragment StoreEntitySet="tblCity">
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
@@ -2230,7 +2302,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblCountries">
-            <EntityTypeMapping TypeName="dentalDBModel.tblCountry">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblCountry">
               <MappingFragment StoreEntitySet="tblCountry">
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -2238,7 +2310,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDiagnostics">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDiagnostic">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDiagnostic">
               <MappingFragment StoreEntitySet="tblDiagnostics">
                 <ScalarProperty Name="DG_ID" ColumnName="DG_ID" />
                 <ScalarProperty Name="DG_Name" ColumnName="DG_Name" />
@@ -2255,7 +2327,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDoctors">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDoctor">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDoctor">
               <MappingFragment StoreEntitySet="tblDoctor">
                 <ScalarProperty Name="D_ID" ColumnName="D_ID" />
                 <ScalarProperty Name="D_FirstName" ColumnName="D_FirstName" />
@@ -2287,10 +2359,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDoctorApproveds">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorApproved">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDoctorApproved">
               <MappingFragment StoreEntitySet="tblDoctorApproved">
                 <ScalarProperty Name="N_ID" ColumnName="N_ID" />
                 <ScalarProperty Name="N_DoctorID" ColumnName="N_DoctorID" />
+                <ScalarProperty Name="N_AdminID" ColumnName="N_AdminID" />
+                <ScalarProperty Name="N_SuperAdminID" ColumnName="N_SuperAdminID" />
                 <ScalarProperty Name="N_IsApproved" ColumnName="N_IsApproved" />
                 <ScalarProperty Name="N_IsArchive" ColumnName="N_IsArchive" />
                 <ScalarProperty Name="N_IsRead" ColumnName="N_IsRead" />
@@ -2302,7 +2376,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDoctorReviews">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorReview">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDoctorReview">
               <MappingFragment StoreEntitySet="tblDoctorReviews">
                 <ScalarProperty Name="DR_ID" ColumnName="DR_ID" />
                 <ScalarProperty Name="DR_DoctorID" ColumnName="DR_DoctorID" />
@@ -2323,7 +2397,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDoctorServices">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorService">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDoctorService">
               <MappingFragment StoreEntitySet="tblDoctorServices">
                 <ScalarProperty Name="DS_ID" ColumnName="DS_ID" />
                 <ScalarProperty Name="DS_DoctorID" ColumnName="DS_DoctorID" />
@@ -2338,7 +2412,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDoctorWorkExperiences">
-            <EntityTypeMapping TypeName="dentalDBModel.tblDoctorWorkExperience">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblDoctorWorkExperience">
               <MappingFragment StoreEntitySet="tblDoctorWorkExperience">
                 <ScalarProperty Name="WEX_ID" ColumnName="WEX_ID" />
                 <ScalarProperty Name="WEX_DoctorID" ColumnName="WEX_DoctorID" />
@@ -2357,7 +2431,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblMessages">
-            <EntityTypeMapping TypeName="dentalDBModel.tblMessage">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblMessage">
               <MappingFragment StoreEntitySet="tblMessage">
                 <ScalarProperty Name="M_ID" ColumnName="M_ID" />
                 <ScalarProperty Name="FromUserID" ColumnName="FromUserID" />
@@ -2368,7 +2442,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblMessageDetails">
-            <EntityTypeMapping TypeName="dentalDBModel.tblMessageDetail">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblMessageDetail">
               <MappingFragment StoreEntitySet="tblMessageDetails">
                 <ScalarProperty Name="MD_ID" ColumnName="MD_ID" />
                 <ScalarProperty Name="MD_MessageID" ColumnName="MD_MessageID" />
@@ -2380,7 +2454,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblOfflineConsultaionDetails">
-            <EntityTypeMapping TypeName="dentalDBModel.tblOfflineConsultaionDetail">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblOfflineConsultaionDetail">
               <MappingFragment StoreEntitySet="tblOfflineConsultaionDetails">
                 <ScalarProperty Name="OFCD_ID" ColumnName="OFCD_ID" />
                 <ScalarProperty Name="OFCD_DoctorID" ColumnName="OFCD_DoctorID" />
@@ -2412,7 +2486,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblOnlineConsultaionDetails">
-            <EntityTypeMapping TypeName="dentalDBModel.tblOnlineConsultaionDetail">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblOnlineConsultaionDetail">
               <MappingFragment StoreEntitySet="tblOnlineConsultaionDetails">
                 <ScalarProperty Name="OCD_ID" ColumnName="OCD_ID" />
                 <ScalarProperty Name="OCD_DoctorID" ColumnName="OCD_DoctorID" />
@@ -2441,7 +2515,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblOTPs">
-            <EntityTypeMapping TypeName="dentalDBModel.tblOTP">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblOTP">
               <MappingFragment StoreEntitySet="tblOTP">
                 <ScalarProperty Name="OT_ID" ColumnName="OT_ID" />
                 <ScalarProperty Name="OT_OTP" ColumnName="OT_OTP" />
@@ -2454,7 +2528,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPatients">
-            <EntityTypeMapping TypeName="dentalDBModel.tblPatient">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblPatient">
               <MappingFragment StoreEntitySet="tblPatient">
                 <ScalarProperty Name="P_ID" ColumnName="P_ID" />
                 <ScalarProperty Name="P_FirstName" ColumnName="P_FirstName" />
@@ -2478,7 +2552,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPatientTests">
-            <EntityTypeMapping TypeName="dentalDBModel.tblPatientTest">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblPatientTest">
               <MappingFragment StoreEntitySet="tblPatientTest">
                 <ScalarProperty Name="PT_ID" ColumnName="PT_ID" />
                 <ScalarProperty Name="PT_PatientID" ColumnName="PT_PatientID" />
@@ -2493,7 +2567,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblRoles">
-            <EntityTypeMapping TypeName="dentalDBModel.tblRole">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblRole">
               <MappingFragment StoreEntitySet="tblRoles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -2507,7 +2581,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblServices">
-            <EntityTypeMapping TypeName="dentalDBModel.tblService">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblService">
               <MappingFragment StoreEntitySet="tblServices">
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="S_Name" ColumnName="S_Name" />
@@ -2522,7 +2596,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblStates">
-            <EntityTypeMapping TypeName="dentalDBModel.tblState">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblState">
               <MappingFragment StoreEntitySet="tblState">
                 <ScalarProperty Name="StateID" ColumnName="StateID" />
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
@@ -2531,7 +2605,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblSuperAdmins">
-            <EntityTypeMapping TypeName="dentalDBModel.tblSuperAdmin">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblSuperAdmin">
               <MappingFragment StoreEntitySet="tblSuperAdmin">
                 <ScalarProperty Name="SA_ID" ColumnName="SA_ID" />
                 <ScalarProperty Name="SA_FirstName" ColumnName="SA_FirstName" />
@@ -2555,7 +2629,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblZones">
-            <EntityTypeMapping TypeName="dentalDBModel.tblZone">
+            <EntityTypeMapping TypeName="dmswebapp_dentalDBModel.tblZone">
               <MappingFragment StoreEntitySet="tblZone">
                 <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
                 <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />

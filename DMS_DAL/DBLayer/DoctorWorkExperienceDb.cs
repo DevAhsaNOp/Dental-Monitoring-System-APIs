@@ -9,11 +9,11 @@ namespace DMS_DAL.DBLayer
 {
     public class DoctorWorkExperienceDb
     {
-        private dentalDBEntities _context;
+        private dmswebapp_dentalDBEntities _context;
 
         public DoctorWorkExperienceDb()
         {
-            _context = new dentalDBEntities();
+            _context = new dmswebapp_dentalDBEntities();
         }
 
         public bool InsertDoctorWorkExperiences(tblDoctorWorkExperience model)

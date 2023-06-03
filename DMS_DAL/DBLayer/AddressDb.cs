@@ -8,11 +8,11 @@ namespace DMS_DAL.DBLayer
 {
     public class AddressDb
     {
-        private dentalDBEntities _context;
+        private dmswebapp_dentalDBEntities _context;
 
         public AddressDb()
         {
-            _context = new dentalDBEntities();
+            _context = new dmswebapp_dentalDBEntities();
         }
 
         public int InsertAddress(tblAddress model)

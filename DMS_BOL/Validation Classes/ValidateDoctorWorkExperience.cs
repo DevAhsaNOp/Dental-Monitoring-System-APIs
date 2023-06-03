@@ -64,5 +64,18 @@ namespace DMS_BOL.Validation_Classes
         [Required(ErrorMessage = "*")]
         [Display(Name = "End of Working Date")]
         public DateTime? WEX_ToDate { get; set; }
+
+        public bool IsActive { get; set; }
+    }
+    
+    public class ValidateDoctorHospitalInfoForUPdate : ValidateDoctorHospitalInfo
+    {
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Start Working Date")]
+        public string WEX_FromDateU { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "End of Working Date")]
+        public string WEX_ToDateU { get; set; }
     }
 }

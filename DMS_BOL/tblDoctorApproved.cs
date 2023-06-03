@@ -16,6 +16,8 @@ namespace DMS_BOL
     {
         public int N_ID { get; set; }
         public Nullable<int> N_DoctorID { get; set; }
+        public Nullable<int> N_AdminID { get; set; }
+        public Nullable<int> N_SuperAdminID { get; set; }
         public Nullable<bool> N_IsApproved { get; set; }
         public Nullable<bool> N_IsArchive { get; set; }
         public Nullable<bool> N_IsRead { get; set; }
@@ -24,6 +26,8 @@ namespace DMS_BOL
         public Nullable<System.DateTime> N_UpdatedOn { get; set; }
         public Nullable<bool> N_UpdatedBy { get; set; }
     
+        public virtual tblAdmin tblAdmin { get; set; }
         public virtual tblDoctor tblDoctor { get; set; }
+        public virtual tblSuperAdmin tblSuperAdmin { get; set; }
     }
 }

@@ -12,52 +12,66 @@ namespace DMS_BOL.Validation_Classes
         [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Doctor ID")]
         public int? OCD_DoctorID { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Monday Start Time")]
         public TimeSpan? OCD_MondayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Monday End Time")]
         public TimeSpan? OCD_MondayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Tuesday Start Time")]
         public TimeSpan? OCD_TuesdayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Tuesday End Time")]
         public TimeSpan? OCD_TuesdayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Wednesday Start Time")]
         public TimeSpan? OCD_WednesdayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Wednesday End Time")]
         public TimeSpan? OCD_WednesdayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Thursday Start Time")]
         public TimeSpan? OCD_ThursdayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Thursday End Time")]
         public TimeSpan? OCD_ThursdayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Friday Start Time")]
         public TimeSpan? OCD_FridayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Friday End Time")]
         public TimeSpan? OCD_FridayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Saturday Start Time")]
         public TimeSpan? OCD_SaturdayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Saturday End Time")]
         public TimeSpan? OCD_SaturdayEndTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Sunday Start Time")]
         public TimeSpan? OCD_SundayStartTime { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Sunday End Time")]
         public TimeSpan? OCD_SundayEndTime { get; set; }
 
         [Required(ErrorMessage = "Provide Online Checkup Charges")]
         [Display(Name = "Online Checkup Charges")]
         [RegularExpression("^\\d{0,8}(\\.\\d{1,4})?$", ErrorMessage = "Invalid Online Checkup Charges")]
-        public decimal OCD_Charges { get; set; }
+        public decimal? OCD_Charges { get; set; }
 
         public bool? OCD_IsActive { get; set; }
 

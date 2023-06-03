@@ -12,11 +12,11 @@ namespace DMS_DAL.DBLayer
 {
     public class UsersDb
     {
-        private dentalDBEntities _context;
+        private dmswebapp_dentalDBEntities _context;
 
         public UsersDb()
         {
-            _context = new dentalDBEntities();
+            _context = new dmswebapp_dentalDBEntities();
         }
 
         #region Operations_On_Patients_Table

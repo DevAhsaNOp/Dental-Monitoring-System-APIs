@@ -10,11 +10,11 @@ namespace DMS_DAL.DBLayer
 {
     public class PatientTestDb
     {
-        private dentalDBEntities _context;
+        private dmswebapp_dentalDBEntities _context;
         private AddressDb _db;
         public PatientTestDb()
         {
-            _context = new dentalDBEntities();
+            _context = new dmswebapp_dentalDBEntities();
             _db = new AddressDb();
         }
 
