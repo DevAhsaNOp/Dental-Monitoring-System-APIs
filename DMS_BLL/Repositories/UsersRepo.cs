@@ -29,14 +29,23 @@ namespace DMS_BLL.Repositories
                     {
                         if (CheckOTP(model.UserEmail, model.UserOTP))
                         {
-                            tblAddress AddrsObj = new tblAddress()
+                            tblAddress AddrsObj = new tblAddress();
+                            if (model.AreaID <= 0)
                             {
-                                AddressCountry = 1,
-                                AddressState = model.StateID,
-                                AddressCity = model.CityID,
-                                AddressZone = model.AreaID,
-                                AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress,
-                            };
+                                AddrsObj.AddressCountry = 1;
+                                AddrsObj.AddressState = model.StateID;
+                                AddrsObj.AddressCity = model.CityID;
+                                AddrsObj.AddressZone = null;
+                                AddrsObj.AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress;
+                            }
+                            else
+                            {
+                                AddrsObj.AddressCountry = 1;
+                                AddrsObj.AddressState = model.StateID;
+                                AddrsObj.AddressCity = model.CityID;
+                                AddrsObj.AddressZone = model.AreaID;
+                                AddrsObj.AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress;
+                            }
                             var addressID = addressRepo.InsertAddress(AddrsObj);
                             if (addressID > 0)
                             {
@@ -169,7 +178,7 @@ namespace DMS_BLL.Repositories
             else
                 return null;
         }
-        
+
         public IEnumerable<tblPatient> GetAllPatients()
         {
             var reas = dbObj.GetAllPatients();
