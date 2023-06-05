@@ -92,15 +92,25 @@ namespace DMS_BLL.Repositories
                 {
                     if (!IsUpdateEmailExist(model.UserEmail, model.UserUpdateEmail))
                     {
-                        tblAddress AddrsObj = new tblAddress()
+                        tblAddress AddrsObj = new tblAddress();
+                        if (model.AreaID <= 0)
                         {
-                            AddressID = GetPatientByID(model.UserID).P_AddressID.Value,
-                            AddressCountry = 1,
-                            AddressState = model.StateID,
-                            AddressCity = model.CityID,
-                            AddressZone = model.AreaID,
-                            AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress
-                        };
+                            AddrsObj.AddressID = GetPatientByID(model.UserID).P_AddressID.Value;
+                            AddrsObj.AddressCountry = 1;
+                            AddrsObj.AddressState = model.StateID;
+                            AddrsObj.AddressCity = model.CityID;
+                            AddrsObj.AddressZone = null;
+                            AddrsObj.AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress;
+                        }
+                        else
+                        {
+                            AddrsObj.AddressID = GetPatientByID(model.UserID).P_AddressID.Value;
+                            AddrsObj.AddressCountry = 1;
+                            AddrsObj.AddressState = model.StateID;
+                            AddrsObj.AddressCity = model.CityID;
+                            AddrsObj.AddressZone = model.AreaID;
+                            AddrsObj.AddressComplete = (model.CompleteAddress == null) ? "" : model.CompleteAddress;
+                        }
                         var addressID = addressRepo.UpdateAddress(AddrsObj);
                         if (addressID > 0)
                         {
