@@ -54,15 +54,9 @@ namespace DMS_BLL.Repositories
                     var patientTest = dbObj.GetPatientTestByID(model.PT_ID);
                     if (patientTest != null)
                     {
-                        patientTest.PT_ID = model.PT_ID;
-                        patientTest.PT_PatientID = model.PT_PatientID;
-                        patientTest.PT_Datetime = model.PT_Datetime;
-                        patientTest.PT_Images = model.PT_Images;
                         patientTest.PT_Pdf = model.PT_Pdf;
                         patientTest.PT_IdentifiedDiseases = model.PT_IdentifiedDiseases;
                         patientTest.PT_Remarks = model.PT_Remarks;
-                        patientTest.PT_IsActive = model.PT_IsActive;
-                        patientTest.PT_IsArchive = model.PT_IsArchive;
                         var patientTestId = dbObj.UpdatePatientTest(patientTest);
                         if (patientTestId > 0)
                             return patientTestId;

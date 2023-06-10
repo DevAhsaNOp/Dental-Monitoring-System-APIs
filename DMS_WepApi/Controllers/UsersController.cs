@@ -11,6 +11,7 @@ using DMS_WepApi.ResponseClasses;
 using DMS_BOL.Validation_Classes;
 using System.Collections.Generic;
 using System.Linq;
+using DMS_BLL;
 
 namespace DMS_WepApi.Controllers
 {
@@ -298,6 +299,7 @@ namespace DMS_WepApi.Controllers
             if (PatientID > 0)
             {
                 var reas = UserRepoObj.GetUserDetailById(PatientID);
+                reas.UserPassword = EncDec.Decrypt(reas.UserPassword);
                 if (reas != null)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRIValidation()
                     {

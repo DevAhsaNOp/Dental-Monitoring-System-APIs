@@ -180,6 +180,17 @@ namespace DMS_BLL.Repositories
                 return false;
         }
 
+
+        public IEnumerable<tblDoctor> GetAllDoctors()
+        {
+            var reas = dbObj.GetAllDoctors();
+            if (reas != null && reas.Count() > 0)
+                return reas;
+            else
+                return null;
+
+        }
+
         public tblDoctor GetDoctorByID(int modelId)
         {
             if (modelId > 0)

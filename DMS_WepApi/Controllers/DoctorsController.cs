@@ -6,6 +6,7 @@ using System.Web.Http.Cors;
 using DMS_BLL.Repositories;
 using DMS_BOL.Validation_Classes;
 using DMS_WepApi.ResponseClasses;
+using System.Linq;
 
 namespace DMS_WepApi.Controllers
 {
@@ -184,6 +185,30 @@ namespace DMS_WepApi.Controllers
                     StatusCode = 412,
                     Success = false,
                     Message = "Invalid data provided!"
+                });
+        }
+
+        [HttpGet]
+        [ValidationActionFilter]
+        [Route("api/Get/AllDoctors")]
+        //[Authorize(Roles = "Admin,SuperAdmin,Patient,Doctor")]
+        public HttpResponseMessage GetAllDoctors()
+        {
+            var reas = DoctorRepoObj.GetAllDoctors();
+            if (reas != null && reas.Count() > 0)
+                return Request.CreateResponse(HttpStatusCode.OK, new GRIValidation()
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    Message = "All doctors record has been recieved successfully!",
+                    Datalist = reas
+                });
+            else
+                return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    Message = "Error occured on getting Doctors details. Please try again later!",
                 });
         }
 
