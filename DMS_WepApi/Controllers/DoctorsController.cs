@@ -7,6 +7,7 @@ using DMS_BLL.Repositories;
 using DMS_BOL.Validation_Classes;
 using DMS_WepApi.ResponseClasses;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace DMS_WepApi.Controllers
 {
@@ -220,14 +221,20 @@ namespace DMS_WepApi.Controllers
         {
             if (DoctorID > 0)
             {
-                var reas = DoctorRepoObj.GetUserDetailById(DoctorID);
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                var reas = DoctorRepoObj.GetDoctorByID(DoctorID);
+                string json = JsonConvert.SerializeObject(reas, settings);
+                var jsonObject = JsonConvert.DeserializeObject(json);
                 if (reas != null)
                     return Request.CreateResponse(HttpStatusCode.OK, new GRIValidation()
                     {
                         StatusCode = 200,
                         Success = true,
                         Message = "Account record has been recieved successfully!",
-                        Datalist = reas
+                        Datalist = jsonObject
                     });
                 else
                     return Request.CreateResponse(HttpStatusCode.OK, new GRValidation()

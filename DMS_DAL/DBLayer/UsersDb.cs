@@ -400,7 +400,16 @@ namespace DMS_DAL.DBLayer
 
         public tblDoctor GetDoctorByID(int modelId)
         {
-            return _context.tblDoctors.Find(modelId);
+            var reas = _context.tblDoctors.Find(modelId);
+            reas.tblDoctorServices = _context.tblDoctorServices.Where(x => x.DS_DoctorID == reas.D_ID).ToList();
+            foreach (var item in reas.tblDoctorServices)
+            {
+                item.tblService = _context.tblServices.Where(x => x.S_ID == item.DS_ServicesID).FirstOrDefault();
+            }
+            reas.tblDoctorWorkExperiences = _context.tblDoctorWorkExperiences.Where(x => x.WEX_DoctorID == reas.D_ID).ToList();
+            reas.tblOnlineConsultaionDetails = _context.tblOnlineConsultaionDetails.Where(x => x.OCD_DoctorID == reas.D_ID).ToList();
+            reas.tblOfflineConsultaionDetails = _context.tblOfflineConsultaionDetails.Where(x => x.OFCD_DoctorID == reas.D_ID).ToList();
+            return reas;
         }
 
         public bool InActiveDoctor(tblDoctor model)

@@ -18,6 +18,7 @@ namespace DMS_WepApi.ResponseClasses
     {
         public int StatusCode { get; set; }
         public string Message { get; set; }
+        public string ForDoctor { get; set; }
         public bool Success { get; set; }
         public object Datalist { get; set; }
     }
