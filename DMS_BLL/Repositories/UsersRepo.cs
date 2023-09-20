@@ -199,18 +199,10 @@ namespace DMS_BLL.Repositories
 
         }
 
-        public ValidateUsersProfiles GetUserDetailById(int Id, string Role)
-        {
-            if (Id > 0 && Role.Length > 4)
-                return dbObj.GetUserDetailById(Id, Role);
-            else
-                return null;
-        }
-
         public ValidateUsersProfiles GetUserDetailById(int Id)
         {
             if (Id > 0)
-                return dbObj.GetUserDetailById(Id);
+                return dbObj.GetUserDetailByIdAndRole(Id,"Patient");
             else
                 return null;
         }

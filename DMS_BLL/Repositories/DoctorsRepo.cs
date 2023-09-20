@@ -202,7 +202,7 @@ namespace DMS_BLL.Repositories
         public ValidateUsersProfiles GetUserDetailById(int Id)
         {
             if (Id > 0)
-                return dbObj.GetUserDetailById(Id);
+                return dbObj.GetUserDetailByIdAndRole(Id,"Doctor");
             else
                 return null;
         }

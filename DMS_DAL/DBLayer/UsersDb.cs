@@ -620,7 +620,7 @@ namespace DMS_DAL.DBLayer
                 return null;
         }
 
-        public ValidateUsersProfiles GetUserDetailById(int Id, string Role)
+        public ValidateUsersProfiles GetUserDetailByIdAndRole(int Id, string Role)
         {
             var patients = _context.tblPatients.Where(x => x.P_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
             {
@@ -641,8 +641,12 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.P_UpdatedOn.Value,
                 UserCreatedBy = s.P_CreatedBy.Value,
                 UserCreatedOn = s.P_CreatedOn.Value,
+                UserAddressID = s.P_AddressID.Value,
+                UserRoleID = s.P_RoleID.Value,
                 Gender = s.P_Gender,
                 IsProfileCompleted = true,
+                CityID = s.tblAddress.AddressCity.Value,
+                StateID = s.tblAddress.AddressState.Value,
             }).FirstOrDefault();
 
             var admin = _context.tblAdmins.Where(x => x.A_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -664,8 +668,12 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.A_UpdatedOn.Value,
                 UserCreatedBy = s.A_CreatedBy.Value,
                 UserCreatedOn = s.A_CreatedOn.Value,
+                UserAddressID = s.A_AddressID.Value,
+                UserRoleID = s.A_RoleID.Value,
                 Gender = s.A_Gender,
                 IsProfileCompleted = true,
+                CityID = s.tblAddress.AddressCity.Value,
+                StateID = s.tblAddress.AddressState.Value,
             }).FirstOrDefault();
 
             var superAdmin = _context.tblSuperAdmins.Where(x => x.SA_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -687,8 +695,12 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.SA_UpdatedOn.Value,
                 UserCreatedBy = s.SA_CreatedBy.Value,
                 UserCreatedOn = s.SA_CreatedOn.Value,
+                UserAddressID = s.SA_AddressID.Value,
+                UserRoleID = s.SA_RoleID.Value,
                 Gender = s.SA_Gender,
                 IsProfileCompleted = true,
+                CityID = s.tblAddress.AddressCity.Value,
+                StateID = s.tblAddress.AddressState.Value,
             }).FirstOrDefault();
 
             var doctor = _context.tblDoctors.Where(x => x.D_ID == Id && x.tblRole.RoleName.ToLower().Contains(Role.ToLower())).Select(s => new ValidateUsersProfiles()
@@ -710,8 +722,12 @@ namespace DMS_DAL.DBLayer
                 UserUpdatedOn = s.D_UpdatedOn.Value,
                 UserCreatedBy = s.D_CreatedBy.Value,
                 UserCreatedOn = s.D_CreatedOn.Value,
+                UserAddressID = s.D_AddressID.Value,
+                UserRoleID = s.D_RoleID.Value,
                 Gender = s.D_Gender,
                 IsProfileCompleted = s.D_IsProfileCompleted == null ? false : s.D_IsProfileCompleted.Value,
+                CityID = s.tblAddress.AddressCity.Value,
+                StateID = s.tblAddress.AddressState.Value,
             }).FirstOrDefault();
 
             if (superAdmin != null)
